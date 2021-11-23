@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
-                android:id="@+id/activity_ma_reu_toolbar"/>
+                android:id="@+id/activity_ma_reu_toolbar"
+                app:titleTextColor="@color/white"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,12 +31,17 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/add_meeting"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="50dp"
-    android:layout_marginRight="50dp"
-    android:layout_gravity="end|bottom"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_ma_reu_add_meeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="50dp"
+        app:srcCompat="@drawable/ic_baseline_add_48"
+        app:maxImageSize="84dp"
+        android:backgroundTint="@color/red"
+        android:layout_gravity="end|bottom"
+        app:fabCustomSize="112dp"
+        app:borderWidth="0dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

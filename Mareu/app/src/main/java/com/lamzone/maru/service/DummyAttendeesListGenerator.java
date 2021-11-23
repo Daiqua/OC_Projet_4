@@ -32,25 +32,29 @@ public abstract class DummyAttendeesListGenerator {
 
     //TODO: find a best way to load attendees lists
     static List<List<Attendee>> generateAttendeesLists() {
-
+        DUMMY_ATTENDEES_LIST_1.clear();
         DUMMY_ATTENDEES_LIST_1.add(attendeesList.get(0));
         DUMMY_ATTENDEES_LIST_1.add(attendeesList.get(1));
         DUMMY_ATTENDEES_LIST_1.add(attendeesList.get(2));
         DUMMY_ATTENDEES_LIST_1.add(attendeesList.get(3));
 
+        DUMMY_ATTENDEES_LIST_2.clear();
         DUMMY_ATTENDEES_LIST_2.add(attendeesList.get(4));
         DUMMY_ATTENDEES_LIST_2.add(attendeesList.get(5));
         DUMMY_ATTENDEES_LIST_2.add(attendeesList.get(6));
         DUMMY_ATTENDEES_LIST_2.add(attendeesList.get(7));
 
+        DUMMY_ATTENDEES_LIST_3.clear();
         DUMMY_ATTENDEES_LIST_3.add(attendeesList.get(8));
         DUMMY_ATTENDEES_LIST_3.add(attendeesList.get(9));
         DUMMY_ATTENDEES_LIST_3.add(attendeesList.get(1));
 
+        DUMMY_ATTENDEES_LIST_4.clear();
         DUMMY_ATTENDEES_LIST_4.add(attendeesList.get(3));
         DUMMY_ATTENDEES_LIST_4.add(attendeesList.get(5));
         DUMMY_ATTENDEES_LIST_4.add(attendeesList.get(7));
 
+        DUMMY_ATTENDEES_LIST_5.clear();
         DUMMY_ATTENDEES_LIST_5.add(attendeesList.get(2));
         DUMMY_ATTENDEES_LIST_5.add(attendeesList.get(4));
 
@@ -66,7 +70,7 @@ public abstract class DummyAttendeesListGenerator {
             commaSeparatedEmailAddressBuilder.append(attendee.getStrAttendeeEmailAddress());
             commaSeparatedEmailAddressBuilder.append(", ");
         }
-
+        //TODO: remove last comma
         return strAttendeesListEmailAddresses = commaSeparatedEmailAddressBuilder.toString();
     }
 

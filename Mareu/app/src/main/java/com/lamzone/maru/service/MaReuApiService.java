@@ -28,4 +28,5 @@ public interface MaReuApiService {
 
     String getAttendeesListEmailAddresses(List<Attendee> attendeesList);
 
+    void deleteMeeting(Meeting meeting);
 }

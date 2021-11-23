@@ -65,4 +65,9 @@ public class DummyApiService implements MaReuApiService{
         this.attendeesList = attendeesList;
         return DummyAttendeesListGenerator.getAttendeesListEmailAddresses(attendeesList);
     }
+
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        meetingsList.remove(meeting);
+    }
 }
