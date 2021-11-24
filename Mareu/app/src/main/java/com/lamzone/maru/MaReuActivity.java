@@ -52,7 +52,6 @@ public class MaReuActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
         setSupportActionBar(toolbar);
 
-
         addMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
