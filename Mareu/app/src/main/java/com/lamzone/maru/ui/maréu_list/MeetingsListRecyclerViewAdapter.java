@@ -43,9 +43,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         private TextView meetingDuration;
         private ImageButton deleteMeetingButton;
 
-
-
-
         public MyViewHolder(View view) {
             super(view);
             meetingName = view.findViewById(R.id.activity_meetings_item_meeting_name);

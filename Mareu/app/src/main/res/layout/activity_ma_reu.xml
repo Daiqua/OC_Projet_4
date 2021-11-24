@@ -42,6 +42,7 @@
         android:backgroundTint="@color/red"
         android:layout_gravity="end|bottom"
         app:fabCustomSize="112dp"
-        app:borderWidth="0dp" />
+        app:borderWidth="0dp"
+        android:tint="@color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

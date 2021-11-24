@@ -11,6 +11,11 @@ public class Attendee {
 
     }
 
+    public Attendee (String strAttendeeEmailAddress ){
+        this("",strAttendeeEmailAddress);
+
+    }
+
     public String getStrAttendeeName() {
         return strAttendeeName;
     }

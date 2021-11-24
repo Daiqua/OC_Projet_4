@@ -8,7 +8,10 @@
         <entry key="..\:/Mareu/app/src/main/res/layout/activity_meeting_item.xml" value="0.18823529411764706" />
         <entry key="..\:/Mareu/app/src/main/res/layout/activity_meetings_list.xml" value="0.35208333333333336" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1527777777777778" />
-        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting.xml" value="0.2504854368932039" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.2734375" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting.xml" value="0.33" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting_attendee_list.xml" value="0.25729166666666664" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting_attendee_list_item.xml" value="0.25729166666666664" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_ma_reu.xml" value="0.22" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_item.xml" value="0.33" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meetings_list.xml" value="0.1984375" />
