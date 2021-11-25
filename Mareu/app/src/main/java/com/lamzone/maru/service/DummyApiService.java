@@ -9,16 +9,14 @@ import java.util.List;
 
 public class DummyApiService implements MaReuApiService{
 
-    List<Attendee> attendeesList;
-    List<List<Attendee>> listsOfAttendees;
-    List<MeetingRoom> meetingRoomList;
-    List<Meeting> meetingsList;
+    private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
+    private List<List<Attendee>> listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
+    private List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
+    private List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
 
 
     @Override
     public List<Meeting> getMeetings() {
-
-        meetingsList = DummyMeetingGenerator.generateMeetings();
         return meetingsList;
     }
 
@@ -28,7 +26,6 @@ public class DummyApiService implements MaReuApiService{
 
     @Override
     public List<Attendee> getAttendees() {
-        attendeesList = DummyAttendeeGenerator.generateAttendees();
         return attendeesList;
     }
 
@@ -37,18 +34,14 @@ public class DummyApiService implements MaReuApiService{
 
     @Override
     public List<List<Attendee>> getListsOfAttendees() {
-        listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
+
         return listsOfAttendees;
     }
 
     @Override
     public List<MeetingRoom> getMeetingRooms() {
-        meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
         return meetingRoomList;
     }
-
-    @Override
-    public void removeMeeting(Meeting meeting) {meetingsList.remove(meeting);}
 
     @Override
     public void getMeetingsAtDate() {

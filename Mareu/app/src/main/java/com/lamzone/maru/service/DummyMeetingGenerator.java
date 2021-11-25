@@ -13,17 +13,13 @@ public abstract class DummyMeetingGenerator {
 
 
     private static List<Meeting> DUMMY_MEETINGS = new ArrayList<>();
-    private static MaReuApiService mApiService;
     private static  List<List<Attendee>> listsOfAttendees = new ArrayList<>();
     private static List<MeetingRoom> mMeetingRooms = new ArrayList<>();
 
 
         static List<Meeting> generateMeetings() {
-            mApiService  = DI.getApiService();
-            listsOfAttendees = mApiService.getListsOfAttendees();
-            mMeetingRooms = mApiService.getMeetingRooms();
-
-            DUMMY_MEETINGS.clear();
+            listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
+            mMeetingRooms = DummyMeetingRoomGenerator.generateMeetingRooms();
 
             Meeting meeting = new Meeting("Réunion 1",mMeetingRooms.get(0), listsOfAttendees.get(0) );
             DUMMY_MEETINGS.add(meeting);

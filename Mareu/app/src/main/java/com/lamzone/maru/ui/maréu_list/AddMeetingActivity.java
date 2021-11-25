@@ -1,6 +1,7 @@
 package com.lamzone.maru.ui.maréu_list;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,10 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
+import com.lamzone.maru.model.MeetingRoom;
 import com.lamzone.maru.service.MaReuApiService;
 
 import java.util.ArrayList;
@@ -32,7 +36,7 @@ import java.util.List;
 public class AddMeetingActivity extends AppCompatActivity {
 
     private MaReuApiService mApiService;
-    private List<Meeting> mMeetingsList = new ArrayList<>();
+
     TextInputLayout meetingTopicInput;
     TextInputLayout meetingRoomInput;
     TextInputLayout meetingDateInput;
@@ -58,6 +62,15 @@ public class AddMeetingActivity extends AppCompatActivity {
     private Attendee newAttendee;
     private RecyclerView mRecyclerView;
     private AddMeetingAttendeesListRecyclerViewAdapter mAddMeetingAttendeesListRVAdapter;
+
+    //variable to create a new meeting
+    private Meeting newMeeting;
+    private String strNewMeetingName;
+    private List<Attendee> newMeetingAttendeesList;
+    private MeetingRoom roomForTheNewMeeting;
+    private String strRoomName;
+    private String strMeetingStartDate;
+    private int iMeetingDuration;
 
 
 
@@ -112,7 +125,25 @@ public class AddMeetingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "ça avance!", Toast.LENGTH_SHORT).show();
+                //load data in newMeeting
+                //Meeting Room
+                strRoomName = meetingRoomInput.getEditText().getText().toString();
+                //TODO: lock the text Format - bug during the record of the date
+                strMeetingStartDate = meetingDateInput.getEditText().getText().toString();
+                iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
+                roomForTheNewMeeting = new MeetingRoom(strRoomName, strMeetingStartDate, iMeetingDuration);
+                //Attendees list
+                newMeetingAttendeesList = mAttendeesList;
+                //Topic/name
+                strNewMeetingName = meetingTopicInput.getEditText().getText().toString();
+
+                newMeeting = new Meeting(strNewMeetingName, roomForTheNewMeeting, newMeetingAttendeesList);
+
+                mApiService.addMeeting(newMeeting);
+                Intent intent = new Intent(view.getContext(),MaReuActivity.class);
+                ActivityCompat.startActivity(view.getContext(), intent, null);
+                finish();
+
             }
         });
 

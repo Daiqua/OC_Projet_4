@@ -9,6 +9,7 @@ import java.util.List;
 
 public abstract class DummyMeetingRoomGenerator {
 
+    //TODO: create unmodifiable list of room
     public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
 
             new MeetingRoom("salle 1","2021.11.22 11:30:00", 45),

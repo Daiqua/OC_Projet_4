@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Attendee;
@@ -30,8 +31,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsListRecyclerViewAdapter.MyViewHolder> {
-    private final List<Meeting> mMeetingsList;
-    public static int iAdapterPosition;
+    private static List<Meeting> mMeetingsList;
     private MaReuApiService mApiService;
     private String attendeesEmailAddressesCommaSeparated;
 
@@ -52,6 +52,7 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             meetingDuration = view.findViewById(R.id.activity_meetings_item_meeting_duration);
             deleteMeetingButton = view.findViewById(R.id.activity_meetings_item_delete_button);
         }
+
     }
 
     public MeetingsListRecyclerViewAdapter (List<Meeting> meetingsList) {this.mMeetingsList = meetingsList;}
@@ -60,7 +61,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_meeting_item, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
@@ -80,7 +80,8 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             @Override
             public void onClick(View v) {
                 mApiService.deleteMeeting(meeting);
-                notifyItemRemoved(holder.getAdapterPosition());
+                notifyDataSetChanged();
+
             }
         });
     }
@@ -97,7 +98,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return date;
     }
 
@@ -113,5 +113,4 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         String meetingStartingDate = dateFormatter.format(date);
         return meetingStartingDate;
     }
-
 }

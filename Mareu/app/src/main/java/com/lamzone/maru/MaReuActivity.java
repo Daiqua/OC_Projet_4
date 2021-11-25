@@ -26,7 +26,7 @@ import java.util.List;
 public class MaReuActivity extends AppCompatActivity {
 
     private MaReuApiService mApiService;
-    private List<Meeting> mMeetingsList = new ArrayList<>();
+    private static List<Meeting> mMeetingsList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MeetingsListRecyclerViewAdapter mMeetingsListRecyclerViewAdapter;
     FloatingActionButton addMeeting;
@@ -35,19 +35,19 @@ public class MaReuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mApiService = DI.getApiService();
-
+        generateMeetings();
         setContentView(R.layout.activity_ma_reu);
         addMeeting = (FloatingActionButton) findViewById(R.id.activity_ma_reu_add_meeting);
 
         mRecyclerView = findViewById(R.id.activity_meetings_list);
-        mMeetingsList = mApiService.getMeetings();
+
         mMeetingsListRecyclerViewAdapter = new MeetingsListRecyclerViewAdapter(mMeetingsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mMeetingsListRecyclerViewAdapter);
+
 
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
         setSupportActionBar(toolbar);
@@ -62,4 +62,15 @@ public class MaReuActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    public void generateMeetings(){
+        mApiService = DI.getApiService();
+        mMeetingsList = mApiService.getMeetings();
+    }
 }

@@ -10,8 +10,7 @@ import java.util.List;
 public abstract class DummyAttendeesListGenerator {
 
     //call the API to access to the Attendees
-    private static MaReuApiService mApiService = DI.getApiService();
-    private static List<Attendee> attendeesList = mApiService.getAttendees();
+    private static List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
 
     //To simulate already recorded Attendees Lists for planned meetings
     private static List<Attendee> DUMMY_ATTENDEES_LIST_1 = new ArrayList<>();
@@ -58,7 +57,7 @@ public abstract class DummyAttendeesListGenerator {
         DUMMY_ATTENDEES_LIST_5.add(attendeesList.get(2));
         DUMMY_ATTENDEES_LIST_5.add(attendeesList.get(4));
 
-        return new ArrayList<>(DUMMY_ATTENDEES_LISTS);
+        return DUMMY_ATTENDEES_LISTS;
     }
 
     static String getAttendeesListEmailAddresses(List<Attendee> attendeesList){
