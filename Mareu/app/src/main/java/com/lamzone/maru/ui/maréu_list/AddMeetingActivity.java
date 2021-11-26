@@ -3,11 +3,16 @@ package com.lamzone.maru.ui.maréu_list;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +38,12 @@ import com.lamzone.maru.service.MaReuApiService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddMeetingActivity extends AppCompatActivity {
+public class AddMeetingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
     private MaReuApiService mApiService;
 
     TextInputLayout meetingTopicInput;
-    TextInputLayout meetingRoomInput;
+
     TextInputLayout meetingDateInput;
     TextInputLayout meetingHourInput;
     TextInputLayout meetingDurationInput;
@@ -72,7 +77,9 @@ public class AddMeetingActivity extends AppCompatActivity {
     private String strMeetingStartDate;
     private int iMeetingDuration;
 
-
+    //TODO implement spinner for room
+    private String[] roomList = {"salle 1","salle 2","salle 3","salle 4","salle 5","salle 6","salle 7","salle 8","salle 9","salle 10"};
+    private String strMeetingRoomInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +88,15 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_meeting);
         meetingTopicInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_topic_input);
-        meetingRoomInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_room_input);
+
+        //TODO implement spinner for room
+
+        Spinner meetingRoomSpinner = findViewById(R.id.activity_add_meeting_room_spinner);
+        meetingRoomSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter meetingRoomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roomList);
+        meetingRoomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        meetingRoomSpinner.setAdapter(meetingRoomArrayAdapter);
+
         meetingDateInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_date_input);
         meetingHourInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_hour_input);
         meetingDurationInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_duration_input);
@@ -122,12 +137,13 @@ public class AddMeetingActivity extends AppCompatActivity {
         });
 
         saveButton = (MaterialButton) findViewById(R.id.activity_add_meeting_save_button);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //load data in newMeeting
                 //Meeting Room
-                strRoomName = meetingRoomInput.getEditText().getText().toString();
+                strRoomName = strMeetingRoomInput;
                 //TODO: lock the text Format - bug during the record of the date
                 strMeetingStartDate = meetingDateInput.getEditText().getText().toString();
                 iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
@@ -149,7 +165,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         //Text watchers for each data
         init(meetingTopicInput, meetingTopicCheck);
-        init(meetingRoomInput, meetingRoomCheck);
         init(meetingDateInput, meetingDateCheck);
         init(meetingHourInput, meetingHourCheck);
         init(meetingDurationInput, meetingDurationCheck);
@@ -182,8 +197,8 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     private void updateSaveButtonStatus(){
-        bFilledCount = (meetingTopicCheck.isEnabled() && meetingRoomCheck.isEnabled()
-                && meetingDateCheck.isEnabled() && meetingDurationCheck.isEnabled() && meetingHourCheck.isEnabled()
+        bFilledCount = (meetingTopicCheck.isEnabled() && meetingDateCheck.isEnabled() && meetingRoomCheck.isEnabled()
+                && meetingDurationCheck.isEnabled() && meetingHourCheck.isEnabled()
                 && mAttendeesList.size()>0);
         if (bFilledCount){
             saveButton.setEnabled(true);
@@ -191,6 +206,23 @@ public class AddMeetingActivity extends AppCompatActivity {
         }else{
             saveButton.setEnabled(false);
             saveButton.setText("Renseigner tous les champs pour pouvoir ajouter la réunion");}
+    }
+
+    //for spinner room
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_24));
+        meetingRoomCheck.setEnabled(true);
+        strMeetingRoomInput = roomList[position];
+
+    }
+
+    //TODO implement spinner for room
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_close_24));
+        meetingRoomCheck.setEnabled(false);
+
     }
 }
 

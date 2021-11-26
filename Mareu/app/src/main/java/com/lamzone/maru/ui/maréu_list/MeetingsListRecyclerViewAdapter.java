@@ -84,7 +84,18 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
 
             }
         });
+
+        //TODO remove dependending on thepresentation meeting
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"La réunion se déroulera en "+meeting.getMeetingRoom().getStrMeetingRoomName() , Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
+
 
     @Override
     public int getItemCount() {return mMeetingsList.size();}

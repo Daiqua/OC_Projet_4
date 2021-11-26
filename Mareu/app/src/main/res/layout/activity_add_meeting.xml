@@ -38,19 +38,24 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_meeting_room_input"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:background="@color/grey"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_meeting_room"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Salle"
-                android:inputType="textAutoComplete" />
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:text="Choisir la salle"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/activity_add_meeting_room_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tooltipText="Choisir la salle"/>
 
             <ImageView
                 android:id="@+id/activity_add_meeting_room_check"
@@ -59,7 +64,7 @@
                 app:srcCompat="@drawable/ic_baseline_close_24"
                 android:layout_gravity="right"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_meeting_date_input"
@@ -199,6 +204,7 @@
             app:titleTextColor="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
 
