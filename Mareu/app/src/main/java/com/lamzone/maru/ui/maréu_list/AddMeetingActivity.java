@@ -1,20 +1,16 @@
 package com.lamzone.maru.ui.maréu_list;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
@@ -43,7 +38,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private MaReuApiService mApiService;
 
     TextInputLayout meetingTopicInput;
-
     TextInputLayout meetingDateInput;
     TextInputLayout meetingHourInput;
     TextInputLayout meetingDurationInput;
@@ -57,6 +51,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     ImageView meetingAttendeesCheck;
 
     ImageButton addAttendeeButton;
+
+    DatePicker meetingDatePicker;
 
     private boolean bFilledCount = false; //used to check if all data are filled - use for the saveButton
     MaterialButton saveButton;
@@ -75,11 +71,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private MeetingRoom roomForTheNewMeeting;
     private String strRoomName;
     private String strMeetingStartDate;
+    private String strMeetingHour;
     private int iMeetingDuration;
 
-    //TODO implement spinner for room
-    private String[] roomList = {"salle 1","salle 2","salle 3","salle 4","salle 5","salle 6","salle 7","salle 8","salle 9","salle 10"};
-    private String strMeetingRoomInput;
+    //for spinner room list
+    private String selectedMeetingRoom;
+    private String[] meetingRoomsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +86,14 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_add_meeting);
         meetingTopicInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_topic_input);
 
-        //TODO implement spinner for room
+        //TODO: implement date picker
+        meetingDatePicker = findViewById(R.id.activity_add_meeting_date_picker);
 
+        //for spinner room list
+        meetingRoomsList = mApiService.getRoomsList();
         Spinner meetingRoomSpinner = findViewById(R.id.activity_add_meeting_room_spinner);
         meetingRoomSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter meetingRoomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roomList);
+        ArrayAdapter meetingRoomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, meetingRoomsList);
         meetingRoomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         meetingRoomSpinner.setAdapter(meetingRoomArrayAdapter);
 
@@ -143,11 +143,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             public void onClick(View view) {
                 //load data in newMeeting
                 //Meeting Room
-                strRoomName = strMeetingRoomInput;
+                strRoomName = selectedMeetingRoom;
                 //TODO: lock the text Format - bug during the record of the date
-                strMeetingStartDate = meetingDateInput.getEditText().getText().toString();
+                strMeetingStartDate = meetingDatePicker.getYear()+"."+meetingDatePicker.getMonth()+"."+meetingDatePicker.getDayOfMonth();
+                strMeetingHour = meetingHourInput.getEditText().getText().toString();
                 iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
-                roomForTheNewMeeting = new MeetingRoom(strRoomName, strMeetingStartDate, iMeetingDuration);
+                roomForTheNewMeeting = new MeetingRoom(strRoomName, strMeetingStartDate, strMeetingHour, iMeetingDuration);
                 //Attendees list
                 newMeetingAttendeesList = mAttendeesList;
                 //Topic/name
@@ -159,7 +160,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 Intent intent = new Intent(view.getContext(),MaReuActivity.class);
                 ActivityCompat.startActivity(view.getContext(), intent, null);
                 finish();
-
             }
         });
 
@@ -211,18 +211,18 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     //for spinner room
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_24));
-        meetingRoomCheck.setEnabled(true);
-        strMeetingRoomInput = roomList[position];
-
+        if (position == 0) {
+            meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_close_24));
+            meetingRoomCheck.setEnabled(false);
+        }else{
+            meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_24));
+            meetingRoomCheck.setEnabled(true);
+            selectedMeetingRoom = meetingRoomsList[position];
+        }
     }
-
-    //TODO implement spinner for room
+    //for spinner room list
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        meetingRoomCheck.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_close_24));
-        meetingRoomCheck.setEnabled(false);
-
     }
 }
 

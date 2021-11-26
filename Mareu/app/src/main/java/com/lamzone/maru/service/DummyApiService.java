@@ -4,7 +4,6 @@ import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DummyApiService implements MaReuApiService{
@@ -62,5 +61,10 @@ public class DummyApiService implements MaReuApiService{
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetingsList.remove(meeting);
+    }
+
+    @Override
+    public String[] getRoomsList() {
+        return DummyMeetingRoomGenerator.getRoomsList();
     }
 }

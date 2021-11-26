@@ -62,13 +62,6 @@ public class MaReuActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
-
     public void generateMeetings(){
         mApiService = DI.getApiService();
         mMeetingsList = mApiService.getMeetings();

@@ -52,11 +52,9 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             meetingDuration = view.findViewById(R.id.activity_meetings_item_meeting_duration);
             deleteMeetingButton = view.findViewById(R.id.activity_meetings_item_delete_button);
         }
-
     }
 
     public MeetingsListRecyclerViewAdapter (List<Meeting> meetingsList) {this.mMeetingsList = meetingsList;}
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,7 +71,7 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
                 .getAttendeesListEmailAddresses(meeting.getMeetingAttendeesList());
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
         holder.meetingStartingDate.setText("le "+writeDate(generateDate(meeting)));
-        holder.meetingStartingHour.setText("à "+writeHour(generateDate(meeting)));
+        holder.meetingStartingHour.setText("à "+meeting.getMeetingRoom().getStrMeetingStartHour());
         holder.meetingDuration.setText("Durée: "+meeting.getMeetingRoom().getMeetingDuration()+" min");
 
         holder.deleteMeetingButton.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +79,10 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             public void onClick(View v) {
                 mApiService.deleteMeeting(meeting);
                 notifyDataSetChanged();
-
             }
         });
 
-        //TODO remove dependending on thepresentation meeting
+        //TODO remove depending on the presentation meeting
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,15 +92,13 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
 
     }
 
-
-
     @Override
     public int getItemCount() {return mMeetingsList.size();}
 
     //TODO: move generateDate, writeHour and writeDate in ApiService or DummyMeetingRoomsGenerator
     public static Date generateDate (Meeting meeting) {
         Date date = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.FRANCE);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
         try {
             date = dateFormatter.parse(meeting.getMeetingRoom().getStrMeetingStartDate());
         } catch (ParseException e) {
