@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,14 +39,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private MaReuApiService mApiService;
 
     TextInputLayout meetingTopicInput;
-    TextInputLayout meetingDateInput;
     TextInputLayout meetingHourInput;
     TextInputLayout meetingDurationInput;
     TextInputLayout meetingAttendeesInput;
 
     ImageView meetingTopicCheck;
     ImageView meetingRoomCheck;
-    ImageView meetingDateCheck;
     ImageView meetingHourCheck;
     ImageView meetingDurationCheck;
     ImageView meetingAttendeesCheck;
@@ -53,6 +52,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     ImageButton addAttendeeButton;
 
     DatePicker meetingDatePicker;
+
+    TimePicker meetingTimePicker;
 
     private boolean bFilledCount = false; //used to check if all data are filled - use for the saveButton
     MaterialButton saveButton;
@@ -86,8 +87,10 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_add_meeting);
         meetingTopicInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_topic_input);
 
-        //TODO: implement date picker
         meetingDatePicker = findViewById(R.id.activity_add_meeting_date_picker);
+
+        meetingTimePicker = findViewById(R.id.activity_add_meeting_time_picker);
+        meetingTimePicker.setIs24HourView(true);
 
         //for spinner room list
         meetingRoomsList = mApiService.getRoomsList();
@@ -97,14 +100,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         meetingRoomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         meetingRoomSpinner.setAdapter(meetingRoomArrayAdapter);
 
-        meetingDateInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_date_input);
         meetingHourInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_hour_input);
         meetingDurationInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_duration_input);
         meetingAttendeesInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_attendees_input);
 
         meetingTopicCheck = findViewById(R.id.activity_add_meeting_topic_check);
         meetingRoomCheck = findViewById(R.id.activity_add_meeting_room_check);
-        meetingDateCheck = findViewById(R.id.activity_add_meeting_date_check);
         meetingHourCheck = findViewById(R.id.activity_add_meeting_hour_check);
         meetingDurationCheck = findViewById(R.id.activity_add_meeting_duration_check);
         meetingAttendeesCheck = findViewById(R.id.activity_add_meeting_attendees_check);
@@ -144,9 +145,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 //load data in newMeeting
                 //Meeting Room
                 strRoomName = selectedMeetingRoom;
-                //TODO: lock the text Format - bug during the record of the date
-                strMeetingStartDate = meetingDatePicker.getYear()+"."+meetingDatePicker.getMonth()+"."+meetingDatePicker.getDayOfMonth();
-                strMeetingHour = meetingHourInput.getEditText().getText().toString();
+                strMeetingStartDate = meetingDatePicker.getYear()+"."+meetingDatePicker.getMonth()+"."+meetingDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
+                strMeetingHour = meetingTimePicker.getCurrentHour()+":"+meetingTimePicker.getCurrentMinute();
                 iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
                 roomForTheNewMeeting = new MeetingRoom(strRoomName, strMeetingStartDate, strMeetingHour, iMeetingDuration);
                 //Attendees list
@@ -165,7 +165,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
         //Text watchers for each data
         init(meetingTopicInput, meetingTopicCheck);
-        init(meetingDateInput, meetingDateCheck);
         init(meetingHourInput, meetingHourCheck);
         init(meetingDurationInput, meetingDurationCheck);
         init(meetingAttendeesInput, meetingAttendeesCheck);
@@ -197,7 +196,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     }
 
     private void updateSaveButtonStatus(){
-        bFilledCount = (meetingTopicCheck.isEnabled() && meetingDateCheck.isEnabled() && meetingRoomCheck.isEnabled()
+        bFilledCount = (meetingTopicCheck.isEnabled() && meetingRoomCheck.isEnabled()
                 && meetingDurationCheck.isEnabled() && meetingHourCheck.isEnabled()
                 && mAttendeesList.size()>0);
         if (bFilledCount){

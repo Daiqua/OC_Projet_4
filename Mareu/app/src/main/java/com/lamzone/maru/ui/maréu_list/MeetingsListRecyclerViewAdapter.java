@@ -70,7 +70,7 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         attendeesEmailAddressesCommaSeparated = mApiService
                 .getAttendeesListEmailAddresses(meeting.getMeetingAttendeesList());
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
-        holder.meetingStartingDate.setText("le "+writeDate(generateDate(meeting)));
+        holder.meetingStartingDate.setText("le "+writeDate(meeting));
         holder.meetingStartingHour.setText("à "+meeting.getMeetingRoom().getStrMeetingStartHour());
         holder.meetingDuration.setText("Durée: "+meeting.getMeetingRoom().getMeetingDuration()+" min");
 
@@ -107,15 +107,15 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         return date;
     }
 
-    public static String writeHour (Date date){
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
-        String meetingStartinghour = dateFormatter.format(date);
-        return meetingStartinghour;
-    }
-
-    public static String writeDate (Date date){
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
+    public static String writeDate (Meeting meeting){
+        Date date = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
+        try {
+            date = dateFormatter.parse(meeting.getMeetingRoom().getStrMeetingStartDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        dateFormatter = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
         String meetingStartingDate = dateFormatter.format(date);
         return meetingStartingDate;
     }

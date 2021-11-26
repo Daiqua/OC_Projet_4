@@ -69,50 +69,55 @@
         </LinearLayout>
 
 
-        <DatePicker
-            android:id="@+id/activity_add_meeting_date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="20dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:scaleX="1.2"
-            android:scaleY="1.2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:text="Choisir la date"/>
-
-        </DatePicker>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_meeting_date_input"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_meeting_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Date"
-                android:inputType="date" />
-
-            <ImageView
-                android:id="@+id/activity_add_meeting_date_check"
+            <DatePicker
+                android:id="@+id/activity_add_meeting_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
+                android:layout_gravity="left"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:background="@color/light_pink">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"
+                    android:text="Choisir la date"/>
+
+            </DatePicker>
+
+                <TimePicker
+                    android:id="@+id/activity_add_meeting_time_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:timePickerMode="spinner"
+                    android:background="@color/light_yellow">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|top"
+                        android:layout_marginLeft="25dp"
+                        android:textStyle="bold"
+                        android:text="Choisir l'heure de début" />
+
+                </TimePicker>
+
+        </LinearLayout>
+
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_meeting_hour_input"

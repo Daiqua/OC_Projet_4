@@ -10,6 +10,8 @@
     <color name="blue">#0099ff</color>
     <color name="red">#ff3333</color>
     <color name="grey">#A79C9B</color>
+    <color name="light_pink">#f8dada</color>
+    <color name="light_yellow">#eff596</color>
 
 
 </resources>
