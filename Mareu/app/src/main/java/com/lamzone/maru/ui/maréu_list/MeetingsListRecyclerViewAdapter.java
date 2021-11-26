@@ -95,18 +95,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
     @Override
     public int getItemCount() {return mMeetingsList.size();}
 
-    //TODO: move generateDate, writeHour and writeDate in ApiService or DummyMeetingRoomsGenerator
-    public static Date generateDate (Meeting meeting) {
-        Date date = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
-        try {
-            date = dateFormatter.parse(meeting.getMeetingRoom().getStrMeetingStartDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
     public static String writeDate (Meeting meeting){
         Date date = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);

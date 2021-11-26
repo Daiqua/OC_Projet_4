@@ -9,22 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mareu">
-        <activity
-            android:name=".MaReuActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.maréu_list.AddMeetingActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             android:parentActivityName=".MaReuActivity"
             android:label="New Meeting">
+        </activity>
+        <activity
+            android:name=".ui.maréu_list.MeetingFilterActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:parentActivityName=".MaReuActivity"
+            android:label="Meeting Filter">
+        </activity>
+        <activity
+            android:name=".MaReuActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

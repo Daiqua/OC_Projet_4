@@ -39,13 +39,11 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private MaReuApiService mApiService;
 
     TextInputLayout meetingTopicInput;
-    TextInputLayout meetingHourInput;
     TextInputLayout meetingDurationInput;
     TextInputLayout meetingAttendeesInput;
 
     ImageView meetingTopicCheck;
     ImageView meetingRoomCheck;
-    ImageView meetingHourCheck;
     ImageView meetingDurationCheck;
     ImageView meetingAttendeesCheck;
 
@@ -56,8 +54,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     TimePicker meetingTimePicker;
 
     private boolean bFilledCount = false; //used to check if all data are filled - use for the saveButton
-    MaterialButton saveButton;
 
+    MaterialButton saveButton;
 
     //variable to manage the creation of the attendees list
     private List<Attendee> mAttendeesList = new ArrayList<>();
@@ -86,9 +84,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
         setContentView(R.layout.activity_add_meeting);
         meetingTopicInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_topic_input);
-
         meetingDatePicker = findViewById(R.id.activity_add_meeting_date_picker);
-
         meetingTimePicker = findViewById(R.id.activity_add_meeting_time_picker);
         meetingTimePicker.setIs24HourView(true);
 
@@ -100,13 +96,11 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         meetingRoomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         meetingRoomSpinner.setAdapter(meetingRoomArrayAdapter);
 
-        meetingHourInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_hour_input);
         meetingDurationInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_duration_input);
         meetingAttendeesInput = (TextInputLayout) findViewById(R.id.activity_add_meeting_attendees_input);
 
         meetingTopicCheck = findViewById(R.id.activity_add_meeting_topic_check);
         meetingRoomCheck = findViewById(R.id.activity_add_meeting_room_check);
-        meetingHourCheck = findViewById(R.id.activity_add_meeting_hour_check);
         meetingDurationCheck = findViewById(R.id.activity_add_meeting_duration_check);
         meetingAttendeesCheck = findViewById(R.id.activity_add_meeting_attendees_check);
 
@@ -157,15 +151,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 newMeeting = new Meeting(strNewMeetingName, roomForTheNewMeeting, newMeetingAttendeesList);
 
                 mApiService.addMeeting(newMeeting);
-                Intent intent = new Intent(view.getContext(),MaReuActivity.class);
-                ActivityCompat.startActivity(view.getContext(), intent, null);
                 finish();
             }
         });
 
         //Text watchers for each data
         init(meetingTopicInput, meetingTopicCheck);
-        init(meetingHourInput, meetingHourCheck);
         init(meetingDurationInput, meetingDurationCheck);
         init(meetingAttendeesInput, meetingAttendeesCheck);
     }
@@ -197,8 +188,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     private void updateSaveButtonStatus(){
         bFilledCount = (meetingTopicCheck.isEnabled() && meetingRoomCheck.isEnabled()
-                && meetingDurationCheck.isEnabled() && meetingHourCheck.isEnabled()
-                && mAttendeesList.size()>0);
+                        && meetingDurationCheck.isEnabled() && mAttendeesList.size()>0);
         if (bFilledCount){
             saveButton.setEnabled(true);
             saveButton.setText("Ajouter la réunion");
@@ -207,7 +197,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             saveButton.setText("Renseigner tous les champs pour pouvoir ajouter la réunion");}
     }
 
-    //for spinner room
+    //for spinner room list
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) {

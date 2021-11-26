@@ -80,11 +80,9 @@
                 android:id="@+id/activity_add_meeting_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:gravity="center"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:scaleX="1"
-                android:scaleY="1"
                 android:background="@color/light_pink">
 
                 <TextView
@@ -97,50 +95,26 @@
 
             </DatePicker>
 
-                <TimePicker
-                    android:id="@+id/activity_add_meeting_time_picker"
-                    android:layout_width="wrap_content"
+            <TimePicker
+                android:id="@+id/activity_add_meeting_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_gravity="right"
+                android:background="@color/light_yellow">
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:timePickerMode="spinner"
-                    android:background="@color/light_yellow">
+                    android:layout_gravity="left|top"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"
+                    android:text="Choisir l'heure de début" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|top"
-                        android:layout_marginLeft="25dp"
-                        android:textStyle="bold"
-                        android:text="Choisir l'heure de début" />
-
-                </TimePicker>
+            </TimePicker>
 
         </LinearLayout>
 
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_meeting_hour_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_meeting_hour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Heure"
-                android:inputType="time" />
-
-            <ImageView
-                android:id="@+id/activity_add_meeting_hour_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_meeting_duration_input"
@@ -234,8 +208,5 @@
             app:titleTextColor="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

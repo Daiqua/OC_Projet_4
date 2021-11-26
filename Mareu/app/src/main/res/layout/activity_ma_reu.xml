@@ -22,7 +22,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 android:id="@+id/activity_ma_reu_toolbar"
-                app:titleTextColor="@color/white"/>
+                app:titleTextColor="@color/white">
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
