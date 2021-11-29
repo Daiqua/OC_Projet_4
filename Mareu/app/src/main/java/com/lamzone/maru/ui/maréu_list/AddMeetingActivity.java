@@ -139,7 +139,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 //load data in newMeeting
                 //Meeting Room
                 strRoomName = selectedMeetingRoom;
-                strMeetingStartDate = meetingDatePicker.getYear()+"."+meetingDatePicker.getMonth()+"."+meetingDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
+                //getMonth()+1 needed during conversion from mm to MMMM)
+                strMeetingStartDate = meetingDatePicker.getYear()+"."+(meetingDatePicker.getMonth()+1)+"."+meetingDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
                 strMeetingHour = meetingTimePicker.getCurrentHour()+":"+meetingTimePicker.getCurrentMinute();
                 iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
                 roomForTheNewMeeting = new MeetingRoom(strRoomName, strMeetingStartDate, strMeetingHour, iMeetingDuration);

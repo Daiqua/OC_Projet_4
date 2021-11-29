@@ -16,6 +16,7 @@ import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
+import com.lamzone.maru.service.DateConvertor;
 import com.lamzone.maru.service.DummyAttendeesListGenerator;
 import com.lamzone.maru.service.MaReuApiService;
 
@@ -54,8 +55,10 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         }
     }
 
-    public MeetingsListRecyclerViewAdapter (List<Meeting> meetingsList) {this.mMeetingsList = meetingsList;}
+    public MeetingsListRecyclerViewAdapter (List<Meeting> meetingsList) {
+        mMeetingsList = meetingsList;}
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_meeting_item, parent, false);
@@ -70,7 +73,9 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         attendeesEmailAddressesCommaSeparated = mApiService
                 .getAttendeesListEmailAddresses(meeting.getMeetingAttendeesList());
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
-        holder.meetingStartingDate.setText("le "+writeDate(meeting));
+
+        holder.meetingStartingDate.setText("le "
+                +DateConvertor.convert_yyyy_MM_dd_to_dd_MMMM(meeting.getMeetingRoom().getStrMeetingStartDate()));
         holder.meetingStartingHour.setText("à "+meeting.getMeetingRoom().getStrMeetingStartHour());
         holder.meetingDuration.setText("Durée: "+meeting.getMeetingRoom().getMeetingDuration()+" min");
 
@@ -95,16 +100,4 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
     @Override
     public int getItemCount() {return mMeetingsList.size();}
 
-    public static String writeDate (Meeting meeting){
-        Date date = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
-        try {
-            date = dateFormatter.parse(meeting.getMeetingRoom().getStrMeetingStartDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        dateFormatter = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
-        String meetingStartingDate = dateFormatter.format(date);
-        return meetingStartingDate;
-    }
 }

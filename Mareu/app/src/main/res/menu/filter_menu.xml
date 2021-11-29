@@ -11,17 +11,21 @@
         <menu>
 
             <item
-
                 android:orderInCategory="1"
                 android:id="@+id/filterDate"
                 android:title="filtre date"
                 app:showAsAction="never" />
 
-
             <item
                 android:orderInCategory="2"
                 android:id="@+id/filterRoom"
                 android:title="filtre salle"
+                app:showAsAction="never" />
+
+            <item
+                android:orderInCategory="2"
+                android:id="@+id/reset_filter"
+                android:title="supprimer le filtre"
                 app:showAsAction="never" />
 
         </menu>

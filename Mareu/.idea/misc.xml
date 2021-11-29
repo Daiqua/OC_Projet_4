@@ -13,10 +13,11 @@
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting.xml" value="0.25" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting_attendee_list.xml" value="0.25729166666666664" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting_attendee_list_item.xml" value="0.25729166666666664" />
-        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_ma_reu.xml" value="0.22" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_ma_reu.xml" value="0.25" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_filter.xml" value="0.33" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_item.xml" value="0.33" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meetings_list.xml" value="0.1984375" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_date_picker.xml" value="0.36041666666666666" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/menu/filter_menu.xml" value="0.30104166666666665" />
       </map>
     </option>

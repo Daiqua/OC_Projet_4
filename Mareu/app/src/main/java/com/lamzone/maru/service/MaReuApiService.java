@@ -29,4 +29,6 @@ public interface MaReuApiService {
     void deleteMeeting(Meeting meeting);
 
     String[] getRoomsList();
+
+    List<Meeting> generateFilteredList(String strDatePattern_yyyy_MM_dd);
 }

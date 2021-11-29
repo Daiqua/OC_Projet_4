@@ -1,12 +1,15 @@
 package com.lamzone.maru.service;
 
+import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class DummyApiService implements MaReuApiService{
+public class DummyApiService extends DateConvertor implements MaReuApiService{
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
     private List<List<Attendee>> listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
@@ -66,5 +69,19 @@ public class DummyApiService implements MaReuApiService{
     @Override
     public String[] getRoomsList() {
         return DummyMeetingRoomGenerator.getRoomsList();
+    }
+
+
+
+    @Override
+    public List<Meeting> generateFilteredList(String strDatePattern_yyyy_MM_dd) {
+        List<Meeting> filteredMeetingsList = new ArrayList<>();
+        String strDateFilter = strDatePattern_yyyy_MM_dd;
+        for (Meeting meeting : meetingsList){
+           String strTempMeetingDate = meeting.getMeetingRoom().getStrMeetingStartDate();//format: yyyy.MM.dd
+           String strDateFiltered = MaReuActivity.getStrDateFiltered();//format: yyyy.MM.dd
+           if (strTempMeetingDate.equals(strDateFiltered)){filteredMeetingsList.add(meeting);}
+        }
+        return filteredMeetingsList;
     }
 }

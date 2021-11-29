@@ -18,12 +18,6 @@
             android:label="New Meeting">
         </activity>
         <activity
-            android:name=".ui.maréu_list.MeetingFilterActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-            android:parentActivityName=".MaReuActivity"
-            android:label="Meeting Filter">
-        </activity>
-        <activity
             android:name=".MaReuActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
