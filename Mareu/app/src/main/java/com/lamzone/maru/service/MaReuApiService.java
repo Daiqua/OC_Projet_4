@@ -30,5 +30,7 @@ public interface MaReuApiService {
 
     String[] getRoomsList();
 
-    List<Meeting> generateFilteredList(String strDatePattern_yyyy_MM_dd);
+    List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd);
+
+    List<Meeting> generateRoomFilteredList(String strMeetingRoomName);
 }

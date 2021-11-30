@@ -45,7 +45,6 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return super.onCreateDialog(savedInstanceState);
-
     }
 
     public static DatePickerFragment newInstance() {
@@ -71,6 +70,8 @@ public class DatePickerFragment extends DialogFragment {
                 //getMonth()+1 needed during conversion from mm to MMMM
                strDateFiltered = mDatePicker.getYear()+"."+(mDatePicker.getMonth()+1)+"."+mDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
                 MaReuActivity.setStrDateFiltered(strDateFiltered);
+                MaReuActivity.setIsDateFilterActivated(true);
+
                 //TODO: add interface and listener
                 Intent intent = new Intent(getActivity(), MaReuActivity.class);
                 startActivity(intent);

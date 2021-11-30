@@ -24,6 +24,7 @@ import com.lamzone.maru.service.MaReuApiService;
 import com.lamzone.maru.ui.maréu_list.AddMeetingActivity;
 import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
+import com.lamzone.maru.ui.maréu_list.RoomsListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,11 @@ public class MaReuActivity extends DateConvertor {
 
     //to manage the date filter
     private static String strDateFiltered="";//format: yyyy.MM.dd
+
+
+    private static String strRoomFiltered="";
     private static TextView filterText;
     private static String strFilterTextToShow;
-
-
-
     private static boolean isDateFilterActivated = false;
     private static boolean isRoomFilterActivated = false;
 
@@ -63,18 +64,17 @@ public class MaReuActivity extends DateConvertor {
             case R.id.filterDate:
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(),"");
-                MaReuActivityNewInstance();
                 break;
             case R.id.filterRoom:
-                //isRoomFilterActivated = true;
-                //isDateFilterActivated = false;
+                RoomsListFragment roomsListFragment = new RoomsListFragment();
+                roomsListFragment.show(getSupportFragmentManager(),"");
                 break;
             case R.id.reset_filter:
                 Toast.makeText(this, "Filtre réinitialisé", Toast.LENGTH_SHORT).show();
-                setStrDateFiltered("");
-                setFilterText();
                 isDateFilterActivated = false;
                 isRoomFilterActivated = false;
+
+                setFilterText();
                 MaReuActivityNewInstance();
                 break;
         }
@@ -110,20 +110,15 @@ public class MaReuActivity extends DateConvertor {
             }
         });
 
-
     }
 
     public void generateMeetings(){
         mApiService = DI.getApiService();
         if (isRoomFilterActivated) {
-            mMeetingsList = mApiService.getMeetings();//TODO change when filter implemented
+            mMeetingsList = mApiService.generateRoomFilteredList(strRoomFiltered);
         }else if(isDateFilterActivated){
-            mMeetingsList = mApiService.generateFilteredList(strDateFiltered);
+            mMeetingsList = mApiService.generateDateFilteredList(strDateFiltered);
         }else{mMeetingsList = mApiService.getMeetings();}
-    }
-
-    public static void setStrDateFiltered(String dateFiltered) {
-        strDateFiltered = dateFiltered;
     }
 
     public void setFilterText() {
@@ -134,16 +129,14 @@ public class MaReuActivity extends DateConvertor {
                 Toast.makeText(v.getContext(), "taille"+mMeetingsList.size(),Toast.LENGTH_SHORT ).show();
             }
         });
-        if (strDateFiltered.equals("")) {
+        if ((!isDateFilterActivated && !isRoomFilterActivated)) {
             strFilterTextToShow = "Filtres actifs: aucun";
-        } else {
+        } else if (isDateFilterActivated){
             strFilterTextToShow = convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered);
+        } else if (isRoomFilterActivated){
+            strFilterTextToShow = strRoomFiltered;
         }
         filterText.setText(strFilterTextToShow);
-    }
-
-    public static String getStrDateFiltered() {
-        return strDateFiltered;
     }
 
     public void loadRecyclerView(){
@@ -157,9 +150,25 @@ public class MaReuActivity extends DateConvertor {
 
     public static void setIsDateFilterActivated(boolean dateFilterActivated) {
         isDateFilterActivated = dateFilterActivated;
+        if (isDateFilterActivated == true){isRoomFilterActivated = false;}
     }
 
     public static void setISRoomFilterActivated(boolean roomFilterActivated) {
         isRoomFilterActivated = roomFilterActivated;
+        if (isRoomFilterActivated == true){isDateFilterActivated = false;}
     }
+
+
+    public static String getStrDateFiltered() {
+        return strDateFiltered;
+    }
+
+    public static void setStrDateFiltered(String dateFiltered) {
+        strDateFiltered = dateFiltered;
+    }
+
+    public static void setStrRoomFiltered(String RoomFiltered) {
+        strRoomFiltered = RoomFiltered;
+    }
+
 }
