@@ -6,13 +6,13 @@ import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class DummyApiService extends DateConvertor implements MaReuApiService{
+public class DummyApiService extends DateConvertor implements MaReuApiService {
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
-    private List<List<Attendee>> listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
+    private List<List<Attendee>> listsOfAttendees =
+            DummyAttendeesListGenerator.generateAttendeesLists();
     private List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
     private List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
 
@@ -23,7 +23,8 @@ public class DummyApiService extends DateConvertor implements MaReuApiService{
     }
 
     @Override
-    public void addMeeting(Meeting meeting) {meetingsList.add(meeting);
+    public void addMeeting(Meeting meeting) {
+        meetingsList.add(meeting);
     }
 
     @Override
@@ -32,27 +33,18 @@ public class DummyApiService extends DateConvertor implements MaReuApiService{
     }
 
     @Override
-    public void addAttendees(Attendee attendee) {attendeesList.add(attendee);}
+    public void addAttendees(Attendee attendee) {
+        attendeesList.add(attendee);
+    }
 
     @Override
     public List<List<Attendee>> getListsOfAttendees() {
-
         return listsOfAttendees;
     }
 
     @Override
     public List<MeetingRoom> getMeetingRooms() {
         return meetingRoomList;
-    }
-
-    @Override
-    public void getMeetingsAtDate() {
-
-    }
-
-    @Override
-    public void getMeetingInMeetingRoom(MeetingRoom meetingRoom) {
-
     }
 
     @Override
@@ -72,15 +64,17 @@ public class DummyApiService extends DateConvertor implements MaReuApiService{
     }
 
 
-
     @Override
     public List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd) {
         List<Meeting> filteredMeetingsList = new ArrayList<>();
         String strDateFilter = strDatePattern_yyyy_MM_dd;
-        for (Meeting meeting : meetingsList){
-           String strTempMeetingDate = meeting.getMeetingRoom().getStrMeetingStartDate();//format: yyyy.MM.dd
-           String strDateFiltered = MaReuActivity.getStrDateFiltered();//format: yyyy.MM.dd
-           if (strTempMeetingDate.equals(strDateFiltered)){filteredMeetingsList.add(meeting);}
+        for (Meeting meeting : meetingsList) {
+            String strTempMeetingDate = meeting.getMeetingRoom()
+                    .getStrMeetingStartDate();//format: yyyy.MM.dd
+            String strDateFiltered = MaReuActivity.getStrDateFiltered();//format: yyyy.MM.dd
+            if (strTempMeetingDate.equals(strDateFiltered)) {
+                filteredMeetingsList.add(meeting);
+            }
         }
         return filteredMeetingsList;
     }
@@ -88,11 +82,12 @@ public class DummyApiService extends DateConvertor implements MaReuApiService{
     @Override
     public List<Meeting> generateRoomFilteredList(String strMeetingRoomName) {
         List<Meeting> filteredMeetingsList = new ArrayList<>();
-        for (Meeting meeting : meetingsList){
+        for (Meeting meeting : meetingsList) {
             String strTempMeetingRoom = meeting.getMeetingRoom().getStrMeetingRoomName();
-            if (strTempMeetingRoom.equals(strMeetingRoomName)){filteredMeetingsList.add(meeting);}
+            if (strTempMeetingRoom.equals(strMeetingRoomName)) {
+                filteredMeetingsList.add(meeting);
+            }
         }
         return filteredMeetingsList;
     }
-
 }

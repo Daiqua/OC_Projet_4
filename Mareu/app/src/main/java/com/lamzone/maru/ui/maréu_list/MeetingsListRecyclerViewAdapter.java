@@ -8,35 +8,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
-import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.service.DateConvertor;
-import com.lamzone.maru.service.DummyAttendeesListGenerator;
 import com.lamzone.maru.service.MaReuApiService;
 
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsListRecyclerViewAdapter.MyViewHolder> {
     private static List<Meeting> mMeetingsList;
     private MaReuApiService mApiService;
     private String attendeesEmailAddressesCommaSeparated;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView meetingName;
         private TextView meetingAttendeesList;
         private TextView meetingStartingDate;
@@ -55,8 +42,9 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         }
     }
 
-    public MeetingsListRecyclerViewAdapter (List<Meeting> meetingsList) {
-        mMeetingsList = meetingsList;}
+    public MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList) {
+        mMeetingsList = meetingsList;
+    }
 
     @NonNull
     @Override
@@ -75,9 +63,9 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
 
         holder.meetingStartingDate.setText("le "
-                +DateConvertor.convert_yyyy_MM_dd_to_dd_MMMM(meeting.getMeetingRoom().getStrMeetingStartDate()));
-        holder.meetingStartingHour.setText("à "+meeting.getMeetingRoom().getStrMeetingStartHour());
-        holder.meetingDuration.setText("Durée: "+meeting.getMeetingRoom().getMeetingDuration()+" min");
+                + DateConvertor.convert_yyyy_MM_dd_to_dd_MMMM(meeting.getMeetingRoom().getStrMeetingStartDate()));
+        holder.meetingStartingHour.setText("à " + meeting.getMeetingRoom().getStrMeetingStartHour());
+        holder.meetingDuration.setText("Durée: " + meeting.getMeetingRoom().getMeetingDuration() + " min");
 
         holder.deleteMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,13 +79,15 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"La réunion se déroulera en "+meeting.getMeetingRoom().getStrMeetingRoomName() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "La réunion se déroulera en " + meeting.getMeetingRoom().getStrMeetingRoomName(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     @Override
-    public int getItemCount() {return mMeetingsList.size();}
+    public int getItemCount() {
+        return mMeetingsList.size();
+    }
 
 }

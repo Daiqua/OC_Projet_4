@@ -11,15 +11,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
-import com.lamzone.maru.service.DummyApiService;
 import com.lamzone.maru.service.MaReuApiService;
-
-import java.util.List;
 
 public class RoomsListFragment extends DialogFragment {
 
@@ -34,8 +30,9 @@ public class RoomsListFragment extends DialogFragment {
     Button buttonRoom9;
     Button buttonRoom10;
 
-    private MaReuApiService mApiService = DI.getApiService();;
-    private String[] roomList={};
+    private MaReuApiService mApiService = DI.getApiService();
+    ;
+    private String[] roomList = {};
 
 
     public RoomsListFragment() {
@@ -88,7 +85,7 @@ public class RoomsListFragment extends DialogFragment {
         return view;
     }
 
-    private void setButtonRoom(Button button, String roomName){
+    private void setButtonRoom(Button button, String roomName) {
         button.setText(roomName);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

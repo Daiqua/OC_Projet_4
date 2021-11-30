@@ -10,15 +10,11 @@ public class MeetingRoom {
     private String strMeetingStartDate; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
 
 
-
     private String strMeetingStartHour; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
     private int meetingDuration;
 
-
-
-    //TODO: add availability
-
-    public MeetingRoom (String strMeetingRoomName, String strMeetingStartDate,String strMeetingStartHour, int meetingDuration){
+    public MeetingRoom(String strMeetingRoomName, String strMeetingStartDate,
+                       String strMeetingStartHour, int meetingDuration) {
 
         this.strMeetingRoomName = strMeetingRoomName;
         this.strMeetingStartDate = strMeetingStartDate;
@@ -50,7 +46,11 @@ public class MeetingRoom {
         this.meetingDuration = meetingDuration;
     }
 
-    public String getStrMeetingStartHour() {return strMeetingStartHour;}
+    public String getStrMeetingStartHour() {
+        return strMeetingStartHour;
+    }
 
-    public void setStrMeetingStartHour(String strMeetingStartHour) {this.strMeetingStartHour = strMeetingStartHour;}
+    public void setStrMeetingStartHour(String strMeetingStartHour) {
+        this.strMeetingStartHour = strMeetingStartHour;
+    }
 }

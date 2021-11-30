@@ -20,10 +20,6 @@ public interface MaReuApiService {
 
     List<MeetingRoom> getMeetingRooms();
 
-    void getMeetingsAtDate();
-
-    void getMeetingInMeetingRoom(MeetingRoom meetingRoom);
-
     String getAttendeesListEmailAddresses(List<Attendee> attendeesList);
 
     void deleteMeeting(Meeting meeting);

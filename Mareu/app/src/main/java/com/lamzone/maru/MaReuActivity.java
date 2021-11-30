@@ -38,12 +38,8 @@ public class MaReuActivity extends DateConvertor {
     private MeetingsListRecyclerViewAdapter mMeetingsListRecyclerViewAdapter;
     private FloatingActionButton addMeeting;
 
-
-
     //to manage the date filter
     private static String strDateFiltered="";//format: yyyy.MM.dd
-
-
     private static String strRoomFiltered="";
     private static TextView filterText;
     private static String strFilterTextToShow;
@@ -57,23 +53,23 @@ public class MaReuActivity extends DateConvertor {
         return true;
     }
 
+    //to manage the menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.filterDate:
-                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                DatePickerFragment datePickerFragment = DatePickerFragment.newInstance();
                 datePickerFragment.show(getSupportFragmentManager(),"");
                 break;
             case R.id.filterRoom:
-                RoomsListFragment roomsListFragment = new RoomsListFragment();
+                RoomsListFragment roomsListFragment = RoomsListFragment.newInstance();
                 roomsListFragment.show(getSupportFragmentManager(),"");
                 break;
             case R.id.reset_filter:
                 Toast.makeText(this, "Filtre réinitialisé", Toast.LENGTH_SHORT).show();
                 isDateFilterActivated = false;
                 isRoomFilterActivated = false;
-
                 setFilterText();
                 MaReuActivityNewInstance();
                 break;
@@ -98,7 +94,6 @@ public class MaReuActivity extends DateConvertor {
         generateMeetings();
         loadRecyclerView();
 
-
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
         setSupportActionBar(toolbar);
 
@@ -109,7 +104,6 @@ public class MaReuActivity extends DateConvertor {
                 ActivityCompat.startActivity(v.getContext(), intent, null);
             }
         });
-
     }
 
     public void generateMeetings(){
@@ -158,7 +152,6 @@ public class MaReuActivity extends DateConvertor {
         if (isRoomFilterActivated == true){isDateFilterActivated = false;}
     }
 
-
     public static String getStrDateFiltered() {
         return strDateFiltered;
     }
@@ -170,5 +163,4 @@ public class MaReuActivity extends DateConvertor {
     public static void setStrRoomFiltered(String RoomFiltered) {
         strRoomFiltered = RoomFiltered;
     }
-
 }

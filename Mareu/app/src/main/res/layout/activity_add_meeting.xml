@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.maréu_list.AddMeetingActivity">
 
     <LinearLayout
@@ -31,15 +31,9 @@
                 android:hint="Sujet"
                 android:inputType="textShortMessage" />
 
-            <ImageView
-                android:id="@+id/activity_add_meeting_topic_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
+<!--TODO: update the color-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,39 +53,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/activity_add_meeting_room_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
-
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <DatePicker
                 android:id="@+id/activity_add_meeting_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:background="@color/light_pink"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:background="@color/light_pink">
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|top"
                     android:layout_marginLeft="25dp"
-                    android:textStyle="bold"
-                    android:text="Choisir la date"/>
+                    android:text="Choisir la date"
+                    android:textStyle="bold" />
 
             </DatePicker>
 
@@ -99,17 +86,17 @@
                 android:id="@+id/activity_add_meeting_time_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:timePickerMode="spinner"
                 android:layout_gravity="right"
-                android:background="@color/light_yellow">
+                android:background="@color/light_yellow"
+                android:timePickerMode="spinner">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|top"
                     android:layout_marginLeft="25dp"
-                    android:textStyle="bold"
-                    android:text="Choisir l'heure de début" />
+                    android:text="Choisir l'heure de début"
+                    android:textStyle="bold" />
 
             </TimePicker>
 
@@ -129,13 +116,6 @@
                 android:ems="10"
                 android:hint="duration"
                 android:inputType="time" />
-
-            <ImageView
-                android:id="@+id/activity_add_meeting_duration_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@drawable/ic_baseline_close_24" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,13 +137,6 @@
                     android:ems="10"
                     android:hint="Participants"
                     android:inputType="textEmailAddress" />
-
-                <ImageView
-                    android:id="@+id/activity_add_meeting_attendees_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    app:srcCompat="@drawable/ic_baseline_close_24" />
 
                 <include layout="@layout/activity_add_meeting_attendee_list" />
 
@@ -188,7 +161,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:enabled="false"
-            android:text="Renseigner tous les champs pour pouvoir ajouter la réunion"
+            android:text="Ajouter la réunion"
             app:cornerRadius="20dp" />
 
     </LinearLayout>
@@ -205,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

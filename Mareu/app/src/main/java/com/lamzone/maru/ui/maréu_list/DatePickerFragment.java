@@ -31,10 +31,6 @@ public class DatePickerFragment extends DialogFragment {
     Button validationButton;
     DatePicker mDatePicker;
 
-    //to define the filter date
-    private int filteredYear;
-    private int filteredMonth;
-    private int filteredDayOfMonth;
     private String strDateFiltered;
 
     public DatePickerFragment() {
@@ -55,7 +51,6 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

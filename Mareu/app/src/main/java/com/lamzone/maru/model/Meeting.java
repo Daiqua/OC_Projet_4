@@ -8,7 +8,8 @@ public class Meeting {
     private MeetingRoom meetingRoom;
     private List<Attendee> meetingAttendeesList;
 
-    public Meeting (String strMeetingName, MeetingRoom meetingRoom, List<Attendee> meetingAttendeesList){
+    public Meeting(String strMeetingName, MeetingRoom meetingRoom,
+                   List<Attendee> meetingAttendeesList) {
         this.strMeetingName = strMeetingName;
         this.meetingRoom = meetingRoom;
         this.meetingAttendeesList = meetingAttendeesList;

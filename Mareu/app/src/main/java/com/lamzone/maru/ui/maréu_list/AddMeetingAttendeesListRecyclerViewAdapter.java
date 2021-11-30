@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,14 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lamzone.maru.R;
 import com.lamzone.maru.model.Attendee;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Adapter<AddMeetingAttendeesListRecyclerViewAdapter.MyViewHolder> {
     private List<Attendee> mAttendeesList;
     private Attendee mAttendee;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView attendeeEmailAddress;
         private ImageButton attendeeListDeleteButton;
 
@@ -32,7 +30,9 @@ public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Ada
         }
     }
 
-    public AddMeetingAttendeesListRecyclerViewAdapter (List<Attendee> attendeesList) {this.mAttendeesList = attendeesList;}
+    public AddMeetingAttendeesListRecyclerViewAdapter(List<Attendee> attendeesList) {
+        this.mAttendeesList = attendeesList;
+    }
 
     @NonNull
     @Override
@@ -49,7 +49,7 @@ public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Ada
         holder.attendeeListDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 mAttendeesList.remove(position);
+                mAttendeesList.remove(position);
                 notifyItemRemoved(position);
             }
         });
@@ -57,6 +57,6 @@ public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Ada
 
     @Override
     public int getItemCount() {
-       return mAttendeesList.size();
+        return mAttendeesList.size();
     }
 }

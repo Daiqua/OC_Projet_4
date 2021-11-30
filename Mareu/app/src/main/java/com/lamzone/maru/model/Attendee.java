@@ -5,14 +5,14 @@ public class Attendee {
     private String strAttendeeName;
     private String strAttendeeEmailAddress;
 
-    public Attendee (String strAttendeeName, String strAttendeeEmailAddress ){
+    public Attendee(String strAttendeeName, String strAttendeeEmailAddress) {
         this.strAttendeeName = strAttendeeName;
         this.strAttendeeEmailAddress = strAttendeeEmailAddress;
 
     }
 
-    public Attendee (String strAttendeeEmailAddress ){
-        this("",strAttendeeEmailAddress);
+    public Attendee(String strAttendeeEmailAddress) {
+        this("", strAttendeeEmailAddress);
 
     }
 
