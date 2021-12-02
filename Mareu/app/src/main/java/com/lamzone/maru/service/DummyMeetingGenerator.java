@@ -10,12 +10,12 @@ import java.util.List;
 public abstract class DummyMeetingGenerator {
 
 
-    private static List<Meeting> DUMMY_MEETINGS = new ArrayList<>();
-    private static List<List<Attendee>> listsOfAttendees = new ArrayList<>();
-    private static List<MeetingRoom> mMeetingRooms = new ArrayList<>();
+    public static List<Meeting> DUMMY_MEETINGS = new ArrayList<>();
+    public static List<List<Attendee>> listsOfAttendees = new ArrayList<>();
+    public static List<MeetingRoom> mMeetingRooms = new ArrayList<>();
 
 
-    static List<Meeting> generateMeetings() {
+    public static List<Meeting> generateMeetings() {
         listsOfAttendees = DummyAttendeesListGenerator.generateAttendeesLists();
         mMeetingRooms = DummyMeetingRoomGenerator.generateMeetingRooms();
 

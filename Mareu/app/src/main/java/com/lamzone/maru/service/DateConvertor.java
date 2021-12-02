@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class DateConvertor extends AppCompatActivity {
+public class DateConvertor /*extends AppCompatActivity*/ {
 
     private static SimpleDateFormat dateFormatter_yyyy_MM_dd = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
     private static SimpleDateFormat dateFormatter_dd_MMMM = new SimpleDateFormat("dd MMMM", Locale.FRANCE);

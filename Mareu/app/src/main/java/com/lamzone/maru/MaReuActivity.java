@@ -1,6 +1,7 @@
 package com.lamzone.maru;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +28,15 @@ import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
 import com.lamzone.maru.ui.maréu_list.RoomsListFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 //TODO: check extend with Brahim. Is it possible to extend DateConvertor and AppCompatActivity instead?
-public class MaReuActivity extends DateConvertor {
+public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
 
     private MaReuApiService mApiService;
     private List<Meeting> mMeetingsList = new ArrayList<>();
@@ -126,6 +132,7 @@ public class MaReuActivity extends DateConvertor {
         if ((!isDateFilterActivated && !isRoomFilterActivated)) {
             strFilterTextToShow = "Filtres actifs: aucun";
         } else if (isDateFilterActivated){
+
             strFilterTextToShow = convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered);
         } else if (isRoomFilterActivated){
             strFilterTextToShow = strRoomFiltered;
@@ -162,5 +169,18 @@ public class MaReuActivity extends DateConvertor {
 
     public static void setStrRoomFiltered(String RoomFiltered) {
         strRoomFiltered = RoomFiltered;
+    }
+
+    public String convert_yyyy_MM_dd_to_dd_MMMM(String strDatePattern_yyyy_MM_dd) {
+        Date date = new Date();
+        SimpleDateFormat dateFormatter_yyyy_MM_dd = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
+        SimpleDateFormat dateFormatter_dd_MMMM = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
+        try {
+            date = dateFormatter_yyyy_MM_dd.parse(strDatePattern_yyyy_MM_dd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String reformatedDateTo_dd_MMMM = dateFormatter_dd_MMMM.format(date);
+        return reformatedDateTo_dd_MMMM;
     }
 }
