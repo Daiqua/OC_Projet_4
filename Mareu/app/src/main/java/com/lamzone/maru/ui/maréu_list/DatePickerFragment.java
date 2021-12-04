@@ -21,18 +21,7 @@ import com.lamzone.maru.R;
 
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DatePickerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DatePickerFragment extends DialogFragment {
-
-    Button validationButton;
-    DatePicker mDatePicker;
-    GetDataFromFragment mGetDataFromFragment;
-
-    private String strDateFiltered;
 
     public DatePickerFragment() {
         // Required empty public constructor
@@ -47,49 +36,5 @@ public class DatePickerFragment extends DialogFragment {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
-
     }
-
-
-
-
-/*
-    public static DatePickerFragment newInstance() {
-        DatePickerFragment fragment = new DatePickerFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_date_picker, container, false);
-        mDatePicker = view.findViewById(R.id.fragment_date_picker);
-        validationButton = view.findViewById(R.id.fragment_date_picker_validation_button);
-        validationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //getMonth()+1 needed during conversion from mm to MMMM
-               strDateFiltered = mDatePicker.getYear()+"."+(mDatePicker.getMonth()+1)+"."+mDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
-                //MaReuActivity.setStrDateFiltered(strDateFiltered);
-                //MaReuActivity.setIsDateFilterActivated(true);
-
-                mGetDataFromFragment.getData(strDateFiltered);
-
-
-
-                //TODO: add interface and listener
-                Intent intent = new Intent(getActivity(), MaReuActivity.class);
-                startActivity(intent);
-                dismiss();
-            }
-        });
-        return view;
-    }*/
-
-
 }

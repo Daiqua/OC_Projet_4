@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,17 +22,17 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Meeting;
-import com.lamzone.maru.service.DateConvertor;
 import com.lamzone.maru.service.MaReuApiService;
 import com.lamzone.maru.ui.maréu_list.AddMeetingActivity;
 import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
-import com.lamzone.maru.ui.maréu_list.GetDataFromFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
 import com.lamzone.maru.ui.maréu_list.RoomsListFragment;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +47,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     private MeetingsListRecyclerViewAdapter mMeetingsListRecyclerViewAdapter;
     private FloatingActionButton addMeeting;
 
-    //to manage the date filter
+    //to manage the filters
     private static String strDateFiltered="";//format: yyyy.MM.dd
     private static String strRoomFiltered="";
     private static TextView filterText;
@@ -70,26 +69,21 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         switch (item.getItemId()) {
             case R.id.filterDate:
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
-                datePickerFragment.show(getSupportFragmentManager(),"");
+                datePickerFragment.show(getSupportFragmentManager(),"DatePicker");
                 break;
             case R.id.filterRoom:
                 RoomsListFragment roomsListFragment = RoomsListFragment.newInstance();
-                roomsListFragment.show(getSupportFragmentManager(),"");
+                roomsListFragment.show(getSupportFragmentManager(),"RoomsListFragment");
                 break;
             case R.id.reset_filter:
                 Toast.makeText(this, "Filtre réinitialisé", Toast.LENGTH_SHORT).show();
-                isDateFilterActivated = false;
-                isRoomFilterActivated = false;
-                setFilterText();
-                MaReuActivityNewInstance();
+                filterText.setText("Filtres actifs: aucun");
+                generateMeetings();
                 break;
         }
         return true;
     }
 
-    private void MaReuActivityNewInstance(){
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +93,20 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         addMeeting = findViewById(R.id.activity_ma_reu_add_meeting);
         mRecyclerView = findViewById(R.id.activity_meetings_list);
 
-        setFilterText();
-        //generateMeetings();
+        generateMeetings();
         loadRecyclerView();
 
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
         setSupportActionBar(toolbar);
+        filterText = findViewById(R.id.activity_ma_reu_filter_text);
+
+        //TODO: remove listener once filter correctly implemented
+        filterText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"date: "+isDateFilterActivated+"/room: "+isRoomFilterActivated+" size: "+mMeetingsList.size(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         addMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,32 +117,13 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         });
     }
 
-    /*public void generateMeetings(){
+    public void generateMeetings(){
         mApiService = DI.getApiService();
-        if (isRoomFilterActivated) {
-            mMeetingsList = mApiService.generateRoomFilteredList(strRoomFiltered);
-        }else if(isDateFilterActivated){
+        if (isDateFilterActivated){
             mMeetingsList = mApiService.generateDateFilteredList(strDateFiltered);
-        }else{mMeetingsList = mApiService.getMeetings();}
-    }*/
-
-    public void setFilterText() {
-        filterText = findViewById(R.id.activity_ma_reu_filter_text);
-        filterText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "taille"+mMeetingsList.size(),Toast.LENGTH_SHORT ).show();
-            }
-        });
-        if ((!isDateFilterActivated && !isRoomFilterActivated)) {
-            strFilterTextToShow = "Filtres actifs: aucun";
-        } else if (isDateFilterActivated){
-
-            strFilterTextToShow = convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered);
-        } else if (isRoomFilterActivated){
-            strFilterTextToShow = strRoomFiltered;
+        } else{
+        mMeetingsList = mApiService.getMeetings();
         }
-        filterText.setText(strFilterTextToShow);
     }
 
     public void loadRecyclerView(){
@@ -152,28 +135,27 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         mRecyclerView.setAdapter(mMeetingsListRecyclerViewAdapter);
     }
 
-    public static void setIsDateFilterActivated(boolean dateFilterActivated) {
-        isDateFilterActivated = dateFilterActivated;
-        if (isDateFilterActivated == true){isRoomFilterActivated = false;}
+    //to listen date of DatePicker - coming from the implement of DatePickerDialog
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        //TODO: remove or standardize with all string "date"
+        /* Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        strDateFiltered = DateFormat.getDateInstance().format(calendar.getTime());
+        */
+        strDateFiltered = year+"."+(month+1)+"."+dayOfMonth;//date format: yyyy.MM.dd
+        filterText.setText(convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered));
+        isDateFilterActivated=true;
+        generateMeetings();
+        //TODO: check with Brahim, don't work - replaced by loadRecyclerView()
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+        loadRecyclerView();
+
     }
 
-    public static void setISRoomFilterActivated(boolean roomFilterActivated) {
-        isRoomFilterActivated = roomFilterActivated;
-        if (isRoomFilterActivated == true){isDateFilterActivated = false;}
-    }
-
-    public static String getStrDateFiltered() {
-        return strDateFiltered;
-    }
-
-    public static void setStrDateFiltered(String dateFiltered) {
-        strDateFiltered = dateFiltered;
-    }
-
-    public static void setStrRoomFiltered(String RoomFiltered) {
-        strRoomFiltered = RoomFiltered;
-    }
-
+    //TODO: put in utility class
     public String convert_yyyy_MM_dd_to_dd_MMMM(String strDatePattern_yyyy_MM_dd) {
         Date date = new Date();
         SimpleDateFormat dateFormatter_yyyy_MM_dd = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
@@ -185,24 +167,5 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         }
         String reformatedDateTo_dd_MMMM = dateFormatter_dd_MMMM.format(date);
         return reformatedDateTo_dd_MMMM;
-    }
-
-
-    public void getData(String data) {
-        mApiService = DI.getApiService();
-        if (isRoomFilterActivated) {
-            mMeetingsList = mApiService.generateRoomFilteredList(data);
-        }else if(isDateFilterActivated){
-            mMeetingsList = mApiService.generateDateFilteredList(data);
-        }else{mMeetingsList = mApiService.getMeetings();}
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        strDateFiltered = year+"."+(month+1)+"."+dayOfMonth;//date format: yyyy.MM.dd
-        getData(strDateFiltered);
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
-
     }
 }

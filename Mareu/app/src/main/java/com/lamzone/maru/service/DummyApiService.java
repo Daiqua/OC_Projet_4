@@ -12,7 +12,7 @@ public class DummyApiService extends DateConvertor implements MaReuApiService {
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
     private List<List<Attendee>> listsOfAttendees =
-            DummyAttendeesListGenerator.getDummyAttendeesLists();
+                                DummyAttendeesListGenerator.getDummyAttendeesLists();
     private List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
     private List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
 
@@ -67,12 +67,10 @@ public class DummyApiService extends DateConvertor implements MaReuApiService {
     @Override
     public List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd) {
         List<Meeting> filteredMeetingsList = new ArrayList<>();
-        String strDateFilter = strDatePattern_yyyy_MM_dd;
         for (Meeting meeting : meetingsList) {
             String strTempMeetingDate = meeting.getMeetingRoom()
                     .getStrMeetingStartDate();//format: yyyy.MM.dd
-            String strDateFiltered = MaReuActivity.getStrDateFiltered();//format: yyyy.MM.dd
-            if (strTempMeetingDate.equals(strDateFiltered)) {
+            if (strTempMeetingDate.equals(strDatePattern_yyyy_MM_dd)) {
                 filteredMeetingsList.add(meeting);
             }
         }
