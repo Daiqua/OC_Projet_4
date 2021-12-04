@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.lamzone.maru.service.DateConvertor;
 import com.lamzone.maru.service.MaReuApiService;
 import com.lamzone.maru.ui.maréu_list.AddMeetingActivity;
 import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
+import com.lamzone.maru.ui.maréu_list.GetDataFromFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
 import com.lamzone.maru.ui.maréu_list.RoomsListFragment;
 
@@ -36,7 +39,8 @@ import java.util.List;
 import java.util.Locale;
 
 //TODO: check extend with Brahim. Is it possible to extend DateConvertor and AppCompatActivity instead?
-public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
+public class MaReuActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
+{
 
     private MaReuApiService mApiService;
     private List<Meeting> mMeetingsList = new ArrayList<>();
@@ -65,7 +69,7 @@ public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.filterDate:
-                DatePickerFragment datePickerFragment = DatePickerFragment.newInstance();
+                DatePickerFragment datePickerFragment = new DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(),"");
                 break;
             case R.id.filterRoom:
@@ -84,8 +88,7 @@ public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
     }
 
     private void MaReuActivityNewInstance(){
-        Intent intent = new Intent(this, MaReuActivity.class);
-        startActivity(intent);
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -97,7 +100,7 @@ public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
         mRecyclerView = findViewById(R.id.activity_meetings_list);
 
         setFilterText();
-        generateMeetings();
+        //generateMeetings();
         loadRecyclerView();
 
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
@@ -112,14 +115,14 @@ public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
         });
     }
 
-    public void generateMeetings(){
+    /*public void generateMeetings(){
         mApiService = DI.getApiService();
         if (isRoomFilterActivated) {
             mMeetingsList = mApiService.generateRoomFilteredList(strRoomFiltered);
         }else if(isDateFilterActivated){
             mMeetingsList = mApiService.generateDateFilteredList(strDateFiltered);
         }else{mMeetingsList = mApiService.getMeetings();}
-    }
+    }*/
 
     public void setFilterText() {
         filterText = findViewById(R.id.activity_ma_reu_filter_text);
@@ -182,5 +185,24 @@ public class MaReuActivity extends AppCompatActivity /*extends DateConvertor*/ {
         }
         String reformatedDateTo_dd_MMMM = dateFormatter_dd_MMMM.format(date);
         return reformatedDateTo_dd_MMMM;
+    }
+
+
+    public void getData(String data) {
+        mApiService = DI.getApiService();
+        if (isRoomFilterActivated) {
+            mMeetingsList = mApiService.generateRoomFilteredList(data);
+        }else if(isDateFilterActivated){
+            mMeetingsList = mApiService.generateDateFilteredList(data);
+        }else{mMeetingsList = mApiService.getMeetings();}
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        strDateFiltered = year+"."+(month+1)+"."+dayOfMonth;//date format: yyyy.MM.dd
+        getData(strDateFiltered);
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+
     }
 }

@@ -30,6 +30,8 @@ public class RoomsListFragment extends DialogFragment {
     Button buttonRoom9;
     Button buttonRoom10;
 
+    GetDataFromFragment mGetDataFromFragment;
+
     private MaReuApiService mApiService = DI.getApiService();
     ;
     private String[] roomList = {};
@@ -90,10 +92,9 @@ public class RoomsListFragment extends DialogFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MaReuActivity.setISRoomFilterActivated(true);
-                MaReuActivity.setStrRoomFiltered(roomName);
-                Intent intent = new Intent(getActivity(), MaReuActivity.class);
-                startActivity(intent);
+               // MaReuActivity.setISRoomFilterActivated(true);
+                //MaReuActivity.setStrRoomFiltered(roomName);
+                mGetDataFromFragment.getData(roomName);
                 dismiss();
             }
         });

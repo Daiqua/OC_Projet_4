@@ -37,7 +37,7 @@ public class MaReuApiServiceTest {
 
     @Before
     public void setup() {
-        service = DI.getApiService();
+        service = DI.getNewInstanceApiService();
     }
 
     @Test
@@ -93,7 +93,7 @@ public class MaReuApiServiceTest {
                                                     .containsInAnyOrder(expectedMeetingRoomList.toArray()));
     }
 
-    //TODO: change when last comma will be removed
+    //TODO: to be changed when last comma will be removed
     @Test
     public void getAttendeesListEmailAddressesWithSuccess() {
         List<Attendee> attendeesList = service.getAttendees();
@@ -125,7 +125,7 @@ public class MaReuApiServiceTest {
         List<Meeting> meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateOne);
         assertEquals(8, meetingsListAtTargetedDate);
         meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateTwo);
-        assertEquals(0, meetingsListAtTargetedDate);
+        assertEquals(0, meetingsListAtTargetedDate.size());
     }
 
     @Test

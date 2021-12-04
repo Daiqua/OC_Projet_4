@@ -30,6 +30,7 @@ public class DatePickerFragment extends DialogFragment {
 
     Button validationButton;
     DatePicker mDatePicker;
+    GetDataFromFragment mGetDataFromFragment;
 
     private String strDateFiltered;
 
@@ -40,9 +41,19 @@ public class DatePickerFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
+            Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
+
     }
 
+
+
+
+/*
     public static DatePickerFragment newInstance() {
         DatePickerFragment fragment = new DatePickerFragment();
         return fragment;
@@ -64,8 +75,12 @@ public class DatePickerFragment extends DialogFragment {
             public void onClick(View v) {
                 //getMonth()+1 needed during conversion from mm to MMMM
                strDateFiltered = mDatePicker.getYear()+"."+(mDatePicker.getMonth()+1)+"."+mDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
-                MaReuActivity.setStrDateFiltered(strDateFiltered);
-                MaReuActivity.setIsDateFilterActivated(true);
+                //MaReuActivity.setStrDateFiltered(strDateFiltered);
+                //MaReuActivity.setIsDateFilterActivated(true);
+
+                mGetDataFromFragment.getData(strDateFiltered);
+
+
 
                 //TODO: add interface and listener
                 Intent intent = new Intent(getActivity(), MaReuActivity.class);
@@ -74,5 +89,7 @@ public class DatePickerFragment extends DialogFragment {
             }
         });
         return view;
-    }
+    }*/
+
+
 }

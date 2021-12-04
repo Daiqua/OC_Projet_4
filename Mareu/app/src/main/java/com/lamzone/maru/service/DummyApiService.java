@@ -12,7 +12,7 @@ public class DummyApiService extends DateConvertor implements MaReuApiService {
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
     private List<List<Attendee>> listsOfAttendees =
-            DummyAttendeesListGenerator.generateAttendeesLists();
+            DummyAttendeesListGenerator.getDummyAttendeesLists();
     private List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
     private List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
 
