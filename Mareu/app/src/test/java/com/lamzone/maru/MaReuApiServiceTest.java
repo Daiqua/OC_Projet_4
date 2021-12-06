@@ -37,7 +37,7 @@ public class MaReuApiServiceTest {
 
     @Before
     public void setup() {
-        service = DI.getApiService();
+        service = DI.getNewInstanceApiService();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class MaReuApiServiceTest {
     public void getAttendeesWithSuccess() {
         List<Attendee> attendeesList = service.getAttendees();
         List<Attendee> expectedAttendeesList = DummyAttendeeGenerator.DUMMY_ATTENDEES;
-        assertThat(attendeesList, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedAttendeesList));
+        assertThat(attendeesList, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedAttendeesList.toArray()));
 
     }
     @Test
@@ -101,8 +101,7 @@ public class MaReuApiServiceTest {
         String expectedAttendeesEmailAddress = "jean@lamzone.com, francis@lamzone.com, " +
                 "alexandra@lamzone.com, maxime@lamzone.com, paul@lamzone.com, amandine@lamzone.com," +
                 " luc@lamzone.com, viviane@lamzone.com, mathilde@lamzone.com, yoann@lamzone.com, ";
-        assertEquals(attendeesEmailAddresses, IsIterableContainingInAnyOrder
-                                                .containsInAnyOrder(expectedAttendeesEmailAddress));
+        assertEquals(attendeesEmailAddresses, expectedAttendeesEmailAddress);
     }
 
     @Test
