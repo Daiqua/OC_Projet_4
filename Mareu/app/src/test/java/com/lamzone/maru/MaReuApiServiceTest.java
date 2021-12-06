@@ -37,7 +37,7 @@ public class MaReuApiServiceTest {
 
     @Before
     public void setup() {
-        service = DI.getNewInstanceApiService();
+        service = DI.getApiService();
     }
 
     @Test
@@ -123,7 +123,7 @@ public class MaReuApiServiceTest {
     @Test
     public void  generateDateFilteredListWithSuccess() {
         List<Meeting> meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateOne);
-        assertEquals(8, meetingsListAtTargetedDate);
+        assertEquals(8, meetingsListAtTargetedDate.size());
         meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateTwo);
         assertEquals(0, meetingsListAtTargetedDate.size());
     }
