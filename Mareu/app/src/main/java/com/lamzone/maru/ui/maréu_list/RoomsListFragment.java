@@ -1,7 +1,6 @@
 package com.lamzone.maru.ui.maréu_list;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.service.MaReuApiService;
@@ -31,9 +29,10 @@ public class RoomsListFragment extends DialogFragment {
     Button buttonRoom10;
 
     private MaReuApiService mApiService = DI.getApiService();
-    ;
+
     private String[] roomList = {};
 
+    private RoomFilterListener mRoomFilterListener = null;
 
     public RoomsListFragment() {
         // Required empty public constructor
@@ -44,16 +43,6 @@ public class RoomsListFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return super.onCreateDialog(savedInstanceState);
 
-    }
-
-    public static RoomsListFragment newInstance() {
-        RoomsListFragment fragment = new RoomsListFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -85,16 +74,24 @@ public class RoomsListFragment extends DialogFragment {
         return view;
     }
 
-    private void setButtonRoom(Button button, String roomName) {
-        button.setText(roomName);
+    private void setButtonRoom(Button button, String mRoomName) {
+        button.setText(mRoomName);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // MaReuActivity.setISRoomFilterActivated(true);
-                //MaReuActivity.setStrRoomFiltered(roomName);
-
+                mRoomFilterListener.getRoomFiltered(mRoomName);
                 dismiss();
             }
         });
+    }
+
+    //TODO: to comment
+    public void setRoomListener(RoomFilterListener roomFilterListener){
+        this.mRoomFilterListener = roomFilterListener;
+    }
+
+    public interface RoomFilterListener {
+
+        void getRoomFiltered(String roomName);
     }
 }
