@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.maréu_list.AddMeetingActivity">
+    tools:context=".ui.maréu_list.AddMeetingActivity"
+    android:id="@+id/activity_add_meeting_layout">
 
     <LinearLayout
         style="@style/Theme.MaterialComponents.DayNight.DarkActionBar"

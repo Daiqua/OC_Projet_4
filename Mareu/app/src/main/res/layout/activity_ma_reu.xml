@@ -45,7 +45,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_ma_reu_add_meeting"
+        android:id="@+id/activity_ma_reu_add_meeting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

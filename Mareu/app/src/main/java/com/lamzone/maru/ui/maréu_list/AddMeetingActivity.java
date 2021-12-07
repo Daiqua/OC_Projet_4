@@ -147,6 +147,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 newMeeting = new Meeting(strNewMeetingName, roomForTheNewMeeting, newMeetingAttendeesList);
                 mApiService.addMeeting(newMeeting);
                 finish();
+                //TODO: layout after adding meeting is abnormal
             }
         });
     }

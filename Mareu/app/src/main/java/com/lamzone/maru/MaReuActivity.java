@@ -93,7 +93,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_ma_reu);
-        addMeeting = findViewById(R.id.activity_ma_reu_add_meeting);
+        addMeeting = findViewById(R.id.activity_ma_reu_add_meeting_button);
         mRecyclerView = findViewById(R.id.activity_meetings_list);
 
         generateMeetings();
