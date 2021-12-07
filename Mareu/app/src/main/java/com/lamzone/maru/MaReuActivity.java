@@ -49,7 +49,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     private static String strDateFiltered = "";//format: yyyy.MM.dd
     private static String strRoomFiltered = "";
     private static TextView filterText;
-    private static String strFilterTextToShow;
     private static boolean isDateFilterActivated = false;
     private static boolean isRoomFilterActivated = false;
 
@@ -102,14 +101,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         Toolbar toolbar = findViewById(R.id.activity_ma_reu_toolbar);
         setSupportActionBar(toolbar);
         filterText = findViewById(R.id.activity_ma_reu_filter_text);
-
-        //TODO: remove listener once filter correctly implemented
-        filterText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "date: " + isDateFilterActivated + "/room: " + isRoomFilterActivated + " size: " + mMeetingsList.size(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
         addMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +164,14 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         return reformatedDateTo_dd_MMMM;
     }
 
+    public static void setIsDateFilterActivated(boolean isDateFilterActivated) {
+        MaReuActivity.isDateFilterActivated = isDateFilterActivated;
+    }
+
+    public static void setIsRoomFilterActivated(boolean isRoomFilterActivated) {
+        MaReuActivity.isRoomFilterActivated = isRoomFilterActivated;
+    }
+
     //TODO: to comment
     @Override
     public void getRoomFiltered(String roomName) {
@@ -190,5 +189,11 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
             RoomsListFragment roomsListFragment = (RoomsListFragment) fragment;
             roomsListFragment.setRoomListener(this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadRecyclerView();
     }
 }

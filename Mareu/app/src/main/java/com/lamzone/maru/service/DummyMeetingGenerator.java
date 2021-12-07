@@ -23,7 +23,10 @@ public abstract class DummyMeetingGenerator {
         new Meeting("Réunion 5", mMeetingRooms.get(4), listsOfAttendees.get(4)),
         new Meeting("Réunion 6", mMeetingRooms.get(5), listsOfAttendees.get(5)),
         new Meeting("Réunion 7", mMeetingRooms.get(6), listsOfAttendees.get(6)),
-        new Meeting("Réunion 8", mMeetingRooms.get(7), listsOfAttendees.get(7))
+        new Meeting("Réunion 8", mMeetingRooms.get(7), listsOfAttendees.get(7)),
+        new Meeting("Réunion 9", mMeetingRooms.get(8), listsOfAttendees.get(8)),
+        new Meeting("Réunion 10", mMeetingRooms.get(9), listsOfAttendees.get(9))
+
     );
 
     public static List<Meeting> generateMeetings() {

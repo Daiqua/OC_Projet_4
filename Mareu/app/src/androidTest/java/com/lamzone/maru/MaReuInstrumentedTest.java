@@ -8,7 +8,9 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.assertion.ViewAssertions.selectedDescendantsMatch;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
@@ -20,6 +22,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.widget.DatePicker;
+
+import androidx.core.app.ActivityCompat;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -28,8 +35,10 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.service.MaReuApiService;
+import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.utils.DeleteViewAction;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,7 +56,10 @@ public class MaReuInstrumentedTest {
     private MaReuActivity mActivity;
     private MaReuApiService mApiService;
 
-    private int ITEMS_COUNT = 8;
+    private final int ITEMS_COUNT = 10;
+    private final int MEETINGS_THE_2021_11_22 = 7;
+    private final int MEETING_THE_2021_11_23 = 1;
+    private final int MEETING_IN_ROOM_1 = 1;
 
     @Rule
     public ActivityTestRule<MaReuActivity> mActivityRule =
@@ -56,8 +68,16 @@ public class MaReuInstrumentedTest {
     @Before
     public void setUp() {
         mActivity = mActivityRule.getActivity();
-        mApiService = DI.getNewInstanceApiService();
+        mApiService = DI.getApiService();
         assertThat(mActivity, notNullValue());
+
+    }
+
+    @After
+    public void endTest(){
+        MaReuActivity.setIsRoomFilterActivated(false);
+        MaReuActivity.setIsDateFilterActivated(false);
+        mApiService = DI.getNewInstanceApiService();
     }
 
     /**
@@ -136,26 +156,75 @@ public class MaReuInstrumentedTest {
         //save
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
                 .perform(click());
-        //Meeting list should be displayed with one additionnal item
+        //Meeting list should be displayed with one additional item
         onView(ViewMatchers.withId(R.id.activity_meetings_list))
                 .check(matches(isDisplayed()))
                 .check(withItemCount(ITEMS_COUNT + 1));
         //TODO: check content of added meeting
-
     }
 
     @Test
     public void SelectRoomAsFilter_ShouldShowOnlyMeetingInThisRoom() {
-
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(matches(isDisplayed()));
+        //click on the menu button
+        onView(withId(R.id.menu_meeting_list_activity))
+                .perform(click());
+        //click on filtre salle
+        onView(ViewMatchers.withText("filtre salle"))
+                .perform(click());
+        //click on salle 1
+        onView(withText("salle 1"))
+                .perform(click());
+        //Check the number of meetings
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(withItemCount(MEETING_IN_ROOM_1));
     }
 
     @Test
     public void SelectDateAsFilter_ShouldShowOnlyMeetingAtThisDate() {
-
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(matches(isDisplayed()));
+        //click on the menu button
+        onView(withId(R.id.menu_meeting_list_activity))
+                .perform(click());
+        //click on filtre date
+        onView(ViewMatchers.withText("filtre date"))
+                .perform(click());
+        //set the date
+        onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(2021, 11, 23));
+        //click OK
+        onView(withText("OK")).perform(click());
+        //check the number of meetings
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(withItemCount(MEETING_THE_2021_11_23));
     }
 
     @Test
     public void RemoveFilter_ShouldShowAllMeetings() {
-
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(matches(isDisplayed()));
+        //click on the menu button
+        onView(withId(R.id.menu_meeting_list_activity))
+                .perform(click());
+        //set a filter
+        onView(ViewMatchers.withText("filtre date"))
+                .perform(click());
+        onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(2021, 11, 22));
+        onView(withText("OK"))
+                .perform(click());
+        //check number of meeting with this filter
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(withItemCount(MEETINGS_THE_2021_11_22));
+        //click on the filter button to remove the filter
+        onView(withId(R.id.menu_meeting_list_activity))
+                .perform(click());
+        onView(ViewMatchers.withText("supprimer le filtre"))
+                .perform(click());
+        //check all meetings are displayed
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(withItemCount(ITEMS_COUNT));
     }
 }

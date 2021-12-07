@@ -13,7 +13,10 @@ public class Attendee {
 
     public Attendee(String strAttendeeEmailAddress) {
         this("", strAttendeeEmailAddress);
+    }
 
+    public Attendee() {
+        this("", "non renseigné");
     }
 
     public String getStrAttendeeName() {

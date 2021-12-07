@@ -22,6 +22,14 @@ public class MeetingRoom {
         this.meetingDuration = meetingDuration;
     }
 
+    public MeetingRoom() {
+
+        this.strMeetingRoomName = "salle non définie";
+        this.strMeetingStartDate = "date non définie";
+        this.strMeetingStartHour = "";
+        this.meetingDuration = 0;
+    }
+
     public String getStrMeetingRoomName() {
         return strMeetingRoomName;
     }

@@ -14,9 +14,9 @@ public abstract class DummyMeetingRoomGenerator {
     public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
 
             new MeetingRoom(getRoomsList()[1], "2021.11.22", "11:30", 45),
-            new MeetingRoom(getRoomsList()[2], "2021.11.22", "11:31", 30),
-            new MeetingRoom(getRoomsList()[3], "2021.11.22", "11:32", 50),
-            new MeetingRoom(getRoomsList()[4], "2021.11.22", "11:33", 45),
+            new MeetingRoom(getRoomsList()[2], "2021.11.23", "11:31", 30),
+            new MeetingRoom(getRoomsList()[3], "2021.11.24", "11:32", 50),
+            new MeetingRoom(getRoomsList()[4], "2021.11.25", "11:33", 45),
             new MeetingRoom(getRoomsList()[5], "2021.11.22", "11:34", 45),
             new MeetingRoom(getRoomsList()[6], "2021.11.22", "11:35", 45),
             new MeetingRoom(getRoomsList()[7], "2021.11.22", "11:36", 30),

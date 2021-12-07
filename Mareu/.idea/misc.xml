@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting.xml" value="0.15729166666666666" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_ma_reu.xml" value="0.25" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_item.xml" value="0.15" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_date_picker.xml" value="0.10555555555555556" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/menu/filter_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

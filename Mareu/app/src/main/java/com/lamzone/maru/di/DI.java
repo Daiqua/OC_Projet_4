@@ -1,5 +1,8 @@
 package com.lamzone.maru.di;
 
+import androidx.core.app.ActivityCompat;
+
+import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.service.DummyApiService;
 import com.lamzone.maru.service.MaReuApiService;
 
@@ -25,6 +28,8 @@ public class DI {
      * @return
      */
     public static MaReuApiService getNewInstanceApiService() {
-        return new DummyApiService();
+
+        service = new DummyApiService();
+        return service;
     }
 }
