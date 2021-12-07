@@ -30,8 +30,9 @@ import java.util.List;
 public class MaReuApiServiceTest {
 
     private MaReuApiService service;
-    private String targetedDateOne = "2021.11.22";//8 meetings planned
-    private String targetedDateTwo = "2021.11.23";//0 meeting planned
+    private final String targetedDateOne = "2021.11.22";//7 meetings planned
+    private final int MEETINGS_THE_2021_11_22 = 7;
+    private final String targetedDateTwo = "2021.12.23";//0 meeting planned
 
 
 
@@ -122,7 +123,7 @@ public class MaReuApiServiceTest {
     @Test
     public void  generateDateFilteredListWithSuccess() {
         List<Meeting> meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateOne);
-        assertEquals(8, meetingsListAtTargetedDate.size());
+        assertEquals(MEETINGS_THE_2021_11_22, meetingsListAtTargetedDate.size());
         meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateTwo);
         assertEquals(0, meetingsListAtTargetedDate.size());
     }
