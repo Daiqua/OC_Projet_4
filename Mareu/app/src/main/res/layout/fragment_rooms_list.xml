@@ -10,8 +10,7 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingBottom="10dp"
-        >
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,8 +18,7 @@
             android:text="Choisir une salle"
             android:gravity="center"
             android:textSize="@dimen/size_fragment_rooms_list_header"
-            android:layout_margin="10dp"
-            />
+            android:layout_margin="10dp"/>
 
         <Button
             android:id="@+id/fragment_room_list_room1"
@@ -30,8 +28,7 @@
             android:layout_weight="1"
             android:text="Salle 1"
             android:backgroundTint="@color/room_button"
-            android:textSize="@dimen/size_fragment_rooms_list_text"
-            />
+            android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
             android:id="@+id/fragment_room_list_room2"
@@ -122,7 +119,6 @@
             android:text="Salle 10"
             android:backgroundTint="@color/room_button"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
-
 
     </LinearLayout>
 
