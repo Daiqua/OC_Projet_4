@@ -22,7 +22,8 @@
             android:id="@+id/activity_add_meeting_topic_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:textSize="20sp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_meeting_topic"
@@ -30,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Sujet"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,12 +49,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
-                android:text="Choisir la salle" />
+                android:text="Choisir la salle"
+                android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/activity_add_meeting_room_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
@@ -71,7 +74,8 @@
                 android:background="@color/light_pink"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:gravity="center">
+                android:gravity="center"
+                android:textSize="@dimen/size_activity_add_meeting_layout_input_text">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,7 +83,8 @@
                     android:layout_gravity="left|top"
                     android:layout_marginLeft="25dp"
                     android:text="Choisir la date"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
             </DatePicker>
 
@@ -97,7 +102,8 @@
                     android:layout_gravity="left|top"
                     android:layout_marginLeft="25dp"
                     android:text="Choisir l'heure de début"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
             </TimePicker>
 
@@ -115,8 +121,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="duration"
-                android:inputType="time" />
+                android:hint="Durée de la réunion"
+                android:inputType="number"
+                android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +144,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Participants"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
                 <include layout="@layout/activity_add_meeting_attendee_list" />
 
@@ -163,7 +171,8 @@
             android:layout_marginTop="20dp"
             android:enabled="false"
             android:text="Ajouter la réunion"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="20dp"
+            android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
 
     </LinearLayout>
 

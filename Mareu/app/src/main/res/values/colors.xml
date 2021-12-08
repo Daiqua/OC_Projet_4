@@ -13,5 +13,9 @@
     <color name="light_pink">#f8dada</color>
     <color name="light_yellow">#eff596</color>
 
+    <!-- fragment_rooms_list_layout -->
+    <!-- fragment_rooms_list_button_color -->
+    <color name="room_button">#A79C9B</color>
+
 
 </resources>
