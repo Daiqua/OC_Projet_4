@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -13,6 +12,7 @@
         tools:context=".ui.maréu_list.AddMeetingActivity"
         android:id="@+id/activity_add_meeting_layout">
 
+        <!-- TODO: check with brahim why scrolling in not possible -->
         <LinearLayout
             style="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-    <!--TODO: update the color-->
+            <!--TODO: update the color-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <DatePicker
                     android:id="@+id/activity_add_meeting_date_picker"
@@ -86,8 +86,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|top"
-                        android:layout_marginLeft="25dp"
+                        android:layout_gravity="center|top"
                         android:text="Choisir la date"
                         android:textStyle="bold"
                         android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
@@ -98,15 +97,14 @@
                     android:id="@+id/activity_add_meeting_time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center"
                     android:background="@color/light_yellow"
                     android:timePickerMode="spinner">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|top"
-                        android:layout_marginLeft="25dp"
+                        android:layout_gravity="center|top"
                         android:text="Choisir l'heure de début"
                         android:textStyle="bold"
                         android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
