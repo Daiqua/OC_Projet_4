@@ -20,8 +20,8 @@
     <!-- activity_add_meeting_layout -->
     <!-- activity_add_meeting_layout_input_text -->
     <dimen name="size_activity_add_meeting_layout_input_text">20sp</dimen>
-    <!-- activity_add_meeting_layout_input_text -->
-    <dimen name="size_activity_add_meetings_attendee_list_attendee_email">25sp</dimen>
+    <!-- activity_add_meeting_layout_email_address_list-->
+    <dimen name="size_activity_add_meetings_attendee_list_attendee_email">18sp</dimen>
 
     <!-- fragment_rooms_list_layout -->
     <!-- fragment_rooms_list_layout_header -->

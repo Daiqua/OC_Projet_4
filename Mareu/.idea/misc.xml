@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable-ldpi/ic_baseline_delete_48.xml" value="1.74375" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_add_meeting.xml" value="1.1" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_add_meeting_attendee_list_item.xml" value="1.209375" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_ma_reu.xml" value="0.8227848101265823" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_meeting_item.xml" value="1.5" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/fragment_rooms_list.xml" value="1.209375" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting.xml" value="0.2" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_add_meeting_attendee_list_item.xml" value="0.1" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_ma_reu.xml" value="0.25" />
