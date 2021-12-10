@@ -17,5 +17,16 @@
     <!-- fragment_rooms_list_button_color -->
     <color name="room_button">#A79C9B</color>
 
+    <!-- rooms_colors -->
+    <color name="room_1">#e67388</color>
+    <color name="room_2">#ff815e</color>
+    <color name="room_3">#ffc75e</color>
+    <color name="room_4">#ffeb5f</color>
+    <color name="room_5">#bdd54e</color>
+    <color name="room_6">#30802f</color>
+    <color name="room_7">#3f5aab</color>
+    <color name="room_8">#5f4fd6</color>
+    <color name="room_9">#603082</color>
+    <color name="room_10">#9368a6</color>
 
 </resources>

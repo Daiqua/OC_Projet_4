@@ -27,7 +27,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 1"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_1"
+            android:textColor="@color/black"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -37,7 +38,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 2"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_2"
+            android:textColor="@color/black"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -47,7 +49,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 3"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_3"
+            android:textColor="@color/black"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -57,7 +60,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 4"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_4"
+            android:textColor="@color/black"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -67,7 +71,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 5"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_5"
+            android:textColor="@color/black"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -77,7 +82,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 6"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_6"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -87,7 +92,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 7"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_7"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -97,7 +102,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 8"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_8"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -107,7 +112,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 9"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_9"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
         <Button
@@ -117,7 +122,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Salle 10"
-            android:backgroundTint="@color/room_button"
+            android:backgroundTint="@color/room_10"
             android:textSize="@dimen/size_fragment_rooms_list_text"/>
 
     </LinearLayout>
