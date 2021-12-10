@@ -13,7 +13,6 @@
         tools:context=".ui.maréu_list.AddMeetingActivity"
         android:id="@+id/activity_add_meeting_layout">
 
-    <!-- TODO: check with brahim why scrolling in not possible -->
         <LinearLayout
             style="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
             android:layout_width="match_parent"
@@ -100,7 +99,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/light_yellow"
-                    android:timePickerMode="spinner">
+                    android:timePickerMode="spinner"
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="match_parent"
