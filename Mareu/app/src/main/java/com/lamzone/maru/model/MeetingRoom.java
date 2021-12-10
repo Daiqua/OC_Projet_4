@@ -8,8 +8,6 @@ public class MeetingRoom {
 
     private String strMeetingRoomName;
     private String strMeetingStartDate; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
-
-
     private String strMeetingStartHour; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
     private int meetingDuration;
 

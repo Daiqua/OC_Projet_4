@@ -1,5 +1,6 @@
 package com.lamzone.maru.ui.maréu_list;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,15 +58,24 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
     public void onBindViewHolder(MyViewHolder holder, int position) {
         mApiService = DI.getApiService();
         Meeting meeting = mMeetingsList.get(position);
-        holder.meetingName.setText(meeting.getStrMeetingName());
         attendeesEmailAddressesCommaSeparated = mApiService
                 .getAttendeesListEmailAddresses(meeting.getMeetingAttendeesList());
-        holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
 
+        //set texts
+        holder.meetingName.setText(meeting.getStrMeetingName());
+        holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
         holder.meetingStartingDate.setText("le "
                 + DateConvertor.convert_yyyy_MM_dd_to_dd_MMMM(meeting.getMeetingRoom().getStrMeetingStartDate()));
         holder.meetingStartingHour.setText("à " + meeting.getMeetingRoom().getStrMeetingStartHour());
         holder.meetingDuration.setText("Durée: " + meeting.getMeetingRoom().getMeetingDuration() + " min");
+
+        //set colors
+        holder.itemView.setBackgroundColor(setBackgroundColorDependingOnRoom(meeting));
+        holder.meetingName.setTextColor(setTextColorDependingOnRoom(meeting));
+        holder.meetingAttendeesList.setTextColor(setTextColorDependingOnRoom(meeting));
+        holder.meetingStartingDate.setTextColor(setTextColorDependingOnRoom(meeting));
+        holder.meetingDuration.setTextColor(setTextColorDependingOnRoom(meeting));
+        holder.meetingStartingHour.setTextColor(setTextColorDependingOnRoom(meeting));
 
         holder.deleteMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,4 +100,44 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         return mMeetingsList.size();
     }
 
+    public int setBackgroundColorDependingOnRoom (Meeting meeting) {
+        String backgroundColor;
+        String meetingRoom = meeting.getMeetingRoom().getStrMeetingRoomName();
+        if (meetingRoom.equals("salle 1")) {
+            backgroundColor = "#e67388";
+        } else if (meetingRoom.equals("salle 2")) {
+            backgroundColor = "#ff815e";
+        } else if (meetingRoom.equals("salle 3")) {
+            backgroundColor = "#ffc75e";
+        } else if (meetingRoom.equals("salle 4")) {
+            backgroundColor = "#ffeb5f";
+        } else if (meetingRoom.equals("salle 5")) {
+            backgroundColor = "#bdd54e";
+        } else if (meetingRoom.equals("salle 6")) {
+            backgroundColor = "#30802f";
+        } else if (meetingRoom.equals("salle 7")) {
+            backgroundColor = "#3f5aab";
+        } else if (meetingRoom.equals("salle 8")) {
+            backgroundColor = "#5f4fd6";
+        } else if (meetingRoom.equals("salle 9")) {
+            backgroundColor = "#603082";
+        } else if (meetingRoom.equals("salle 10")) {
+            backgroundColor = "#9368a6";
+        } else {
+            backgroundColor = "#A79C9B";
+        }
+        return Color.parseColor(backgroundColor);
+    }
+
+    public int setTextColorDependingOnRoom (Meeting meeting) {
+        String textColor;
+        String meetingRoom = meeting.getMeetingRoom().getStrMeetingRoomName();
+        if (meetingRoom.equals("salle 1") || meetingRoom.equals("salle 2") ||
+                meetingRoom.equals("salle 3") || meetingRoom.equals("salle 4") ||
+                meetingRoom.equals("salle 5")) {
+            textColor = "#FF000000";
+        }else{ textColor = "#FFFFFFFF";}
+
+        return Color.parseColor(textColor);
+    }
 }
