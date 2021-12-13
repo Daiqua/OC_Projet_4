@@ -28,9 +28,7 @@ public class RoomsListFragment extends DialogFragment {
     Button buttonRoom9;
     Button buttonRoom10;
 
-    private MaReuApiService mApiService = DI.getApiService();
-
-    private String[] roomList = {};
+    private final MaReuApiService mApiService = DI.getApiService();
 
     private RoomFilterListener mRoomFilterListener = null;
 
@@ -48,7 +46,7 @@ public class RoomsListFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        roomList = mApiService.getRoomsList(); // room index 0 is empty.
+        String[] roomList = mApiService.getRoomsList(); // room index 0 is empty.
         View view = inflater.inflate(R.layout.fragment_rooms_list, container, false);
         buttonRoom1 = view.findViewById(R.id.fragment_room_list_room1);
         setButtonRoom(buttonRoom1, roomList[1]);
@@ -76,17 +74,14 @@ public class RoomsListFragment extends DialogFragment {
 
     private void setButtonRoom(Button button, String mRoomName) {
         button.setText(mRoomName);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mRoomFilterListener.getRoomFiltered(mRoomName);
-                dismiss();
-            }
+        button.setOnClickListener(v -> {
+            mRoomFilterListener.getRoomFiltered(mRoomName);
+            dismiss();
         });
     }
 
     //TODO: to comment
-    public void setRoomListener(RoomFilterListener roomFilterListener){
+    public void setRoomListener(RoomFilterListener roomFilterListener) {
         this.mRoomFilterListener = roomFilterListener;
     }
 
@@ -94,4 +89,6 @@ public class RoomsListFragment extends DialogFragment {
 
         void getRoomFiltered(String roomName);
     }
+
+
 }

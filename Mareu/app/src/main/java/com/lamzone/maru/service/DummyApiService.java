@@ -1,6 +1,5 @@
 package com.lamzone.maru.service;
 
-import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
@@ -11,11 +10,11 @@ import java.util.List;
 public class DummyApiService extends DateConvertor implements MaReuApiService {
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
-    private List<List<Attendee>> listsOfAttendees =
-                                DummyAttendeesListGenerator.getDummyAttendeesLists();
-    private List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
-    private List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
-    private List<Meeting> filteredMeetingsList = new ArrayList<>();
+    private final List<List<Attendee>> listsOfAttendees =
+            DummyAttendeesListGenerator.getDummyAttendeesLists();
+    private final List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRooms();
+    private final List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
+    private final List<Meeting> filteredMeetingsList = new ArrayList<>();
 
 
     @Override
@@ -69,8 +68,7 @@ public class DummyApiService extends DateConvertor implements MaReuApiService {
     public List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd) {
         filteredMeetingsList.clear();
         for (Meeting meeting : meetingsList) {
-            String strTempMeetingDate = meeting.getMeetingRoom()
-                    .getStrMeetingStartDate();//format: yyyy.MM.dd
+            String strTempMeetingDate = meeting.getStrMeetingStartDate();//format: yyyy.MM.dd
             if (strTempMeetingDate.equals(strDatePattern_yyyy_MM_dd)) {
                 filteredMeetingsList.add(meeting);
             }

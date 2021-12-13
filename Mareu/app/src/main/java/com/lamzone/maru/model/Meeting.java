@@ -4,42 +4,49 @@ import java.util.List;
 
 public class Meeting {
 
-    private String strMeetingName;
-    private MeetingRoom meetingRoom;
-    private List<Attendee> meetingAttendeesList;
+    private final String strMeetingName;
+    private final MeetingRoom meetingRoom;
+    private final List<Attendee> meetingAttendeesList;
+    private final String strMeetingStartDate; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
+    private final String strMeetingStartHour; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
+
+
+    private final int meetingDuration;
 
     public Meeting (String strMeetingName, MeetingRoom meetingRoom,
-                   List<Attendee> meetingAttendeesList) {
+                   List<Attendee> meetingAttendeesList, String strMeetingStartDate,
+                    String strMeetingStartHour, int meetingDuration) {
         this.strMeetingName = strMeetingName;
         this.meetingRoom = meetingRoom;
         this.meetingAttendeesList = meetingAttendeesList;
-    }
-
-    public Meeting () {
-        this("non renseigné", new MeetingRoom(),null);
+        this.strMeetingStartDate = strMeetingStartDate;
+        this.strMeetingStartHour = strMeetingStartHour;
+        this.meetingDuration = meetingDuration;
     }
 
     public String getStrMeetingName() {
         return strMeetingName;
     }
 
-    public void setStrMeetingName(String strMeetingName) {
-        this.strMeetingName = strMeetingName;
-    }
-
     public MeetingRoom getMeetingRoom() {
         return meetingRoom;
-    }
-
-    public void setMeetingPlace(MeetingRoom meetingPlace) {
-        this.meetingRoom = meetingRoom;
     }
 
     public List<Attendee> getMeetingAttendeesList() {
         return meetingAttendeesList;
     }
 
-    public void setMeetingAttendeesList(List<Attendee> meetingAttendeesList) {
-        this.meetingAttendeesList = meetingAttendeesList;
+
+    public String getStrMeetingStartDate() {
+        return strMeetingStartDate;
     }
+
+    public String getStrMeetingStartHour() {
+        return strMeetingStartHour;
+    }
+
+    public int getMeetingDuration() {
+        return meetingDuration;
+    }
+
 }

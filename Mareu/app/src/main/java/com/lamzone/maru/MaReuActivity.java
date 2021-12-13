@@ -1,5 +1,6 @@
 package com.lamzone.maru;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,16 +40,14 @@ import java.util.Locale;
 //TODO: check extend with Brahim. Is it possible to extend DateConvertor and AppCompatActivity instead?
 public class MaReuActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, RoomsListFragment.RoomFilterListener {
 
-    private MaReuApiService mApiService;
     private List<Meeting> mMeetingsList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MeetingsListRecyclerViewAdapter mMeetingsListRecyclerViewAdapter;
-    private FloatingActionButton addMeeting;
 
     //to manage the filters
     private static String strDateFiltered = "";//format: yyyy.MM.dd
     private static String strRoomFiltered = "";
-    private static TextView filterText;
+    private TextView filterText;
     private static boolean isDateFilterActivated = false;
     private static boolean isRoomFilterActivated = false;
 
@@ -60,6 +59,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     }
 
     //to manage the menu
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -92,7 +92,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_ma_reu);
-        addMeeting = findViewById(R.id.activity_ma_reu_add_meeting_button);
+        FloatingActionButton addMeeting = findViewById(R.id.activity_ma_reu_add_meeting_button);
         mRecyclerView = findViewById(R.id.activity_meetings_list);
 
         generateMeetings();
@@ -102,22 +102,21 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         setSupportActionBar(toolbar);
         filterText = findViewById(R.id.activity_ma_reu_filter_text);
 
-        addMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddMeetingActivity.class);
-                ActivityCompat.startActivity(v.getContext(), intent, null);
-            }
+        addMeeting.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddMeetingActivity.class);
+            ActivityCompat.startActivity(v.getContext(), intent, null);
         });
     }
 
     public void generateMeetings() {
-        mApiService = DI.getApiService();
+        MaReuApiService apiService = DI.getApiService();
         if (isDateFilterActivated) {
-            mMeetingsList = mApiService.generateDateFilteredList(strDateFiltered);
+            mMeetingsList = apiService.generateDateFilteredList(strDateFiltered);
         } else if (isRoomFilterActivated) {
-            mMeetingsList = mApiService.generateRoomFilteredList(strRoomFiltered);
-        } else {mMeetingsList = mApiService.getMeetings();}
+            mMeetingsList = apiService.generateRoomFilteredList(strRoomFiltered);
+        } else {
+            mMeetingsList = apiService.getMeetings();
+        }
     }
 
     public void loadRecyclerView() {
@@ -126,11 +125,12 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                                                    DividerItemDecoration.VERTICAL));
+                DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mMeetingsListRecyclerViewAdapter);
     }
 
     //to listen date of DatePicker - coming from the implement of DatePickerDialog
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         //TODO: remove or standardize with all string "date"
@@ -160,8 +160,8 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String reformatedDateTo_dd_MMMM = dateFormatter_dd_MMMM.format(date);
-        return reformatedDateTo_dd_MMMM;
+        assert date != null;
+        return dateFormatter_dd_MMMM.format(date);
     }
 
     public static void setIsDateFilterActivated(boolean isDateFilterActivated) {
@@ -173,6 +173,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     }
 
     //TODO: to comment
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void getRoomFiltered(String roomName) {
         strRoomFiltered = roomName;
@@ -182,10 +183,11 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
         loadRecyclerView();
     }
-    //TODO: to comment
+
+    //TODO: to comment - to replace
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {
-        if (fragment instanceof RoomsListFragment){
+        if (fragment instanceof RoomsListFragment) {
             RoomsListFragment roomsListFragment = (RoomsListFragment) fragment;
             roomsListFragment.setRoomListener(this);
         }

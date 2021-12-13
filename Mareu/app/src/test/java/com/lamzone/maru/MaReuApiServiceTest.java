@@ -35,7 +35,6 @@ public class MaReuApiServiceTest {
     private final String targetedDateTwo = "2021.12.23";//0 meeting planned
 
 
-
     @Before
     public void setup() {
         service = DI.getNewInstanceApiService();
@@ -55,11 +54,11 @@ public class MaReuApiServiceTest {
         //create new meeting
         List<List<Attendee>> listsOfAttendees = service.getListsOfAttendees();
         List<MeetingRoom> meetingRoomList = service.getMeetingRooms();
-        Meeting newMeeting = new Meeting("MeetingTest",meetingRoomList.get(0),listsOfAttendees.get(0));
+        Meeting newMeeting = new Meeting("MeetingTest", meetingRoomList.get(0), listsOfAttendees.get(0),"2021.12.25", "15:15", 0);
         //add it to meetingsList
         service.addMeeting(newMeeting);
         int numberOfMeetingAfterAdding = meetingsList.size();
-        assertEquals(initialNumberOfMeetings+1,numberOfMeetingAfterAdding);
+        assertEquals(initialNumberOfMeetings + 1, numberOfMeetingAfterAdding);
     }
 
     @Test
@@ -69,21 +68,23 @@ public class MaReuApiServiceTest {
         assertThat(attendeesList, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedAttendeesList.toArray()));
 
     }
+
     @Test
     public void addAttendeesWithSuccess() {
         List<Attendee> attendeesList = service.getAttendees();
         int initialAttendeesListSize = attendeesList.size();
         service.addAttendees(new Attendee("Test"));
         int AttendeesListSizeAfterAdding = attendeesList.size();
-        assertEquals(initialAttendeesListSize+1,AttendeesListSizeAfterAdding);
+        assertEquals(initialAttendeesListSize + 1, AttendeesListSizeAfterAdding);
 
     }
+
     @Test
     public void getListsOfAttendeesWithSuccess() {
         List<List<Attendee>> listsOfAttendees = service.getListsOfAttendees();
         List<List<Attendee>> expectedListsOfAttendees = DummyAttendeesListGenerator.DUMMY_ATTENDEES_LISTS;
         assertThat(listsOfAttendees, IsIterableContainingInAnyOrder
-                                                        .containsInAnyOrder(expectedListsOfAttendees.toArray()));
+                .containsInAnyOrder(expectedListsOfAttendees.toArray()));
     }
 
     @Test
@@ -91,7 +92,7 @@ public class MaReuApiServiceTest {
         List<MeetingRoom> meetingRoomList = service.getMeetingRooms();
         List<MeetingRoom> expectedMeetingRoomList = DummyMeetingRoomGenerator.DUMMY_MEETING_ROOMS;
         assertThat(meetingRoomList, IsIterableContainingInAnyOrder
-                                                    .containsInAnyOrder(expectedMeetingRoomList.toArray()));
+                .containsInAnyOrder(expectedMeetingRoomList.toArray()));
     }
 
     //TODO: to be changed when last comma will be removed
@@ -117,11 +118,11 @@ public class MaReuApiServiceTest {
         List<MeetingRoom> meetingRoomList = service.getMeetingRooms();
         List<MeetingRoom> expectedMeetingRoomList = DummyMeetingRoomGenerator.DUMMY_MEETING_ROOMS;
         assertThat(meetingRoomList, IsIterableContainingInAnyOrder
-                                                    .containsInAnyOrder(expectedMeetingRoomList.toArray()));
+                .containsInAnyOrder(expectedMeetingRoomList.toArray()));
     }
 
     @Test
-    public void  generateDateFilteredListWithSuccess() {
+    public void generateDateFilteredListWithSuccess() {
         List<Meeting> meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateOne);
         assertEquals(MEETINGS_THE_2021_11_22, meetingsListAtTargetedDate.size());
         meetingsListAtTargetedDate = service.generateDateFilteredList(targetedDateTwo);
@@ -132,7 +133,7 @@ public class MaReuApiServiceTest {
     public void generateRoomFilteredListWithSuccess() {
         String meetingRoomToFilter = service.getMeetingRooms().get(0).getStrMeetingRoomName();
         List<Meeting> meetingsAfterFilter = service.
-                                              generateRoomFilteredList(meetingRoomToFilter);
+                generateRoomFilteredList(meetingRoomToFilter);
         assertEquals(1, meetingsAfterFilter.size());
     }
 }

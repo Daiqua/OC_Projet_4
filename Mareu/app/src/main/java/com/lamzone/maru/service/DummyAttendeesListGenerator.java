@@ -9,19 +9,19 @@ import java.util.List;
 public abstract class DummyAttendeesListGenerator {
 
     //call the API to access to the Attendees
-    private static List<Attendee> dummyAttendeesList = DummyAttendeeGenerator.generateAttendees();
+    private static final List<Attendee> dummyAttendeesList = DummyAttendeeGenerator.generateAttendees();
 
     //To simulate already recorded Attendees Lists for planned meetings
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_1 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_2 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_3 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_4 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_5 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_6 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_7 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_8 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_9 = new ArrayList<>();
-    private static List<Attendee> DUMMY_ATTENDEES_LIST_10 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_1 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_2 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_3 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_4 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_5 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_6 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_7 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_8 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_9 = new ArrayList<>();
+    private static final List<Attendee> DUMMY_ATTENDEES_LIST_10 = new ArrayList<>();
 
 
     public static List<List<Attendee>> DUMMY_ATTENDEES_LISTS = Arrays.asList(
@@ -46,12 +46,11 @@ public abstract class DummyAttendeesListGenerator {
         return attendeesList;
     }
 
-    static List<List<Attendee>> getDummyAttendeesLists(){
+    static List<List<Attendee>> getDummyAttendeesLists() {
         return DUMMY_ATTENDEES_LISTS;
     }
 
     static String getAttendeesListEmailAddresses(List<Attendee> attendeesList) {
-        String strAttendeesListEmailAddresses;
 
         StringBuilder commaSeparatedEmailAddressBuilder = new StringBuilder();
 
@@ -60,7 +59,7 @@ public abstract class DummyAttendeesListGenerator {
             commaSeparatedEmailAddressBuilder.append(", ");
         }
         //TODO: remove last comma
-        return strAttendeesListEmailAddresses = commaSeparatedEmailAddressBuilder.toString();
+        return commaSeparatedEmailAddressBuilder.toString();
     }
 
 

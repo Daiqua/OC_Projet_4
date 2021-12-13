@@ -3,6 +3,7 @@ package com.lamzone.maru.utils;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewAssertion;
 
@@ -32,7 +33,8 @@ public class RecyclerViewItemCountAssertion implements ViewAssertion {
         }
 
         RecyclerView recyclerView = (RecyclerView) view;
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        Adapter adapter = recyclerView.getAdapter();
+        assert adapter != null;
         Assert.assertThat(adapter.getItemCount(), matcher);
     }
 }

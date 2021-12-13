@@ -5,15 +5,10 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.assertion.ViewAssertions.selectedDescendantsMatch;
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.lamzone.maru.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.CoreMatchers.allOf;
@@ -22,11 +17,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.widget.DatePicker;
 
-import androidx.core.app.ActivityCompat;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -35,7 +27,6 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.service.MaReuApiService;
-import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.utils.DeleteViewAction;
 
 import org.junit.After;
@@ -53,7 +44,6 @@ import org.junit.runner.RunWith;
 public class MaReuInstrumentedTest {
 
 
-    private MaReuActivity mActivity;
     private MaReuApiService mApiService;
 
     private final int ITEMS_COUNT = 10;
@@ -62,19 +52,19 @@ public class MaReuInstrumentedTest {
     private final int MEETING_IN_ROOM_1 = 1;
 
     @Rule
-    public ActivityTestRule<MaReuActivity> mActivityRule =
+    public ActivityTestRule mActivityRule =
             new ActivityTestRule(MaReuActivity.class);
 
     @Before
     public void setUp() {
-        mActivity = mActivityRule.getActivity();
+        MaReuActivity activity = (MaReuActivity) mActivityRule.getActivity();
         mApiService = DI.getApiService();
-        assertThat(mActivity, notNullValue());
+        assertThat(activity, notNullValue());
 
     }
 
     @After
-    public void endTest(){
+    public void endTest() {
         MaReuActivity.setIsRoomFilterActivated(false);
         MaReuActivity.setIsDateFilterActivated(false);
         mApiService = DI.getNewInstanceApiService();
