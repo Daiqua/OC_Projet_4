@@ -37,7 +37,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-//TODO: check extend with Brahim. Is it possible to extend DateConvertor and AppCompatActivity instead?
 public class MaReuActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, RoomsListFragment.RoomFilterListener {
 
     private List<Meeting> mMeetingsList = new ArrayList<>();

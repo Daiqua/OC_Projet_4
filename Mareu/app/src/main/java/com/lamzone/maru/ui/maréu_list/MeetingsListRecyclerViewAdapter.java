@@ -72,12 +72,7 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         holder.meetingDuration.setText("Durée: " + meeting.getMeetingDuration() + " min");
 
         //set colors
-        holder.itemView.setBackgroundColor(DummyMeetingRoomGenerator.getRoomColor(meeting.getStrMeetingName()));
-        holder.meetingName.setTextColor(setTextColorDependingOnRoom(meeting));
-        holder.meetingAttendeesList.setTextColor(setTextColorDependingOnRoom(meeting));
-        holder.meetingStartingDate.setTextColor(setTextColorDependingOnRoom(meeting));
-        holder.meetingDuration.setTextColor(setTextColorDependingOnRoom(meeting));
-        holder.meetingStartingHour.setTextColor(setTextColorDependingOnRoom(meeting));
+        holder.itemView.setBackgroundColor(meeting.getMeetingRoom().getMeetingRoomColor());
 
         holder.deleteMeetingButton.setOnClickListener(v -> {
             mApiService.deleteMeeting(meeting);
@@ -94,20 +89,5 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
     @Override
     public int getItemCount() {
         return mMeetingsList.size();
-    }
-
-    //TODO: review
-    public int setTextColorDependingOnRoom(Meeting meeting) {
-        String textColor;
-        String meetingRoom = meeting.getMeetingRoom().getStrMeetingRoomName();
-        if (meetingRoom.equals("salle 1") || meetingRoom.equals("salle 2") ||
-                meetingRoom.equals("salle 3") || meetingRoom.equals("salle 4") ||
-                meetingRoom.equals("salle 5")) {
-            textColor = "#FF000000";
-        } else {
-            textColor = "#FFFFFFFF";
-        }
-
-        return Color.parseColor(textColor);
     }
 }
