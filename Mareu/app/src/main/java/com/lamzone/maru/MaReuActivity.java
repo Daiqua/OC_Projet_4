@@ -51,6 +51,8 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     private static boolean isDateFilterActivated = false;
     private static boolean isRoomFilterActivated = false;
 
+    RoomsListFragment roomsListFragment = new RoomsListFragment();
+
     //to manage the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,7 +72,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
                 isRoomFilterActivated = false;
                 break;
             case R.id.filterRoom:
-                RoomsListFragment roomsListFragment = new RoomsListFragment();
+                roomsListFragment.setRoomListener(this);
                 roomsListFragment.show(getSupportFragmentManager(), "RoomsListFragment");
                 isDateFilterActivated = false;
                 break;
@@ -183,18 +185,9 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         loadRecyclerView();
     }
 
-    //TODO: to comment - to replace
-    @Override
-    public void onAttachFragment(@NonNull Fragment fragment) {
-        if (fragment instanceof RoomsListFragment) {
-            RoomsListFragment roomsListFragment = (RoomsListFragment) fragment;
-            roomsListFragment.setRoomListener(this);
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        loadRecyclerView();
+        //loadRecyclerView();
     }
 }

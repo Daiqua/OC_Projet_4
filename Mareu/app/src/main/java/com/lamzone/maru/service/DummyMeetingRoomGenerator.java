@@ -33,24 +33,18 @@ public abstract class DummyMeetingRoomGenerator {
 
     public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
         new MeetingRoom(roomsList[1], Color.parseColor(roomsColors[1])),
-            new MeetingRoom(roomsList[1], Color.parseColor(roomsColors[1])),
-            new MeetingRoom(roomsList[2], Color.parseColor(roomsColors[2])),
-            new MeetingRoom(roomsList[3], Color.parseColor(roomsColors[3])),
-            new MeetingRoom(roomsList[4], Color.parseColor(roomsColors[4])),
-            new MeetingRoom(roomsList[5], Color.parseColor(roomsColors[5])),
-            new MeetingRoom(roomsList[6], Color.parseColor(roomsColors[6])),
-            new MeetingRoom(roomsList[7], Color.parseColor(roomsColors[7])),
-            new MeetingRoom(roomsList[8], Color.parseColor(roomsColors[8])),
-            new MeetingRoom(roomsList[9], Color.parseColor(roomsColors[9])),
-            new MeetingRoom(roomsList[10], Color.parseColor(roomsColors[10]))
+        new MeetingRoom(roomsList[2], Color.parseColor(roomsColors[2])),
+        new MeetingRoom(roomsList[3], Color.parseColor(roomsColors[3])),
+        new MeetingRoom(roomsList[4], Color.parseColor(roomsColors[4])),
+        new MeetingRoom(roomsList[5], Color.parseColor(roomsColors[5])),
+        new MeetingRoom(roomsList[6], Color.parseColor(roomsColors[6])),
+        new MeetingRoom(roomsList[7], Color.parseColor(roomsColors[7])),
+        new MeetingRoom(roomsList[8], Color.parseColor(roomsColors[8])),
+        new MeetingRoom(roomsList[9], Color.parseColor(roomsColors[9])),
+        new MeetingRoom(roomsList[10], Color.parseColor(roomsColors[10]))
 
     );
 
-
-    static MeetingRoom generateMeetingRooms(MeetingRoom meetingRoom, int index) {
-        meetingRoom = new MeetingRoom(roomsList[index], Color.parseColor(roomsColors[index]));
-        return meetingRoom;
-    }
 
     static List<MeetingRoom> generateMeetingRoomsList (){
         return new ArrayList<>(DUMMY_MEETING_ROOMS);
@@ -60,6 +54,7 @@ public abstract class DummyMeetingRoomGenerator {
         return roomsList;
     }
 
+    //TODO
     public static int getRoomColor(String roomName){
         //return DUMMY_MEETING_ROOMS.get(DUMMY_MEETING_ROOMS.indexOf(roomName)).getMeetingRoomColor();
         return 0;

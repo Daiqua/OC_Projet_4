@@ -1,11 +1,16 @@
 package com.lamzone.maru.ui.maréu_list;
 
+import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lamzone.maru.R;
@@ -15,8 +20,14 @@ import com.lamzone.maru.service.MaReuApiService;
 
 import java.util.List;
 
-public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RoomListFragmentRecyclerViewAdapter.MyViewHolder>{
+public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RoomListFragmentRecyclerViewAdapter.MyViewHolder> {
     private final List<MeetingRoom> sMeetingRoomsList;
+    private String meetingRoomFiltered;
+    RoomsListFragment mRoomsListFragment;
+
+    //click listener to transfer data to frag
+    private OnItemClickListener onItemClickListener;
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,6 +41,7 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
 
     public RoomListFragmentRecyclerViewAdapter (List<MeetingRoom> meetingRoomsList){
         sMeetingRoomsList = meetingRoomsList;
+
     }
 
     @NonNull
@@ -41,17 +53,30 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         holder.mButton.setText(sMeetingRoomsList.get(position).getStrMeetingRoomName());
         holder.mButton.setBackgroundColor(sMeetingRoomsList.get(position).getMeetingRoomColor());
-        /*holder.itemView.setOnClickListener(v -> {
-
-        }*/
-
+        holder.mButton.setOnClickListener(v -> {
+            //click listener to transfer data to frag
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(sMeetingRoomsList.get(position).getStrMeetingRoomName());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return sMeetingRoomsList.size();
     }
+    //TODO: to comment
+    //click listener to transfer data to frag
+    public interface OnItemClickListener {
 
+        void onItemClick (String text);
+    }
+    //TODO: to comment
+    //click listener to transfer data to frag
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 }
