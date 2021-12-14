@@ -3,8 +3,6 @@ package com.lamzone.maru.model;
 public class MeetingRoom {
 
     private final String strMeetingRoomName;
-
-
     private final int meetingRoomColor;
 
     public MeetingRoom(String strMeetingRoomName, int meetingRoomColor) {

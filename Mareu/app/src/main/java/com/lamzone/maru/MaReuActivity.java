@@ -173,7 +173,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     }
 
     //TODO: to comment
-    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void getRoomFiltered(String roomName) {
         strRoomFiltered = roomName;

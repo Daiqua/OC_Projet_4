@@ -12,9 +12,12 @@
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable-xhdpi/ic_baseline_delete_48.xml" value="0.315" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable-xxhdpi/ic_baseline_add_48.xml" value="0.3765625" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/drawable/ic_baseline_add_48.xml" value="0.23489583333333333" />
-        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_add_meeting.xml" value="0.35208333333333336" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_add_meeting.xml" value="0.1" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_add_meeting_attendee_list.xml" value="0.453125" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_add_meeting_attendee_list_item.xml" value="0.7546666666666667" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_ma_reu.xml" value="0.35208333333333336" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_meeting_item.xml" value="0.35208333333333336" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/activity_meetings_list.xml" value="0.43828125" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-hdpi/fragment_rooms_list.xml" value="0.1" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_add_meeting.xml" value="0.6331198536139067" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-ldpi/activity_add_meeting_attendee_list_item.xml" value="1.209375" />
@@ -24,6 +27,8 @@
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-mdpi/activity_add_meeting_attendee_list.xml" value="0.66" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-mdpi/activity_ma_reu.xml" value="0.66" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-mdpi/activity_meeting_item.xml" value="0.865" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-mdpi/activity_meetings_list.xml" value="0.48375" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-mdpi/fragment_rooms_list.xml" value="0.48375" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-xhdpi/activity_add_meeting.xml" value="0.36041666666666666" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-xhdpi/activity_add_meeting_attendee_list.xml" value="0.275" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout-xhdpi/activity_ma_reu.xml" value="0.25" />
@@ -40,7 +45,9 @@
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_filter.xml" value="0.36041666666666666" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/activity_meeting_item.xml" value="0.33" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_date_picker.xml" value="0.10555555555555556" />
-        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_rooms_list.xml" value="0.25" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_rooms_list.xml" value="0.21122112211221122" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_rooms_list_item.xml" value="0.22" />
+        <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/layout/fragment_rooms_list_recycler_view.xml" value="0.337890625" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/menu/filter_menu.xml" value="0.1" />
         <entry key="..\:/OC_Projet_4/Mareu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3765625" />
       </map>
