@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -51,22 +52,11 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private RecyclerView mRecyclerView;
     private AddMeetingAttendeesListRecyclerViewAdapter mAddMeetingAttendeesListRVAdapter;
 
-    //variable to create a new meeting
-    private Meeting newMeeting;
-    private String strNewMeetingName;
-    private List<Attendee> newMeetingAttendeesList;
-    private MeetingRoom roomForTheNewMeeting;
-    private String strRoomName;
-    private String strMeetingStartDate;
-    private String strMeetingHour;
-    private int iMeetingDuration;
-
     //for spinner room list
-    private String selectedMeetingRoom;
+    private MeetingRoom selectedMeetingRoom;
     private String[] meetingRoomsList;
 
-    //to manage date not filled in layout inputs
-    private final String empty = "empty";
+    private List<MeetingRoom> mMeetingRoomList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,54 +126,19 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         });
     }
 
-    @SuppressLint("SetTextI18n")
     private void setClickOnSaveButton() {
-        saveButton.setOnClickListener(view -> {
-            //load data in newMeeting
-            //record meeting room - if condition to manage if not selected
-            if (selectedMeetingRoom.equals("")) {
-                strRoomName = empty;
-            } else {
-                strRoomName = selectedMeetingRoom;
-            }
+        saveButton.setOnClickListener(v -> {
+            Meeting newMeeting = new Meeting(
+                    meetingTopicInput.getEditText().getText().toString(),
+                    selectedMeetingRoom,
+                    mAttendeesList,
+                    meetingDatePicker.getYear() + "." + (meetingDatePicker.getMonth() + 1) + "."
+                            + meetingDatePicker.getDayOfMonth(),
+                    meetingTimePicker.getCurrentHour() + "." + meetingTimePicker.getCurrentMinute(),
+                    Integer.parseInt(meetingDurationInput.getEditText().getText().toString()));
+                    mApiService.addMeeting(newMeeting);
 
-            //getMonth()+1 needed during conversion from mm to MMMM)
-            strMeetingStartDate = meetingDatePicker.getYear() + "."
-                    + (meetingDatePicker.getMonth() + 1) + "."
-                    + meetingDatePicker.getDayOfMonth();//date format: yyyy.MM.dd
-            strMeetingHour = meetingTimePicker.getCurrentHour() + ":" + meetingTimePicker.getCurrentMinute();
-
-            //record meeting duration - if condition to manage if not filled
-            if (Objects.requireNonNull(meetingDurationInput.getEditText()).getText().toString().equals("")) {
-                iMeetingDuration = 0;
-            } else {
-                iMeetingDuration = Integer.parseInt(meetingDurationInput.getEditText().getText().toString());
-            }
-            //generate the MeetingRoom
-            roomForTheNewMeeting = new MeetingRoom(strRoomName, DummyMeetingRoomGenerator.getRoomColor(strRoomName));
-            // record attendees list - if condition to manage if not filled
-            if (mAttendeesList.size() == 0) {
-                mAttendeesList.add(new Attendee("non renseigné"));
-            }
-            newMeetingAttendeesList = mAttendeesList;
-
-            //record Topic/name - if condition to manage if not filled
-            if (Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString().equals("")) {
-                strNewMeetingName = empty;
-            } else {
-                strNewMeetingName = meetingTopicInput.getEditText().getText().toString();
-            }
-
-            newMeeting = new Meeting(strNewMeetingName, roomForTheNewMeeting,
-                    newMeetingAttendeesList, strMeetingStartDate, strMeetingHour, iMeetingDuration);
-            //check if data are correctly filled
-            if (checkIfMeetingDataFilled(newMeeting)) {
-                mApiService.addMeeting(newMeeting);
-                finish();
-            } else {
-                saveButton.setText("Renseigner tous les champs pour pouvoir valider");
-                saveButton.setEnabled(false);
-            }
+                    this.finish();
         });
     }
 
@@ -214,23 +169,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         meetingRoomSpinner.setAdapter(meetingRoomArrayAdapter);
     }
 
-    private boolean checkIfMeetingDataFilled(Meeting meeting) {
-        if (meeting.getMeetingRoom().getStrMeetingRoomName().equals(empty)
-                || (meeting.getMeetingDuration() == 0)
-                || meeting.getStrMeetingName().equals(empty)
-                || meeting.getMeetingAttendeesList().get(0).equals("")) {
-            meeting.getMeetingAttendeesList().clear();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     //for spinner room list
     //TODO add pad listener for enter action
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedMeetingRoom = meetingRoomsList[position];
+        mMeetingRoomList = mApiService.getMeetingRooms();
+        selectedMeetingRoom = mMeetingRoomList.get(position);//MeetingRoom
         saveButton.setEnabled(true);
     }
 

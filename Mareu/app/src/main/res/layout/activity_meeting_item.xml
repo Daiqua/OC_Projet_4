@@ -7,7 +7,6 @@
     android:background="@color/white"
     android:textColor="@color/black">
 
-
     <ImageView
         android:id="@+id/activity_meeting_item_color"
         android:layout_width="50dp"
@@ -15,7 +14,7 @@
         android:src="@drawable/ic_baseline_brightness_1_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_name"
@@ -27,7 +26,7 @@
         android:textSize="@dimen/size_activity_meetings_item_meeting_name"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/activity_meeting_item_color"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_starting_date"
@@ -39,7 +38,7 @@
         android:textSize="@dimen/size_activity_meetings_item_meeting_starting_date_and_hour"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/activity_meetings_item_meeting_name"
-        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_name" />
+        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_name"/>
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_starting_hour"
@@ -51,7 +50,7 @@
         android:textSize="@dimen/size_activity_meetings_item_meeting_starting_date_and_hour"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/activity_meetings_item_meeting_name"
-        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_starting_date" />
+        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_starting_date"/>
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_duration"
@@ -64,8 +63,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/activity_meetings_item_meeting_name"
         app:layout_constraintRight_toLeftOf="@id/activity_meetings_item_delete_button"
-        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_starting_hour" />
-
+        app:layout_constraintStart_toEndOf="@id/activity_meetings_item_meeting_starting_hour"/>
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_attendees_list"
@@ -76,10 +74,11 @@
         android:textSize="@dimen/size_activity_meetings_item_meeting_attendees_list"
         android:textStyle="italic"
         app:layout_constrainedWidth="true"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@id/activity_meetings_item_delete_button"
         app:layout_constraintStart_toStartOf="@id/activity_meetings_item_meeting_name"
-        app:layout_constraintTop_toBottomOf="@id/activity_meetings_item_meeting_name" />
-
+        app:layout_constraintTop_toBottomOf="@id/activity_meetings_item_meeting_name"/>
 
     <ImageButton
         android:id="@+id/activity_meetings_item_delete_button"
@@ -90,7 +89,6 @@
         android:src="@drawable/ic_baseline_delete_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

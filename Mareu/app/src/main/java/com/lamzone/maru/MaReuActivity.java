@@ -187,6 +187,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     @Override
     protected void onResume() {
         super.onResume();
-        //loadRecyclerView();
+        loadRecyclerView();
     }
 }
