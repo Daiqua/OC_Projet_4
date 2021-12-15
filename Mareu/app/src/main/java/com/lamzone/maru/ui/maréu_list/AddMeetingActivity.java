@@ -3,6 +3,7 @@ package com.lamzone.maru.ui.maréu_list;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,7 +27,6 @@ import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
-import com.lamzone.maru.service.DummyMeetingRoomGenerator;
 import com.lamzone.maru.service.MaReuApiService;
 
 import java.util.ArrayList;
@@ -91,6 +90,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         saveButton = findViewById(R.id.activity_add_meeting_save_button);
+        checkDataIsCorrectlyFilled();
+
         addAttendeeButton = findViewById(R.id.activity_add_meeting_add_attendee);
         addAttendeeButton.setEnabled(false);
     }
@@ -108,15 +109,13 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void afterTextChanged(Editable s) {
-                saveButton.setEnabled(true);
-                if (textInputLayout.getEditText().getText().toString().equals("")) {
-                    if (textInputLayout == meetingAttendeesInput) {
+                checkDataIsCorrectlyFilled();
+                if (textInputLayout == meetingAttendeesInput) {
+                    if (TextUtils.isEmpty(meetingAttendeesInput.getEditText().getText().toString())) {
                         addAttendeeButton.setEnabled(false);
                         addAttendeeButton.setImageDrawable(getResources()
                                 .getDrawable(R.drawable.ic_baseline_person_add_24_grey));
-                    }
-                } else {
-                    if (textInputLayout == meetingAttendeesInput) {
+                    } else {
                         addAttendeeButton.setEnabled(true);
                         addAttendeeButton.setImageDrawable(getResources()
                                 .getDrawable(R.drawable.ic_baseline_person_add_24_green));
@@ -136,9 +135,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                             + meetingDatePicker.getDayOfMonth(),
                     meetingTimePicker.getCurrentHour() + "." + meetingTimePicker.getCurrentMinute(),
                     Integer.parseInt(meetingDurationInput.getEditText().getText().toString()));
-                    mApiService.addMeeting(newMeeting);
-
-                    this.finish();
+            mApiService.addMeeting(newMeeting);
+            this.finish();
         });
     }
 
@@ -175,12 +173,27 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mMeetingRoomList = mApiService.getMeetingRooms();
         selectedMeetingRoom = mMeetingRoomList.get(position);//MeetingRoom
-        saveButton.setEnabled(true);
+        checkDataIsCorrectlyFilled();
     }
 
     //for spinner room list
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        selectedMeetingRoom = mMeetingRoomList.get(0);
     }
+
+    @SuppressLint("SetTextI18n")
+    private void checkDataIsCorrectlyFilled() {
+        if (TextUtils.isEmpty(Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString())
+                || TextUtils.isEmpty(meetingTopicInput.getEditText().getText().toString())
+                || mAttendeesList.size() == 0
+                || selectedMeetingRoom.equals(mMeetingRoomList.get(0))) {
+            saveButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+            saveButton.setText("Ajouter la réunion");
+        }
+    }
+
 }
 
