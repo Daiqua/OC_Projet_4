@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.maréu_list.AddMeetingActivity"
@@ -27,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="20sp">
+                android:textSize="20sp"
+                app:boxBackgroundColor="@color/grey"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_add_meeting_topic"
@@ -36,7 +39,7 @@
                     android:ems="10"
                     android:hint="Sujet"
                     android:inputType="textShortMessage"
-                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,8 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/grey"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/grey">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -54,12 +57,14 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:text="Choisir la salle"
-                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"
+                    />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/activity_add_meeting_room_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:foregroundTint="#5A4E4E" />
 
             </LinearLayout>
 
@@ -112,12 +117,12 @@
 
             </LinearLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_add_meeting_duration_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:background="@color/grey">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_add_meeting_duration"
@@ -126,7 +131,8 @@
                     android:ems="10"
                     android:hint="Durée de la réunion"
                     android:inputType="number"
-                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
+                    android:textSize="@dimen/size_activity_add_meeting_layout_input_text"
+                    android:background="@color/grey"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,7 +145,8 @@
                     android:id="@+id/activity_add_meeting_attendees_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/activity_add_meeting_attendees"
@@ -148,7 +155,8 @@
                         android:ems="10"
                         android:hint="Participants"
                         android:inputType="textEmailAddress"
-                        android:textSize="@dimen/size_activity_add_meeting_layout_input_text"/>
+                        android:textSize="@dimen/size_activity_add_meeting_layout_input_text"
+                        android:background="@color/grey"/>
 
                     <include layout="@layout/activity_add_meeting_attendee_list" />
 

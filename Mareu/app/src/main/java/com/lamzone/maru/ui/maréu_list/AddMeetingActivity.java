@@ -63,8 +63,20 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         mApiService = DI.getApiService();
         loadView();
         loadSpinnerList();
+        loadRecyclerView();
         setClickOnSaveButton();
         setClickOnAddAttendeeButton();
+    }
+
+    private void loadRecyclerView() {
+        mRecyclerView = findViewById(R.id.activity_add_meetings_attendee_list);
+        mAddMeetingAttendeesListRVAdapter =
+                new AddMeetingAttendeesListRecyclerViewAdapter(mAttendeesList,this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.setAdapter(mAddMeetingAttendeesListRVAdapter);
     }
 
     private void loadView() {
@@ -140,21 +152,14 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void setClickOnAddAttendeeButton() {
         addAttendeeButton.setOnClickListener(v -> {
             newAttendee = new Attendee(Objects.requireNonNull(meetingAttendeesInput.getEditText()).getText().toString());
             mAttendeesList.add(newAttendee);
             meetingAttendeesInput.getEditText().setText("");
+            mAddMeetingAttendeesListRVAdapter.notifyDataSetChanged();
 
-            //RV launch
-            mRecyclerView = findViewById(R.id.activity_add_meetings_attendee_list);
-            mAddMeetingAttendeesListRVAdapter =
-                    new AddMeetingAttendeesListRecyclerViewAdapter(mAttendeesList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            mRecyclerView.setLayoutManager(layoutManager);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-            mRecyclerView.setAdapter(mAddMeetingAttendeesListRVAdapter);
         });
     }
 
@@ -183,17 +188,21 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     }
 
     @SuppressLint("SetTextI18n")
-    private void checkDataIsCorrectlyFilled() {
+    protected void checkDataIsCorrectlyFilled() {
         if (TextUtils.isEmpty(Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString())
                 || TextUtils.isEmpty(meetingTopicInput.getEditText().getText().toString())
-                || mAttendeesList.size() == 0
+                || mAddMeetingAttendeesListRVAdapter.getItemCount()==0
                 || selectedMeetingRoom.equals(mMeetingRoomList.get(0))) {
             saveButton.setEnabled(false);
+            saveButton.setText("Renseigner tous les champs pour pouvoir valider");
+
         } else {
             saveButton.setEnabled(true);
             saveButton.setText("Ajouter la réunion");
         }
     }
+
+
 
 }
 
