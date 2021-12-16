@@ -18,19 +18,6 @@ public abstract class DummyMeetingRoomGenerator {
     private static final String[] roomsColors = {"#A79C9B", "#e67388", "#ff815e", "#ffc75e","#ffeb5f", "#bdd54e", "#30802f",
             "#3f5aab", "#5f4fd6", "#603082", "#9368a6"};
 
-    private static MeetingRoom DummyMeetingRoom1;
-    private static MeetingRoom DummyMeetingRoom2;
-    private static MeetingRoom DummyMeetingRoom3;
-    private static MeetingRoom DummyMeetingRoom4;
-    private static MeetingRoom DummyMeetingRoom5;
-    private static MeetingRoom DummyMeetingRoom6;
-    private static MeetingRoom DummyMeetingRoom7;
-    private static MeetingRoom DummyMeetingRoom8;
-    private static MeetingRoom DummyMeetingRoom9;
-    private static MeetingRoom DummyMeetingRoom10;
-
-
-
     public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
         new MeetingRoom(roomsList[1], Color.parseColor(roomsColors[1])),
         new MeetingRoom(roomsList[2], Color.parseColor(roomsColors[2])),
@@ -53,15 +40,5 @@ public abstract class DummyMeetingRoomGenerator {
     public static String[] getRoomsList() {
         return roomsList;
     }
-
-    //TODO
-    public static int getRoomColor(String roomName){
-        //return DUMMY_MEETING_ROOMS.get(DUMMY_MEETING_ROOMS.indexOf(roomName)).getMeetingRoomColor();
-        return 0;
-    }
-
-
-
-
 
 }

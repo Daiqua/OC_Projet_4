@@ -122,8 +122,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
 
     public void loadRecyclerView() {
         mMeetingsListRecyclerViewAdapter = new MeetingsListRecyclerViewAdapter(mMeetingsList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
                 DividerItemDecoration.VERTICAL));
@@ -134,20 +133,13 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        //TODO: remove or standardize with all string "date"
-        /*
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        strDateFiltered = DateFormat.getDateInstance().format(calendar.getTime());
-        */
+
         strDateFiltered = year + "." + (month + 1) + "." + dayOfMonth;//date format: yyyy.MM.dd
         filterText.setText(convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered));
         isDateFilterActivated = true;
         generateMeetings();
         //TODO: check with Brahim, don't work - replaced by loadRecyclerView()
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+        //mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
         loadRecyclerView();
     }
 
@@ -180,13 +172,17 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         filterText.setText(strRoomFiltered);
         isRoomFilterActivated = true;
         generateMeetings();
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+        //TODO: check with Brahim
+        //mMeetingsListRecyclerViewAdapter.notifyDataSetChanged(); --> don't work
         loadRecyclerView();
+
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
         super.onResume();
-        loadRecyclerView();
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

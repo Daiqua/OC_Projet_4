@@ -45,6 +45,7 @@ public class MaReuApiServiceTest {
         List<Meeting> meetingsList = service.getMeetings();
         List<Meeting> expectedMeetingsList = DummyMeetingGenerator.DUMMY_MEETINGS;
         assertThat(meetingsList, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetingsList.toArray()));
+        assertEquals(0, 0);
     }
 
     @Test

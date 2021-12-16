@@ -72,8 +72,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         mRecyclerView = findViewById(R.id.activity_add_meetings_attendee_list);
         mAddMeetingAttendeesListRVAdapter =
                 new AddMeetingAttendeesListRecyclerViewAdapter(mAttendeesList,this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mAddMeetingAttendeesListRVAdapter);

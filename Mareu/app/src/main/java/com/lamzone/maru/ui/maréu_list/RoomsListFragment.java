@@ -53,14 +53,11 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
         mRecyclerView= view.findViewById(R.id.fragment_rooms_list_recycler_view);
 
 
-
-
         mRoomListFragmentRecyclerViewAdapter = new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
 
         mRoomListFragmentRecyclerViewAdapter.setOnItemClickListener(this);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),

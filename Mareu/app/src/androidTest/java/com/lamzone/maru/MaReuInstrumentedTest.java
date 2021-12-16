@@ -3,6 +3,7 @@ package com.lamzone.maru;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
@@ -143,14 +144,18 @@ public class MaReuInstrumentedTest {
                 .perform(typeText("attendee 2"));
         onView(ViewMatchers.withId(R.id.activity_add_meeting_add_attendee))
                 .perform(click());
-        //save
+        //hide the keyboard
+        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(closeSoftKeyboard());
+
+        //save //TODO: check with Brahim if softKeyBoard prevent the click on the button behind
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
                 .perform(click());
         //Meeting list should be displayed with one additional item
         onView(ViewMatchers.withId(R.id.activity_meetings_list))
                 .check(matches(isDisplayed()))
                 .check(withItemCount(ITEMS_COUNT + 1));
-        //TODO: check content of added meeting
+        //TODO: check content of added meeting - check with Brahim if needed
     }
 
     @Test

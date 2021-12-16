@@ -22,6 +22,8 @@ android {
     }
     testOptions {
         animationsDisabled = true
+        unitTests.returnDefaultValues = true //to avoid Method parseColor in android.graphics.Color not mocked
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
