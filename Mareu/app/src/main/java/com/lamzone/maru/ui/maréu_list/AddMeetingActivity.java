@@ -2,9 +2,7 @@ package com.lamzone.maru.ui.maréu_list;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +26,7 @@ import com.lamzone.maru.model.Attendee;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.model.MeetingRoom;
 import com.lamzone.maru.service.MaReuApiService;
+import com.lamzone.maru.service.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +70,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private void loadRecyclerView() {
         mRecyclerView = findViewById(R.id.activity_add_meetings_attendee_list);
         mAddMeetingAttendeesListRVAdapter =
-                new AddMeetingAttendeesListRecyclerViewAdapter(mAttendeesList,this);
+                new AddMeetingAttendeesListRecyclerViewAdapter(mAttendeesList, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
@@ -81,20 +80,16 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private void loadView() {
         setContentView(R.layout.activity_add_meeting);
         mRecyclerView = findViewById(R.id.activity_add_meetings_attendee_list);
-
         meetingTopicInput = findViewById(R.id.activity_add_meeting_topic_input);
-        setTextWatcher(meetingTopicInput);
-
         meetingDurationInput = findViewById(R.id.activity_add_meeting_duration_input);
-        setTextWatcher(meetingDurationInput);
-
         meetingAttendeesInput = findViewById(R.id.activity_add_meeting_attendees_input);
-        setTextWatcher(meetingAttendeesInput);
-
         meetingDatePicker = findViewById(R.id.activity_add_meeting_date_picker);
-
         meetingTimePicker = findViewById(R.id.activity_add_meeting_time_picker);
         meetingTimePicker.setIs24HourView(true);
+
+
+        TextInputLayout[] textInputLayoutList = {meetingTopicInput, meetingTopicInput, meetingAttendeesInput};
+        Util.setTextWatcher(textInputLayoutList, this);
 
         Toolbar toolbar = findViewById(R.id.activity_add_meeting_toolbar);
         setSupportActionBar(toolbar);
@@ -105,35 +100,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
         addAttendeeButton = findViewById(R.id.activity_add_meeting_add_attendee);
         addAttendeeButton.setEnabled(false);
-    }
-
-    private void setTextWatcher(TextInputLayout textInputLayout) {
-        Objects.requireNonNull(textInputLayout.getEditText()).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void afterTextChanged(Editable s) {
-                checkDataIsCorrectlyFilled();
-                if (textInputLayout == meetingAttendeesInput) {
-                    if (TextUtils.isEmpty(meetingAttendeesInput.getEditText().getText().toString())) {
-                        addAttendeeButton.setEnabled(false);
-                        addAttendeeButton.setImageDrawable(getResources()
-                                .getDrawable(R.drawable.ic_baseline_person_add_24_grey));
-                    } else {
-                        addAttendeeButton.setEnabled(true);
-                        addAttendeeButton.setImageDrawable(getResources()
-                                .getDrawable(R.drawable.ic_baseline_person_add_24_green));
-                    }
-                }
-            }
-        });
     }
 
     private void setClickOnSaveButton() {
@@ -187,10 +153,10 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     }
 
     @SuppressLint("SetTextI18n")
-    protected void checkDataIsCorrectlyFilled() {
+    public void checkDataIsCorrectlyFilled() {
         if (TextUtils.isEmpty(Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString())
                 || TextUtils.isEmpty(meetingTopicInput.getEditText().getText().toString())
-                || mAddMeetingAttendeesListRVAdapter.getItemCount()==0
+                || mAddMeetingAttendeesListRVAdapter.getItemCount() == 0
                 || selectedMeetingRoom.equals(mMeetingRoomList.get(0))) {
             saveButton.setEnabled(false);
             saveButton.setText("Renseigner tous les champs pour pouvoir valider");
@@ -201,7 +167,18 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void checkAttendeeInputToSetAddAttendeeButton() {
+        if (TextUtils.isEmpty(Objects.requireNonNull(meetingAttendeesInput.getEditText()).getText().toString())) {
+            addAttendeeButton.setEnabled(false);
+            addAttendeeButton.setImageDrawable(getResources()
+                    .getDrawable(R.drawable.ic_baseline_person_add_24_grey));
+        } else {
+            addAttendeeButton.setEnabled(true);
+            addAttendeeButton.setImageDrawable(getResources()
+                    .getDrawable(R.drawable.ic_baseline_person_add_24_green));
+        }
+    }
 
 }
 
