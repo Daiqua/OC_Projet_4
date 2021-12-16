@@ -1,29 +1,20 @@
 package com.lamzone.maru.ui.maréu_list;
 
-import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lamzone.maru.R;
-import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.MeetingRoom;
-import com.lamzone.maru.service.MaReuApiService;
 
 import java.util.List;
 
 public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RoomListFragmentRecyclerViewAdapter.MyViewHolder> {
     private final List<MeetingRoom> sMeetingRoomsList;
-    private String meetingRoomFiltered;
-    RoomsListFragment mRoomsListFragment;
 
     //click listener to transfer data to frag
     private OnItemClickListener onItemClickListener;
@@ -39,7 +30,7 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
         }
     }
 
-    public RoomListFragmentRecyclerViewAdapter (List<MeetingRoom> meetingRoomsList){
+    public RoomListFragmentRecyclerViewAdapter(List<MeetingRoom> meetingRoomsList) {
         sMeetingRoomsList = meetingRoomsList;
 
     }
@@ -68,12 +59,14 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
     public int getItemCount() {
         return sMeetingRoomsList.size();
     }
+
     //TODO: to comment
     //click listener to transfer data to frag
     public interface OnItemClickListener {
 
-        void onItemClick (String text);
+        void onItemClick(String text);
     }
+
     //TODO: to comment
     //click listener to transfer data to frag
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

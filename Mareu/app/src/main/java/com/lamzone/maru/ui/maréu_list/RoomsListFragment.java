@@ -1,16 +1,10 @@
 package com.lamzone.maru.ui.maréu_list;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-
 import android.app.Dialog;
-import android.app.Notification;
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,8 +25,6 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
 
     private final MaReuApiService mApiService = DI.getApiService();
     private RoomFilterListener mRoomFilterListener = null;
-    private RecyclerView mRecyclerView;
-    private RoomListFragmentRecyclerViewAdapter mRoomListFragmentRecyclerViewAdapter;
 
     public RoomsListFragment() {
         // Required empty public constructor
@@ -50,38 +42,39 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
                              Bundle savedInstanceState) {
         List<MeetingRoom> meetingRoomList = mApiService.getMeetingRooms();
         View view = inflater.inflate(R.layout.fragment_rooms_list, container, false);
-        mRecyclerView= view.findViewById(R.id.fragment_rooms_list_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.fragment_rooms_list_recycler_view);
 
 
-        mRoomListFragmentRecyclerViewAdapter = new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
+        RoomListFragmentRecyclerViewAdapter roomListFragmentRecyclerViewAdapter = new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
 
-        mRoomListFragmentRecyclerViewAdapter.setOnItemClickListener(this);
+        roomListFragmentRecyclerViewAdapter.setOnItemClickListener(this);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
                 DividerItemDecoration.VERTICAL));
 
-        mRecyclerView.setAdapter(mRoomListFragmentRecyclerViewAdapter);
+        recyclerView.setAdapter(roomListFragmentRecyclerViewAdapter);
 
         return view;
     }
 
 
-
     //TODO: to comment
 
-    public void setRoomListener(RoomFilterListener roomFilterListener){
+    public void setRoomListener(RoomFilterListener roomFilterListener) {
         this.mRoomFilterListener = roomFilterListener;
     }
+
     //TODO: to comment
     //click listener to transfer data to frag
     @Override
     public void onItemClick(String text) {
         mRoomFilterListener.getRoomFiltered(text);
-            dismiss();
+        dismiss();
     }
+
     //TODO: to comment
     public interface RoomFilterListener {
 

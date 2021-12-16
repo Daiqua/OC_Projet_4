@@ -61,7 +61,6 @@ public class MaReuInstrumentedTest {
         MaReuActivity activity = (MaReuActivity) mActivityRule.getActivity();
         mApiService = DI.getApiService();
         assertThat(activity, notNullValue());
-
     }
 
     @After
@@ -147,7 +146,6 @@ public class MaReuInstrumentedTest {
         //hide the keyboard
         onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
                 .perform(closeSoftKeyboard());
-
         //save //TODO: check with Brahim if softKeyBoard prevent the click on the button behind
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
                 .perform(click());

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,12 +29,8 @@ import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
 import com.lamzone.maru.ui.maréu_list.RoomsListFragment;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class MaReuActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, RoomsListFragment.RoomFilterListener {
 
@@ -87,7 +81,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         }
         return true;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +138,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     }
 
 
-
     public static void setIsDateFilterActivated(boolean isDateFilterActivated) {
         MaReuActivity.isDateFilterActivated = isDateFilterActivated;
     }
@@ -164,8 +156,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         //TODO: check with Brahim
         //mMeetingsListRecyclerViewAdapter.notifyDataSetChanged(); --> don't work
         loadRecyclerView();
-
-
     }
 
     @SuppressLint("NotifyDataSetChanged")

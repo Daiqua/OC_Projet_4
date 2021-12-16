@@ -2,7 +2,7 @@ package com.lamzone.maru.model;
 
 public class Attendee {
 
-    private String strAttendeeEmailAddress;
+    private final String strAttendeeEmailAddress;
 
     public Attendee(String strAttendeeEmailAddress) {
         this.strAttendeeEmailAddress = strAttendeeEmailAddress;

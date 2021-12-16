@@ -52,7 +52,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     //for spinner room list
     private MeetingRoom selectedMeetingRoom;
-    private String[] meetingRoomsList;
 
     private List<MeetingRoom> mMeetingRoomList;
 
@@ -83,35 +82,31 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         meetingTopicInput = findViewById(R.id.activity_add_meeting_topic_input);
         meetingDurationInput = findViewById(R.id.activity_add_meeting_duration_input);
         meetingAttendeesInput = findViewById(R.id.activity_add_meeting_attendees_input);
+        saveButton = findViewById(R.id.activity_add_meeting_save_button);
+        addAttendeeButton = findViewById(R.id.activity_add_meeting_add_attendee);
         meetingDatePicker = findViewById(R.id.activity_add_meeting_date_picker);
         meetingTimePicker = findViewById(R.id.activity_add_meeting_time_picker);
         meetingTimePicker.setIs24HourView(true);
-
-
-        TextInputLayout[] textInputLayoutList = {meetingTopicInput, meetingTopicInput, meetingAttendeesInput};
-        Util.setTextWatcher(textInputLayoutList, this);
 
         Toolbar toolbar = findViewById(R.id.activity_add_meeting_toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        saveButton = findViewById(R.id.activity_add_meeting_save_button);
-        checkDataIsCorrectlyFilled();
-
-        addAttendeeButton = findViewById(R.id.activity_add_meeting_add_attendee);
-        addAttendeeButton.setEnabled(false);
+        //set all text watchers
+        TextInputLayout[] textInputLayoutList = {meetingTopicInput, meetingTopicInput, meetingAttendeesInput};
+        Util.setTextWatcher(textInputLayoutList, this);
     }
 
     private void setClickOnSaveButton() {
         saveButton.setOnClickListener(v -> {
             Meeting newMeeting = new Meeting(
-                    meetingTopicInput.getEditText().getText().toString(),
+                    Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString(),
                     selectedMeetingRoom,
                     mAttendeesList,
                     meetingDatePicker.getYear() + "." + (meetingDatePicker.getMonth() + 1) + "."
                             + meetingDatePicker.getDayOfMonth(),
                     meetingTimePicker.getCurrentHour() + "." + meetingTimePicker.getCurrentMinute(),
-                    Integer.parseInt(meetingDurationInput.getEditText().getText().toString()));
+                    Integer.parseInt(Objects.requireNonNull(meetingDurationInput.getEditText()).getText().toString()));
             mApiService.addMeeting(newMeeting);
             this.finish();
         });
@@ -129,7 +124,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     }
 
     private void loadSpinnerList() {
-        meetingRoomsList = mApiService.getRoomsList();
+        String[] meetingRoomsList = mApiService.getRoomsList();
         Spinner meetingRoomSpinner = findViewById(R.id.activity_add_meeting_room_spinner);
         meetingRoomSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> meetingRoomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, meetingRoomsList);
@@ -179,6 +174,5 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                     .getDrawable(R.drawable.ic_baseline_person_add_24_green));
         }
     }
-
 }
 

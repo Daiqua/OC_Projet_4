@@ -16,13 +16,12 @@ import com.lamzone.maru.model.Attendee;
 import java.util.List;
 
 public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Adapter<AddMeetingAttendeesListRecyclerViewAdapter.MyViewHolder> {
-    private List<Attendee> mAttendeesList;
-    private Attendee mAttendee;
+    private final List<Attendee> mAttendeesList;
     AddMeetingActivity mAddMeetingActivity;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView attendeeEmailAddress;
-        private ImageButton attendeeListDeleteButton;
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        private final TextView attendeeEmailAddress;
+        private final ImageButton attendeeListDeleteButton;
 
 
         public MyViewHolder(View view) {
@@ -34,7 +33,7 @@ public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Ada
 
     public AddMeetingAttendeesListRecyclerViewAdapter(List<Attendee> attendeesList, AddMeetingActivity addMeetingActivity) {
         this.mAttendeesList = attendeesList;
-        this.mAddMeetingActivity=addMeetingActivity;
+        this.mAddMeetingActivity = addMeetingActivity;
     }
 
     @NonNull
@@ -47,8 +46,8 @@ public class AddMeetingAttendeesListRecyclerViewAdapter extends RecyclerView.Ada
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        mAttendee = new Attendee(mAttendeesList.get(position).getStrAttendeeEmailAddress());
-        holder.attendeeEmailAddress.setText(mAttendee.getStrAttendeeEmailAddress());
+        Attendee attendee = new Attendee(mAttendeesList.get(position).getStrAttendeeEmailAddress());
+        holder.attendeeEmailAddress.setText(attendee.getStrAttendeeEmailAddress());
         holder.attendeeListDeleteButton.setOnClickListener(v -> {
             mAttendeesList.remove(position);
             notifyDataSetChanged();

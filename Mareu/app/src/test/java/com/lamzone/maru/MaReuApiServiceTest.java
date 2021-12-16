@@ -55,7 +55,7 @@ public class MaReuApiServiceTest {
         //create new meeting
         List<List<Attendee>> listsOfAttendees = service.getListsOfAttendees();
         List<MeetingRoom> meetingRoomList = service.getMeetingRooms();
-        Meeting newMeeting = new Meeting("MeetingTest", meetingRoomList.get(0), listsOfAttendees.get(0),"2021.12.25", "15:15", 0);
+        Meeting newMeeting = new Meeting("MeetingTest", meetingRoomList.get(0), listsOfAttendees.get(0), "2021.12.25", "15:15", 0);
         //add it to meetingsList
         service.addMeeting(newMeeting);
         int numberOfMeetingAfterAdding = meetingsList.size();
