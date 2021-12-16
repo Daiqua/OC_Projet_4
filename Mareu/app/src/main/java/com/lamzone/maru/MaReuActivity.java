@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Meeting;
 import com.lamzone.maru.service.MaReuApiService;
+import com.lamzone.maru.service.Util;
 import com.lamzone.maru.ui.maréu_list.AddMeetingActivity;
 import com.lamzone.maru.ui.maréu_list.DatePickerFragment;
 import com.lamzone.maru.ui.maréu_list.MeetingsListRecyclerViewAdapter;
@@ -135,7 +136,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         strDateFiltered = year + "." + (month + 1) + "." + dayOfMonth;//date format: yyyy.MM.dd
-        filterText.setText(convert_yyyy_MM_dd_to_dd_MMMM(strDateFiltered));
+        filterText.setText(Util.convertYearMonthNumberDayToDayMonthName(strDateFiltered));
         isDateFilterActivated = true;
         generateMeetings();
         //TODO: check with Brahim, don't work - replaced by loadRecyclerView()
@@ -143,19 +144,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         loadRecyclerView();
     }
 
-    //TODO: put in utility class
-    public String convert_yyyy_MM_dd_to_dd_MMMM(String strDatePattern_yyyy_MM_dd) {
-        Date date = new Date();
-        SimpleDateFormat dateFormatter_yyyy_MM_dd = new SimpleDateFormat("yyyy.MM.dd", Locale.FRANCE);
-        SimpleDateFormat dateFormatter_dd_MMMM = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
-        try {
-            date = dateFormatter_yyyy_MM_dd.parse(strDatePattern_yyyy_MM_dd);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        assert date != null;
-        return dateFormatter_dd_MMMM.format(date);
-    }
+
 
     public static void setIsDateFilterActivated(boolean isDateFilterActivated) {
         MaReuActivity.isDateFilterActivated = isDateFilterActivated;

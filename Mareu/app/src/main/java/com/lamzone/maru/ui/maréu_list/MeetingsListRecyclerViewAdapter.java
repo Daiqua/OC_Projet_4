@@ -1,7 +1,6 @@
 package com.lamzone.maru.ui.maréu_list;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Meeting;
-import com.lamzone.maru.service.DateConvertor;
-import com.lamzone.maru.service.DummyMeetingRoomGenerator;
 import com.lamzone.maru.service.MaReuApiService;
+import com.lamzone.maru.service.Util;
 
 import java.util.List;
 
@@ -71,7 +68,7 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         holder.meetingName.setText(meeting.getStrMeetingName());
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
         holder.meetingStartingDate.setText("le "
-                + DateConvertor.convert_yyyy_MM_dd_to_dd_MMMM(meeting.getStrMeetingStartDate()));
+                + Util.convertYearMonthNumberDayToDayMonthName(meeting.getStrMeetingStartDate()));
         holder.meetingStartingHour.setText("à " + meeting.getStrMeetingStartHour());
         holder.meetingDuration.setText("Durée: " + meeting.getMeetingDuration() + " min");
         holder.roomColor.setColorFilter(meeting.getMeetingRoom().getMeetingRoomColor());

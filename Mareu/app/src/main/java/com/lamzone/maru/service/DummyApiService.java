@@ -7,7 +7,7 @@ import com.lamzone.maru.model.MeetingRoom;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyApiService extends DateConvertor implements MaReuApiService {
+public class DummyApiService implements MaReuApiService {
 
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
     private final List<List<Attendee>> listsOfAttendees =
