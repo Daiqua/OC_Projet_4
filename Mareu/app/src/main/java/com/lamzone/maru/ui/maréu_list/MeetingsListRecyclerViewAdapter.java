@@ -28,8 +28,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         private final TextView meetingName;
         private final TextView meetingAttendeesList;
         private final TextView meetingStartingDate;
-        private final TextView meetingStartingHour;
-        private final TextView meetingDuration;
         private final ImageButton deleteMeetingButton;
         private final ImageView roomColor;
 
@@ -38,8 +36,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             meetingName = view.findViewById(R.id.activity_meetings_item_meeting_name);
             meetingAttendeesList = view.findViewById(R.id.activity_meetings_item_meeting_attendees_list);
             meetingStartingDate = view.findViewById(R.id.activity_meetings_item_meeting_starting_date);
-            meetingStartingHour = view.findViewById(R.id.activity_meetings_item_meeting_starting_hour);
-            meetingDuration = view.findViewById(R.id.activity_meetings_item_meeting_duration);
             deleteMeetingButton = view.findViewById(R.id.activity_meetings_item_delete_button);
             roomColor = view.findViewById(R.id.activity_meeting_item_color);
         }
@@ -67,10 +63,10 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         //set content
         holder.meetingName.setText(meeting.getStrMeetingName());
         holder.meetingAttendeesList.setText(attendeesEmailAddressesCommaSeparated);
-        holder.meetingStartingDate.setText("le "
-                + Util.convertYearMonthNumberDayToDayMonthName(meeting.getStrMeetingStartDate()));
-        holder.meetingStartingHour.setText("à " + meeting.getStrMeetingStartHour());
-        holder.meetingDuration.setText("Durée: " + meeting.getMeetingDuration() + " min");
+        holder.meetingStartingDate.setText("Le "
+                + Util.convertYearMonthNumberDayToDayMonthName(meeting.getStrMeetingStartDate())
+                + " à " + meeting.getStrMeetingStartHour()
+                + " Durée: " + meeting.getMeetingDuration() + " min"  );
         holder.roomColor.setColorFilter(meeting.getMeetingRoom().getMeetingRoomColor());
         holder.deleteMeetingButton.setOnClickListener(v -> {
             mApiService.deleteMeeting(meeting);

@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:layout_marginRight="65dp"
+        android:layout_marginRight="50dp"
         app:srcCompat="@drawable/ic_baseline_add_48"
         app:maxImageSize="@dimen/maxImageSize_activity_ma_reu_add_meeting_button"
         android:backgroundTint="@color/red"

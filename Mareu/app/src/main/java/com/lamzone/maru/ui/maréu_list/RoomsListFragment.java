@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,25 +45,18 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
         View view = inflater.inflate(R.layout.fragment_rooms_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.fragment_rooms_list_recycler_view);
 
-
-        RoomListFragmentRecyclerViewAdapter roomListFragmentRecyclerViewAdapter = new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
+        RoomListFragmentRecyclerViewAdapter roomListFragmentRecyclerViewAdapter =
+                    new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
 
         roomListFragmentRecyclerViewAdapter.setOnItemClickListener(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.VERTICAL));
-
         recyclerView.setAdapter(roomListFragmentRecyclerViewAdapter);
 
         return view;
     }
 
-
     //TODO: to comment
-
     public void setRoomListener(RoomFilterListener roomFilterListener) {
         this.mRoomFilterListener = roomFilterListener;
     }

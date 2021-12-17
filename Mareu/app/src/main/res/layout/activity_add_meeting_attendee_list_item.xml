@@ -4,28 +4,30 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
         <ImageButton
             android:id="@+id/activity_add_meetings_attendee_list_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_delete_24_red"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_delete_24_red"
+            android:backgroundTint="@color/white"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/activity_add_meetings_attendee_list_attendee_email"
+            app:layout_constraintStart_toEndOf="@id/activity_add_meetings_attendee_list_delete_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/activity_add_meetings_attendee_list_delete_button"
+            app:layout_constraintBottom_toBottomOf="@id/activity_add_meetings_attendee_list_delete_button"
             android:layout_marginLeft="10dp"
             android:textStyle="italic"
             android:text="email"
+            app:layout_constrainedWidth="true"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="@dimen/size_activity_add_meetings_attendee_list_attendee_email"
             android:layout_gravity="center"/>
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
