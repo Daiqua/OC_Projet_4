@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_meetings_item_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,13 +15,14 @@
         android:src="@drawable/ic_baseline_brightness_1_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/activity_meetings_item_meeting_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:text="Name"
         android:textColor="@color/black"
         android:textSize="@dimen/size_activity_meetings_item_meeting_name"
@@ -37,7 +39,7 @@
         app:layout_constrainedHeight="true"
         android:maxLines="2"
         android:textColor="@color/black"
-        android:textSize="@dimen/size_activity_meetings_item_meeting_starting_date_and_hour"
+        android:textSize="@dimen/size_activity_meetings_item_meeting_date_hour_duration"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/activity_meetings_item_meeting_name"
         app:layout_constraintStart_toStartOf="@id/activity_meetings_item_meeting_name"
@@ -63,11 +65,12 @@
         android:id="@+id/activity_meetings_item_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@null"
         android:src="@drawable/ic_baseline_delete_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
     <!-- activity_meetings_item_meeting_name -->
     <dimen name="size_activity_meetings_item_meeting_name">15sp</dimen>
     <!-- activity_meetings_item_meeting_starting_date and hour -->
-    <dimen name="size_activity_meetings_item_meeting_starting_date_and_hour">13sp</dimen>
+    <dimen name="size_activity_meetings_item_meeting_date_hour_duration">13sp</dimen>
     <!-- activity_meetings_item_meeting_attendees_list -->
     <dimen name="size_activity_meetings_item_meeting_attendees_list">9sp</dimen>
 

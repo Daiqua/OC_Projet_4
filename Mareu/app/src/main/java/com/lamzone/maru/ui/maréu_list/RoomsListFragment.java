@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +44,7 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
         RecyclerView recyclerView = view.findViewById(R.id.fragment_rooms_list_recycler_view);
 
         RoomListFragmentRecyclerViewAdapter roomListFragmentRecyclerViewAdapter =
-                    new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
+                new RoomListFragmentRecyclerViewAdapter(meetingRoomList);
 
         roomListFragmentRecyclerViewAdapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
