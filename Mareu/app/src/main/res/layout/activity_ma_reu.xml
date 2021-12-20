@@ -48,14 +48,11 @@
         android:id="@+id/activity_ma_reu_add_meeting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_baseline_add_48"
-        app:maxImageSize="@dimen/maxImageSize_activity_ma_reu_add_meeting_button"
+        app:fabSize="mini"
         android:backgroundTint="@color/red"
-        android:layout_gravity="end|bottom"
-        app:fabCustomSize="@dimen/fabCustomSize_activity_ma_reu_add_meeting_button"
-        app:borderWidth="0dp"
-        android:tint="@color/white"/>
+        app:borderWidth="0dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

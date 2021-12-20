@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- activity_ma_reu_layout -->
-    <!-- activity_ma_reu_add_meeting_button -->
-    <dimen name="fabCustomSize_activity_ma_reu_add_meeting_button">40dp</dimen>
-    <dimen name="maxImageSize_activity_ma_reu_add_meeting_button">35dp</dimen>
     <!-- activity_ma_reu_filter_text -->
     <dimen name="size_activity_ma_reu_filter_text">20sp</dimen>
 
