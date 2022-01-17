@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertThat;
 
 import android.widget.DatePicker;
 
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -126,16 +128,26 @@ public class MaReuInstrumentedTest {
         //click on "salle 1"
         onData(allOf(is(instanceOf(String.class)), is("salle 1")))
                 .perform(click());
+        //hide the keyboard
+        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(closeSoftKeyboard());
         //set the Date picker
         onView(withId(R.id.activity_add_meeting_date_picker))
                 .perform(PickerActions.setDate(2021, 12, 1));
+        //hide the keyboard
+        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(closeSoftKeyboard());
         //set the Time picker
         onView(withId(R.id.activity_add_meeting_time_picker))
-                .perform(PickerActions.setTime(11, 0));
-        //add 2 attendees
+                .perform(PickerActions.setTime(11, 0))
+                .perform(scrollTo());
+        //set the duration
         onView(ViewMatchers.withId(R.id.activity_add_meeting_duration))
+                .perform(ViewActions.scrollTo())
                 .perform(typeText("20"));
+        //add 2 attendees
         onView(ViewMatchers.withId(R.id.activity_add_meeting_attendees))
+                .perform(ViewActions.scrollTo())
                 .perform(typeText("attendee 1"));
         onView(ViewMatchers.withId(R.id.activity_add_meeting_add_attendee))
                 .perform(click());
@@ -148,6 +160,7 @@ public class MaReuInstrumentedTest {
                 .perform(closeSoftKeyboard());
         //save
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
+                .perform(ViewActions.scrollTo())
                 .perform(click());
         //Meeting list should be displayed with one additional item
         onView(ViewMatchers.withId(R.id.activity_meetings_list))
