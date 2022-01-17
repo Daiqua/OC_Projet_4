@@ -133,7 +133,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     }
 
     //for spinner room list
-    //TODO add pad listener for enter action
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mMeetingRoomList = mApiService.getMeetingRooms();

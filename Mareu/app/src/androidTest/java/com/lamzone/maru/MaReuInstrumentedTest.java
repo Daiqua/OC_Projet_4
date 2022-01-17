@@ -146,14 +146,13 @@ public class MaReuInstrumentedTest {
         //hide the keyboard
         onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
                 .perform(closeSoftKeyboard());
-        //save //TODO: check with Brahim if softKeyBoard prevent the click on the button behind
+        //save
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
                 .perform(click());
         //Meeting list should be displayed with one additional item
         onView(ViewMatchers.withId(R.id.activity_meetings_list))
                 .check(matches(isDisplayed()))
                 .check(withItemCount(ITEMS_COUNT + 1));
-        //TODO: check content of added meeting - check with Brahim if needed
     }
 
     @Test

@@ -73,7 +73,6 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
             notifyDataSetChanged();
         });
 
-        //TODO remove depending on the presentation meeting
         holder.itemView.setOnClickListener(v -> Toast.makeText
                 (v.getContext(), "La réunion se déroulera en "
                         + meeting.getMeetingRoom().getStrMeetingRoomName(), Toast.LENGTH_SHORT).show());

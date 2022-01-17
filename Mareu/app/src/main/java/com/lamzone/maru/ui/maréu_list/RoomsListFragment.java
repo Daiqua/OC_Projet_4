@@ -54,20 +54,17 @@ public class RoomsListFragment extends DialogFragment implements RoomListFragmen
         return view;
     }
 
-    //TODO: to comment
     public void setRoomListener(RoomFilterListener roomFilterListener) {
         this.mRoomFilterListener = roomFilterListener;
     }
 
-    //TODO: to comment
-    //click listener to transfer data to frag
+    //click listener to listen RoomListRecyclerView
     @Override
     public void onItemClick(String text) {
         mRoomFilterListener.getRoomFiltered(text);
         dismiss();
     }
 
-    //TODO: to comment
     public interface RoomFilterListener {
 
         void getRoomFiltered(String roomName);

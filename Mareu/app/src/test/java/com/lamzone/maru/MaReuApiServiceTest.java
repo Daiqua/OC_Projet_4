@@ -96,7 +96,6 @@ public class MaReuApiServiceTest {
                 .containsInAnyOrder(expectedMeetingRoomList.toArray()));
     }
 
-    //TODO: to be changed when last comma will be removed
     @Test
     public void getAttendeesListEmailAddressesWithSuccess() {
         List<Attendee> attendeesList = service.getAttendees();

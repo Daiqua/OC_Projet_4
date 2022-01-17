@@ -19,7 +19,6 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
     //click listener to transfer data to frag
     private OnItemClickListener onItemClickListener;
 
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final Button mButton;
@@ -32,7 +31,6 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
 
     public RoomListFragmentRecyclerViewAdapter(List<MeetingRoom> meetingRoomsList) {
         sMeetingRoomsList = meetingRoomsList;
-
     }
 
     @NonNull
@@ -60,14 +58,12 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
         return sMeetingRoomsList.size();
     }
 
-    //TODO: to comment
-    //click listener to transfer data to frag
+    //click listener to transfer data to fragment
     public interface OnItemClickListener {
 
         void onItemClick(String text);
     }
 
-    //TODO: to comment
     //click listener to transfer data to frag
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;

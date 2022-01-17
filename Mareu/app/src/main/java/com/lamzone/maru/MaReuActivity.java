@@ -132,8 +132,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         filterText.setText(Util.convertYearMonthNumberDayToDayMonthName(strDateFiltered));
         isDateFilterActivated = true;
         generateMeetings();
-        //TODO: check with Brahim, don't work - replaced by loadRecyclerView()
-        //mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
+        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
         loadRecyclerView();
     }
 
@@ -146,15 +145,12 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         MaReuActivity.isRoomFilterActivated = isRoomFilterActivated;
     }
 
-    //TODO: to comment
     @Override
     public void getRoomFiltered(String roomName) {
         strRoomFiltered = roomName;
         filterText.setText(strRoomFiltered);
         isRoomFilterActivated = true;
         generateMeetings();
-        //TODO: check with Brahim
-        //mMeetingsListRecyclerViewAdapter.notifyDataSetChanged(); --> don't work
         loadRecyclerView();
     }
 

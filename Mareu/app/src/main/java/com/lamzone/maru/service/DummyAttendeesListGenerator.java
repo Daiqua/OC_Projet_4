@@ -58,7 +58,6 @@ public abstract class DummyAttendeesListGenerator {
             commaSeparatedEmailAddressBuilder.append(attendee.getStrAttendeeEmailAddress());
             commaSeparatedEmailAddressBuilder.append(", ");
         }
-        //TODO: remove last comma
         return commaSeparatedEmailAddressBuilder.toString();
     }
 
