@@ -52,7 +52,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     //for spinner room list
     private MeetingRoom selectedMeetingRoom;
-
     private List<MeetingRoom> mMeetingRoomList;
 
     @Override

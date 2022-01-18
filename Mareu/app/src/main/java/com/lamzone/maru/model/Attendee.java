@@ -1,5 +1,6 @@
 package com.lamzone.maru.model;
 
+
 public class Attendee {
 
     private final String strAttendeeEmailAddress;

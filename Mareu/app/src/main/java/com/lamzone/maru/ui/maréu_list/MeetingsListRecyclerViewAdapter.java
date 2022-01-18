@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lamzone.maru.MaReuActivity;
 import com.lamzone.maru.R;
 import com.lamzone.maru.di.DI;
 import com.lamzone.maru.model.Meeting;
@@ -21,8 +22,9 @@ import com.lamzone.maru.service.Util;
 import java.util.List;
 
 public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsListRecyclerViewAdapter.MyViewHolder> {
-    private static List<Meeting> mMeetingsList;
+    private List<Meeting> mMeetingsList;
     private MaReuApiService mApiService;
+    private MaReuActivity mMaReuActivity;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private final TextView meetingName;
@@ -41,8 +43,9 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         }
     }
 
-    public MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList) {
+    public MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList, MaReuActivity maReuActivity) {
         mMeetingsList = meetingsList;
+        this.mMaReuActivity = maReuActivity;
     }
 
     @NonNull
@@ -66,13 +69,15 @@ public class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter<Meetin
         holder.meetingStartingDate.setText("Le "
                 + Util.convertYearMonthNumberDayToDayMonthName(meeting.getStrMeetingStartDate())
                 + " à " + meeting.getStrMeetingStartHour()
-                + " Durée: " + meeting.getMeetingDuration() + " min"  );
+                + " Durée: " + meeting.getMeetingDuration() + " min");
         holder.roomColor.setColorFilter(meeting.getMeetingRoom().getMeetingRoomColor());
         holder.deleteMeetingButton.setOnClickListener(v -> {
             mApiService.deleteMeeting(meeting);
-            notifyDataSetChanged();
+            mMaReuActivity.updateMeetingList();
+
         });
 
+        //TODO remove depending on the presentation meeting
         holder.itemView.setOnClickListener(v -> Toast.makeText
                 (v.getContext(), "La réunion se déroulera en "
                         + meeting.getMeetingRoom().getStrMeetingRoomName(), Toast.LENGTH_SHORT).show());

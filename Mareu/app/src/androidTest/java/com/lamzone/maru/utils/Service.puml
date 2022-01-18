@@ -1,0 +1,293 @@
+@startuml
+
+package model {
+
+    +class Attendee {
+        -String strAttendeeEmailAddress
+        --
+        .. getter ..
+        +String getStrAttendeeEmailAddress()
+    }
+
+    +class Meeting {
+        - final String strMeetingName
+        - final MeetingRoom meetingRoom
+        - final List<Attendee> meetingAttendeesList
+        - final String strMeetingStartDate
+        - final String strMeetingStartHour
+        - final int meetingDuration
+        --
+        .. getter ..
+        +String getStrMeetingName()
+        +MeetingRoom getMeetingRoom()
+        +List<Attendee> getMeetingAttendeesList()
+        +String getStrMeetingStartDate()
+        +String getStrMeetingStartHour()
+        +int getMeetingDuration()
+    }
+
+    +class MeetingRoom {
+        -final String strMeetingRoomName;
+        -final int meetingRoomColor;
+        --
+        .. getter ..
+        + String getStrMeetingRoomName()
+        + int getMeetingRoomColor()
+    }
+
+
+
+    Meeting "*"--"*" Attendee
+    Meeting "*"--"1" MeetingRoom
+}
+
+
+package service {
+
+    +class DummyApiService implements MaReuApiService{
+        -final List<Attendee> attendeesList
+        -final List<List<Attendee>> listsOfAttendees
+        -final List<MeetingRoom> meetingRoomList
+        -final List<Meeting> meetingsList
+        -final List<Meeting> filteredMeetingsList
+        +List<Meeting> getMeetings()
+        +void addMeeting(Meeting meeting)
+        +List<Attendee> getAttendees() {
+        +{Override} void addAttendees(Attendee attendee)
+        +{Override} List<List<Attendee>> getListsOfAttendees()
+        +{Override} List<MeetingRoom> getMeetingRooms()
+        +{Override} String getAttendeesListEmailAddresses(List<Attendee> attendeesList)
+        +{Override} void deleteMeeting(Meeting meeting)
+        +{Override} String[] getRoomsList()
+        +{Override} List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd)
+        +{Override} List<Meeting> generateRoomFilteredList(String strMeetingRoomName)
+    }
+
+    +abstract class DummyAttendeeGenerator {
+        +{static} List<Attendee> DUMMY_ATTENDEES
+        +{static} List<Attendee> generateAttendees()
+    }
+
+    +abstract class DummyAttendeesListGenerator {
+        -{static} final List<Attendee> dummyAttendeesList
+        -{static} final List<Attendee> DUMMY_ATTENDEES_LIST_1 to 10
+        -{static}List<List<Attendee>> DUMMY_ATTENDEES_LISTS
+        +{static} List<Attendee> generateAttendeesList(int a, int b, List<Attendee> attendeesList)
+        +{static} List<List<Attendee>> getDummyAttendeesLists()
+        +{static} String getAttendeesListEmailAddresses(List<Attendee> attendeesList)
+    }
+
+    +abstract class DummyMeetingGenerator {
+        +List<List<Attendee>> listsOfAttendees
+        +{static} List<MeetingRoom> mMeetingRooms
+        +{static} static List<Meeting> DUMMY_MEETINGS
+        +{static} List<Meeting> generateMeetings()
+    }
+
+    abstract class DummyMeetingGenerator {
+        +{static} List<List<Attendee>> listsOfAttendees
+        +{static} List<MeetingRoom> mMeetingRooms
+        +{static} List<Meeting> DUMMY_MEETINGS
+        +{static} List<Meeting> generateMeetings()
+    }
+
+    abstract class DummyMeetingRoomGenerator {
+        -{static} final String[] roomsList
+        -{static} final String[] roomsColors
+        +{static} List<MeetingRoom> DUMMY_MEETING_ROOMS
+        +{static} List<MeetingRoom> generateMeetingRoomsList()
+        +{static} String[] getRoomsList()
+    }
+
+    +interface MaReuApiService {
+        List<Meeting> getMeetings();
+        void addMeeting(Meeting meeting);
+        List<Attendee> getAttendees();
+        void addAttendees(Attendee attendee);
+        List<List<Attendee>> getListsOfAttendees();
+        List<MeetingRoom> getMeetingRooms();
+        String getAttendeesListEmailAddresses(List<Attendee> attendeesList);
+        void deleteMeeting(Meeting meeting);
+        String[] getRoomsList();
+        List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd);
+        List<Meeting> generateRoomFilteredList(String strMeetingRoomName);
+    }
+
+    +class Util {
+        +{static} String convertYearMonthNumberDayToDayMonthName(String strYearMonthDay)
+        +{static} void setTextWatcher(TextInputLayout[] textInputLayoutList, AddMeetingActivity addMeetingActivity)
+    }
+
+    DummyApiService -- DummyAttendeeGenerator
+    DummyApiService -- DummyAttendeesListGenerator
+    DummyApiService -- DummyMeetingRoomGenerator
+    DummyApiService -- DummyMeetingGenerator
+    DummyAttendeeGenerator -- Attendee
+    DummyAttendeeGenerator -- DummyAttendeesListGenerator
+    DummyMeetingGenerator -- DummyAttendeesListGenerator
+    DummyMeetingGenerator -- DummyMeetingRoomGenerator
+    DummyMeetingGenerator -- Meeting
+    DummyMeetingRoomGenerator -- MeetingRoom
+
+}
+
+package maréu_list{
+    +class AddMeetingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+        -MaReuApiService mApiService
+        ..layout variable..
+        +TextInputLayout meetingTopicInput;
+        +TextInputLayout meetingDurationInput;
+        +TextInputLayout meetingAttendeesInput;
+        +ImageButton addAttendeeButton;
+        +DatePicker meetingDatePicker;
+        +TimePicker meetingTimePicker;
+        +MaterialButton saveButton;
+
+        ..Attendee list variable..
+        -final List<Attendee> mAttendeesList
+        -Attendee newAttendee
+        -RecyclerView mRecyclerView
+        -AddMeetingAttendeesListRecyclerViewAdapter mAddMeetingAttendeesListRVAdapter
+
+        ..spinner room list variable..
+        -MeetingRoom selectedMeetingRoom;
+        -List<MeetingRoom> mMeetingRoomList;
+        ----
+        #void onCreate(Bundle savedInstanceState)
+        ..view configuration..
+        -void loadRecyclerView()
+        -void loadView()
+        -void setClickOnAddAttendeeButton()
+        -void setClickOnSaveButton()
+        ..spinner list..
+        -void loadSpinnerList()
+        +{Override} void onItemSelected()
+        +{Override} void onNothingSelected()
+        ..update buttons availability..
+        +void checkDataIsCorrectlyFilled()
+        +void checkAttendeeInputToSetAddAttendeeButton()
+    }
+
+
+    +class AddMeetingAttendeesListRecyclerViewAdapter{
+        -final List<Attendee> mAttendeesList
+        +AddMeetingActivity mAddMeetingActivity
+        +{static} class MyViewHolder extends RecyclerView.ViewHolder
+        ----
+        +AddMeetingAttendeesListRecyclerViewAdapter(List<Attendee> attendeesList,
+                                           AddMeetingActivity addMeetingActivity)
+      +{Override} MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+      +{Override} void onBindViewHolder(MyViewHolder holder, int position)
+      +{Override} int getItemCount()
+
+    }
+
+    +class DatePickerFragment extends DialogFragment {
+        +DatePickerFragment()
+        +{Override} Dialog onCreateDialog(@Nullable Bundle savedInstanceState)
+    }
+
+    +class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter{
+        -{static}List<Meeting> mMeetingsList
+        -MaReuApiService mApiService
+        -{static} class MyViewHolder
+        ----
+        -MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList)
+        +MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        +{Override} void onBindViewHolder(MyViewHolder holder, int position)
+        +{Override} int getItemCount()
+    }
+
+    +class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter,OnItemClickListener{
+        - final List<MeetingRoom> sMeetingRoomsList
+        - OnItemClickListener onItemClickListener
+        +{static} class MyViewHolder
+        ----
+        +RoomListFragmentRecyclerViewAdapter(List<MeetingRoom> meetingRoomsList)
+        +MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        +{Override} void onBindViewHolder(MyViewHolder holder, int position)
+        +{Override} int getItemCount()
+        +void setOnItemClickListener(OnItemClickListener onItemClickListener)
+    }
+
+        +interface OnItemClickListener{
+        +void onItemClick(String text)
+    }
+
+    class RoomsListFragment extends DialogFragment, RoomFilterListener implements OnItemClickListener {
+        -final MaReuApiService mApiService
+        -RoomFilterListener mRoomFilterListener
+        +RoomsListFragment()
+        +{Override} Dialog onCreateDialog(@Nullable Bundle savedInstanceState)
+        +{Override} View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                                 Bundle savedInstanceState)
+        +void setRoomListener(RoomFilterListener roomFilterListener)
+        +{Override} void onItemClick(String text)
+    }
+
+    +interface RoomFilterListener {
+        void getRoomFiltered(String roomName)
+    }
+
+    +class MaReuActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, RoomFilterListener{
+        - List<Meeting> mMeetingsList
+        - RecyclerView mRecyclerView
+        - MeetingsListRecyclerViewAdapter mMeetingsListRecyclerViewAdapter
+        ..to manage filters..
+        -{static} String strDateFiltered
+        -{static} String strRoomFiltered
+        - TextView filterText
+        - static boolean isDateFilterActivated
+        - static boolean isRoomFilterActivated
+        +RoomsListFragment roomsListFragment
+        ----
+        ..to manage the menu..
+        +{Override} boolean onCreateOptionsMenu(Menu menu)
+        +{Override} boolean onOptionsItemSelected(@NonNull MenuItem item)
+        +{static}void setIsDateFilterActivated(boolean isDateFilterActivated)
+        +{static}void setIsRoomFilterActivated(boolean isRoomFilterActivated)
+        ..to manage the main view..
+        +{Override} void onCreate(Bundle savedInstanceState)
+        +void generateMeetings()
+        +void loadRecyclerView()
+        #{Override} void onResume()
+        ..listener..
+        +{Override} void onDateSet(DatePicker view, int year, int month,
+         int dayOfMonth)
+         +{Override}void getRoomFiltered(String roomName)
+    }
+
+        AddMeetingActivity -- MeetingRoom
+        AddMeetingActivity -- Meeting
+        AddMeetingActivity -- Attendee
+        AddMeetingActivity -- MaReuApiService
+        AddMeetingActivity -- AddMeetingAttendeesListRecyclerViewAdapter
+        AddMeetingActivity -- Util
+        MaReuActivity -- DatePickerFragment
+        MeetingsListRecyclerViewAdapter -- MaReuApiService
+        MeetingsListRecyclerViewAdapter -- Meeting
+        RoomsListFragment -- MaReuApiService
+        RoomFilterListener -- RoomsListFragment
+        RoomFilterListener -- MeetingsListRecyclerViewAdapter
+        MaReuActivity-- RecyclerView
+        MaReuActivity -- MeetingsListRecyclerViewAdapter
+        MaReuActivity -- DatePickerFragment
+        MaReuActivity -- RoomsListFragment
+        MaReuApiService -- MaReuActivity
+
+}
+note left
+
+hide service
+end note
+
+hide maréu_list
+hide model
+
+hide DialogFragment
+hide AppCompatActivity
+hide RecyclerView
+hide DatePickerDialog.OnDateSetListener
+hide AdapterView.OnItemSelectedListener
+
+@enduml

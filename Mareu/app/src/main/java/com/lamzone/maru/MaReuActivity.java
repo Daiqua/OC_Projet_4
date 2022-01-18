@@ -115,7 +115,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     }
 
     public void loadRecyclerView() {
-        mMeetingsListRecyclerViewAdapter = new MeetingsListRecyclerViewAdapter(mMeetingsList);
+        mMeetingsListRecyclerViewAdapter = new MeetingsListRecyclerViewAdapter(mMeetingsList, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
@@ -132,7 +132,6 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         filterText.setText(Util.convertYearMonthNumberDayToDayMonthName(strDateFiltered));
         isDateFilterActivated = true;
         generateMeetings();
-        mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
         loadRecyclerView();
     }
 
@@ -158,6 +157,11 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
     @Override
     protected void onResume() {
         super.onResume();
+        updateMeetingList();
+    }
+
+    public void updateMeetingList() {
+        generateMeetings();
         mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
     }
 }
