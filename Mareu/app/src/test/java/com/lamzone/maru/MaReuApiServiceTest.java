@@ -131,7 +131,7 @@ public class MaReuApiServiceTest {
 
     @Test
     public void generateRoomFilteredListWithSuccess() {
-        String meetingRoomToFilter = service.getMeetingRooms().get(0).getStrMeetingRoomName();
+        String meetingRoomToFilter = service.getMeetingRooms().get(1).getStrMeetingRoomName();
         List<Meeting> meetingsAfterFilter = service.
                 generateRoomFilteredList(meetingRoomToFilter);
         assertEquals(1, meetingsAfterFilter.size());
