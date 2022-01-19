@@ -12,7 +12,6 @@ public class DummyApiService implements MaReuApiService {
     private List<Attendee> attendeesList = DummyAttendeeGenerator.generateAttendees();
     private final List<List<Attendee>> listsOfAttendees =
             DummyAttendeesListGenerator.getDummyAttendeesLists();
-    private final List<MeetingRoom> meetingRoomList = DummyMeetingRoomGenerator.generateMeetingRoomsList();
     private final List<Meeting> meetingsList = DummyMeetingGenerator.generateMeetings();
     private final List<Meeting> filteredMeetingsList = new ArrayList<>();
 
@@ -84,7 +83,7 @@ public class DummyApiService implements MaReuApiService {
 
     @Override
     public List<MeetingRoom> getMeetingRooms() {
-        return meetingRoomList;
+        return DummyMeetingRoomGenerator.generateMeetingRoomsList();
     }
 
 }

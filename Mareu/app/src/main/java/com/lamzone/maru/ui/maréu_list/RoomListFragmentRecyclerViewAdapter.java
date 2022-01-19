@@ -31,6 +31,7 @@ public class RoomListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Ro
 
     public RoomListFragmentRecyclerViewAdapter(List<MeetingRoom> meetingRoomsList) {
         sMeetingRoomsList = meetingRoomsList;
+        sMeetingRoomsList.remove(0); //room index zero is empty - needed for AddMeetingActivity spinner list
     }
 
     @NonNull
