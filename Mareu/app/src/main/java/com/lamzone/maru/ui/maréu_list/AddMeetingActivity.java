@@ -98,13 +98,13 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     private void setClickOnSaveButton() {
         saveButton.setOnClickListener(v -> {
-            Meeting newMeeting = new Meeting(
+            @SuppressLint("DefaultLocale") Meeting newMeeting = new Meeting(
                     Objects.requireNonNull(meetingTopicInput.getEditText()).getText().toString(),
                     selectedMeetingRoom,
                     mAttendeesList,
                     meetingDatePicker.getYear() + "." + (meetingDatePicker.getMonth() + 1) + "."
                             + meetingDatePicker.getDayOfMonth(),
-                    meetingTimePicker.getCurrentHour() + "." + meetingTimePicker.getCurrentMinute(),
+                    meetingTimePicker.getCurrentHour() + ":" + String.format("%02d", meetingTimePicker.getCurrentMinute()),
                     Integer.parseInt(Objects.requireNonNull(meetingDurationInput.getEditText()).getText().toString()));
             mApiService.addMeeting(newMeeting);
             this.finish();

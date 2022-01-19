@@ -28,32 +28,6 @@ public class DummyApiService implements MaReuApiService {
     }
 
     @Override
-    public List<Attendee> getAttendees() {
-        return attendeesList;
-    }
-
-    @Override
-    public void addAttendees(Attendee attendee) {
-        attendeesList.add(attendee);
-    }
-
-    @Override
-    public List<List<Attendee>> getListsOfAttendees() {
-        return listsOfAttendees;
-    }
-
-    @Override
-    public List<MeetingRoom> getMeetingRooms() {
-        return meetingRoomList;
-    }
-
-    @Override
-    public String getAttendeesListEmailAddresses(List<Attendee> attendeesList) {
-        this.attendeesList = attendeesList;
-        return DummyAttendeesListGenerator.getAttendeesListEmailAddresses(attendeesList);
-    }
-
-    @Override
     public void deleteMeeting(Meeting meeting) {
         meetingsList.remove(meeting);
     }
@@ -62,7 +36,6 @@ public class DummyApiService implements MaReuApiService {
     public String[] getRoomsList() {
         return DummyMeetingRoomGenerator.getRoomsList();
     }
-
 
     @Override
     public List<Meeting> generateDateFilteredList(String strDatePattern_yyyy_MM_dd) {
@@ -87,4 +60,31 @@ public class DummyApiService implements MaReuApiService {
         }
         return filteredMeetingsList;
     }
+
+    @Override
+    public String getAttendeesListEmailAddresses(List<Attendee> attendeesList) {
+        this.attendeesList = attendeesList;
+        return DummyAttendeesListGenerator.getAttendeesListEmailAddresses(attendeesList);
+    }
+
+    @Override
+    public List<Attendee> getAttendees() {
+        return attendeesList;
+    }
+
+    @Override
+    public void addAttendees(Attendee attendee) {
+        attendeesList.add(attendee);
+    }
+
+    @Override
+    public List<List<Attendee>> getListsOfAttendees() {
+        return listsOfAttendees;
+    }
+
+    @Override
+    public List<MeetingRoom> getMeetingRooms() {
+        return meetingRoomList;
+    }
+
 }

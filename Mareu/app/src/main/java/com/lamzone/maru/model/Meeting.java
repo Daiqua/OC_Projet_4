@@ -7,8 +7,8 @@ public class Meeting {
     private final String strMeetingName;
     private final MeetingRoom meetingRoom;
     private final List<Attendee> meetingAttendeesList;
-    private final String strMeetingStartDate; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
-    private final String strMeetingStartHour; //pattern "yyyy.MM.dd G 'at' HH:mm:ss z" will be transform as date after using SimpleDateFormat
+    private final String strMeetingStartDate; //pattern "yyyy.MM.dd"
+    private final String strMeetingStartHour;
     private final int meetingDuration;
 
     public Meeting (String strMeetingName, MeetingRoom meetingRoom,

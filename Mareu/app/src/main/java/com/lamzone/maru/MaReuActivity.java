@@ -135,13 +135,8 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         loadRecyclerView();
     }
 
-
     public static void setIsDateFilterActivated(boolean isDateFilterActivated) {
         MaReuActivity.isDateFilterActivated = isDateFilterActivated;
-    }
-
-    public static void setIsRoomFilterActivated(boolean isRoomFilterActivated) {
-        MaReuActivity.isRoomFilterActivated = isRoomFilterActivated;
     }
 
     @Override
@@ -153,6 +148,10 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         loadRecyclerView();
     }
 
+    public static void setIsRoomFilterActivated(boolean isRoomFilterActivated) {
+        MaReuActivity.isRoomFilterActivated = isRoomFilterActivated;
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
@@ -160,6 +159,7 @@ public class MaReuActivity extends AppCompatActivity implements DatePickerDialog
         updateMeetingList();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void updateMeetingList() {
         generateMeetings();
         mMeetingsListRecyclerViewAdapter.notifyDataSetChanged();
