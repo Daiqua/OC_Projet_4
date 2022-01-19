@@ -121,30 +121,29 @@ public class MaReuInstrumentedTest {
         //fill the data
         //fill the topic
         onView(ViewMatchers.withId(R.id.activity_add_meeting_topic))
-                .perform(typeText("Test meeting"));
+                .perform(typeText("Test meeting"))
+                .perform(closeSoftKeyboard());
         //click on the spinner to see rooms
         onView(withId(R.id.activity_add_meeting_room_spinner))
                 .perform(click());
         //click on "salle 1"
         onData(allOf(is(instanceOf(String.class)), is("salle 1")))
-                .perform(click());
-        //hide the keyboard
-        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(click())
                 .perform(closeSoftKeyboard());
         //set the Date picker
         onView(withId(R.id.activity_add_meeting_date_picker))
-                .perform(PickerActions.setDate(2021, 12, 1));
-        //hide the keyboard
-        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(PickerActions.setDate(2021, 12, 1))
                 .perform(closeSoftKeyboard());
         //set the Time picker
         onView(withId(R.id.activity_add_meeting_time_picker))
                 .perform(PickerActions.setTime(11, 0))
+                .perform(closeSoftKeyboard())
                 .perform(scrollTo());
         //set the duration
         onView(ViewMatchers.withId(R.id.activity_add_meeting_duration))
                 .perform(ViewActions.scrollTo())
-                .perform(typeText("20"));
+                .perform(typeText("20"))
+                .perform(closeSoftKeyboard());
         //add 2 attendees
         onView(ViewMatchers.withId(R.id.activity_add_meeting_attendees))
                 .perform(ViewActions.scrollTo())
@@ -154,9 +153,7 @@ public class MaReuInstrumentedTest {
         onView(ViewMatchers.withId(R.id.activity_add_meeting_attendees))
                 .perform(typeText("attendee 2"));
         onView(ViewMatchers.withId(R.id.activity_add_meeting_add_attendee))
-                .perform(click());
-        //hide the keyboard
-        onView(ViewMatchers.withId(R.id.activity_add_meeting_layout))
+                .perform(click())
                 .perform(closeSoftKeyboard());
         //save
         onView(ViewMatchers.withId(R.id.activity_add_meeting_save_button))
