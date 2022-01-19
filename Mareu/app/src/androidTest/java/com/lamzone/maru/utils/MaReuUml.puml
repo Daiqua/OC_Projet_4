@@ -188,11 +188,12 @@ package maréu_list{
     }
 
     +class MeetingsListRecyclerViewAdapter extends RecyclerView.Adapter{
-        -{static}List<Meeting> mMeetingsList
+        -List<Meeting> mMeetingsList
         -MaReuApiService mApiService
         -{static} class MyViewHolder
+        -MaReuActivity mMaReuActivity
         ----
-        -MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList)
+        -MeetingsListRecyclerViewAdapter(List<Meeting> meetingsList, MaReuActivity maReuActivity)
         +MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         +{Override} void onBindViewHolder(MyViewHolder holder, int position)
         +{Override} int getItemCount()
@@ -250,6 +251,7 @@ package maréu_list{
         +{Override} void onCreate(Bundle savedInstanceState)
         +void generateMeetings()
         +void loadRecyclerView()
+         void updateMeetingList()
         #{Override} void onResume()
         ..listener..
         +{Override} void onDateSet(DatePicker view, int year, int month,
@@ -263,17 +265,17 @@ package maréu_list{
         AddMeetingActivity -- MaReuApiService
         AddMeetingActivity -- AddMeetingAttendeesListRecyclerViewAdapter
         AddMeetingActivity -- Util
-        MaReuActivity -- DatePickerFragment
         MeetingsListRecyclerViewAdapter -- MaReuApiService
         MeetingsListRecyclerViewAdapter -- Meeting
         RoomsListFragment -- MaReuApiService
-        RoomFilterListener -- RoomsListFragment
         RoomFilterListener -- MeetingsListRecyclerViewAdapter
         MaReuActivity-- RecyclerView
         MaReuActivity -- MeetingsListRecyclerViewAdapter
         MaReuActivity -- DatePickerFragment
         MaReuActivity -- RoomsListFragment
         MaReuApiService -- MaReuActivity
+        MaReuActivity -- AddMeetingActivity
+        RoomListFragmentRecyclerViewAdapter -- RoomsListFragment
 
 }
 note left

@@ -265,30 +265,34 @@ package maréu_list{
         AddMeetingActivity -- MaReuApiService
         AddMeetingActivity -- AddMeetingAttendeesListRecyclerViewAdapter
         AddMeetingActivity -- Util
-        MaReuActivity -- DatePickerFragment
         MeetingsListRecyclerViewAdapter -- MaReuApiService
         MeetingsListRecyclerViewAdapter -- Meeting
         RoomsListFragment -- MaReuApiService
-        RoomFilterListener -- RoomsListFragment
         RoomFilterListener -- MeetingsListRecyclerViewAdapter
         MaReuActivity-- RecyclerView
         MaReuActivity -- MeetingsListRecyclerViewAdapter
         MaReuActivity -- DatePickerFragment
         MaReuActivity -- RoomsListFragment
         MaReuApiService -- MaReuActivity
+        MaReuActivity -- AddMeetingActivity
+        RoomListFragmentRecyclerViewAdapter -- RoomsListFragment
 
 }
 note left
 hide AddMeetingActivity
 hide AddMeetingAttendeesListRecyclerViewAdapter
 
-hide service
-end note
-
 hide RoomsListFragment
 hide RoomListFragmentRecyclerViewAdapter
 hide DatePickerFragment
 hide RoomFilterListener
+
+hide service
+
+
+end note
+
+
 
 hide model
 

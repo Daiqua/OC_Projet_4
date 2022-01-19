@@ -29,6 +29,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.lamzone.maru.di.DI;
+import com.lamzone.maru.model.Attendee;
+import com.lamzone.maru.model.Meeting;
+import com.lamzone.maru.service.DummyApiService;
+import com.lamzone.maru.service.DummyMeetingRoomGenerator;
 import com.lamzone.maru.service.MaReuApiService;
 import com.lamzone.maru.utils.DeleteViewAction;
 
@@ -37,6 +41,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -163,6 +171,19 @@ public class MaReuInstrumentedTest {
         onView(ViewMatchers.withId(R.id.activity_meetings_list))
                 .check(matches(isDisplayed()))
                 .check(withItemCount(ITEMS_COUNT + 1));
+        //click on the menu button
+        onView(withId(R.id.menu_meeting_list_activity))
+                .perform(click());
+        //click on filtre salle
+        onView(ViewMatchers.withText("filtre salle"))
+                .perform(click());
+        //click on salle 1
+        onView(withText("salle 1"))
+                .perform(click());
+        //Check the number of meetings
+        onView(ViewMatchers.withId(R.id.activity_meetings_list))
+                .check(withItemCount(2));
+
     }
 
     @Test
