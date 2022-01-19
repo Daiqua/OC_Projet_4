@@ -17,6 +17,7 @@ public abstract class DummyMeetingRoomGenerator {
             "#3f5aab", "#5f4fd6", "#603082", "#9368a6"};
 
     public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
+            new MeetingRoom(roomsList[0], Color.parseColor(roomsColors[0])),
             new MeetingRoom(roomsList[1], Color.parseColor(roomsColors[1])),
             new MeetingRoom(roomsList[2], Color.parseColor(roomsColors[2])),
             new MeetingRoom(roomsList[3], Color.parseColor(roomsColors[3])),
